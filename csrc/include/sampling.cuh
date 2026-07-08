@@ -116,6 +116,25 @@ struct RenormTempStorage {
   };
 };
 
+template <typename T, uint32_t BLOCK_THREADS, BlockReduceAlgorithm REDUCE_ALGORITHM>
+struct RenormIndicesTempStorage {
+  union {
+    typename BlockReduce<T, BLOCK_THREADS, REDUCE_ALGORITHM>::TempStorage reduce;
+    typename BlockReduce<int, BLOCK_THREADS, REDUCE_ALGORITHM>::TempStorage reduce_int;
+    typename BlockReduce<Pair<T>, BLOCK_THREADS, REDUCE_ALGORITHM>::TempStorage reduce_pair;
+    typename BlockScan<int, BLOCK_THREADS, SCAN_ALGO>::TempStorage scan;
+  } block_prim;
+  struct {
+    T max_val;
+    T min_val;
+    union {
+      T value;
+      int count;
+      Pair<T> pair;
+    } block_aggregate;
+  };
+};
+
 template <uint32_t BLOCK_THREADS, BlockReduceAlgorithm REDUCE_ALGORITHM, uint32_t VEC_SIZE,
           typename DType>
 __global__ void TopPReturnMaskKernel(DType* probs, uint8_t* mask, float* top_p_arr, float top_p_val,
@@ -230,6 +249,150 @@ __global__ void TopPReturnMaskKernel(DType* probs, uint8_t* mask, float* top_p_a
   }
 }
 
+template <uint32_t BLOCK_THREADS, BlockReduceAlgorithm REDUCE_ALGORITHM, uint32_t VEC_SIZE,
+          typename DType>
+__global__ void TopPReturnIndicesKernel(DType* probs, int32_t* output_indices,
+                                        int32_t* output_counts, int32_t* input_indices,
+                                        float* top_p_arr, float top_p_val, uint32_t d,
+                                        uint32_t output_stride) {
+  const uint32_t bx = blockIdx.x, tx = threadIdx.x;
+  const uint32_t row_idx = bx;
+  DType p = DType(top_p_arr == nullptr ? top_p_val : top_p_arr[bx]);
+
+  extern __shared__ __align__(alignof(RenormIndicesTempStorage<DType, BLOCK_THREADS, REDUCE_ALGO>))
+      uint8_t smem_renorm[];
+  auto& temp_storage =
+      reinterpret_cast<RenormIndicesTempStorage<DType, BLOCK_THREADS, REDUCE_ALGO>&>(smem_renorm);
+  temp_storage.max_val = DType(0);
+  vec_t<DType, VEC_SIZE> probs_vec;
+  DType probs_greater_than_pivot[VEC_SIZE];
+
+  DType threadlocal_max_val = DType(0);
+  for (uint32_t i = 0; i < ceil_div(d, BLOCK_THREADS * VEC_SIZE); ++i) {
+    probs_vec.fill(DType(0));
+    if ((i * BLOCK_THREADS + tx) * VEC_SIZE < d) {
+      probs_vec.load(probs + row_idx * d + i * BLOCK_THREADS * VEC_SIZE + tx * VEC_SIZE);
+    }
+#pragma unroll
+    for (uint32_t j = 0; j < VEC_SIZE; ++j) {
+      probs_greater_than_pivot[j] = probs_vec[j];
+    }
+    threadlocal_max_val =
+        max(threadlocal_max_val,
+            BlockReduce<DType, BLOCK_THREADS, REDUCE_ALGORITHM>(temp_storage.block_prim.reduce)
+                .Reduce<VEC_SIZE>(probs_greater_than_pivot, cub::Max()));
+    __syncthreads();
+  }
+  if (tx == 0) {
+    temp_storage.max_val = threadlocal_max_val;
+  }
+  __syncthreads();
+  threadlocal_max_val = temp_storage.max_val;
+  probs_vec.fill(DType(0));
+  probs_vec.load(probs + row_idx * d);
+
+  DType low = 0.0, high = probs_vec[0];
+  DType min_gt_low, max_le_high;
+  DType sum_low(1);
+  DType eps = DType(1e-5);
+
+  do {
+    DType threadlocal_sum(0);
+    DType mid = (low + high) / DType(2);
+    min_gt_low = high;
+    max_le_high = low;
+    for (uint32_t i = 0; i < ceil_div(d, BLOCK_THREADS * VEC_SIZE); ++i) {
+      probs_vec.fill(DType(0));
+      if ((i * BLOCK_THREADS + tx) * VEC_SIZE < d) {
+        probs_vec.load(probs + row_idx * d + i * BLOCK_THREADS * VEC_SIZE + tx * VEC_SIZE);
+      }
+#pragma unroll
+      for (uint32_t j = 0; j < VEC_SIZE; ++j) {
+        const uint32_t col = i * BLOCK_THREADS * VEC_SIZE + tx * VEC_SIZE + j;
+        probs_greater_than_pivot[j] = (probs_vec[j] > mid) ? probs_vec[j] : DType(0);
+        if (probs_vec[j] > low && col < d) {
+          min_gt_low = min(min_gt_low, probs_vec[j]);
+        }
+        if (probs_vec[j] <= high && col < d) {
+          max_le_high = max(max_le_high, probs_vec[j]);
+        }
+      }
+      threadlocal_sum +=
+          BlockReduce<DType, BLOCK_THREADS, REDUCE_ALGORITHM>(temp_storage.block_prim.reduce)
+              .Sum<VEC_SIZE>(probs_greater_than_pivot);
+      __syncthreads();
+    }
+    min_gt_low = BlockReduce<DType, BLOCK_THREADS, REDUCE_ALGORITHM>(temp_storage.block_prim.reduce)
+                     .Reduce(min_gt_low, cub::Min());
+    __syncthreads();
+    max_le_high =
+        BlockReduce<DType, BLOCK_THREADS, REDUCE_ALGORITHM>(temp_storage.block_prim.reduce)
+            .Reduce(max_le_high, cub::Max());
+    if (tx == 0) {
+      temp_storage.block_aggregate.value = threadlocal_sum;
+      temp_storage.min_val = min_gt_low;
+      temp_storage.max_val = max_le_high;
+    }
+    __syncthreads();
+    threadlocal_sum = temp_storage.block_aggregate.value;
+    min_gt_low = temp_storage.min_val;
+    max_le_high = temp_storage.max_val;
+    if (threadlocal_sum >= p) {
+      low = mid;
+      sum_low = threadlocal_sum;
+    } else {
+      high = min(mid, max_le_high);
+    }
+  } while (max_le_high - min_gt_low > eps);
+
+  uint32_t row_count = 0;
+  for (uint32_t i = 0; i < ceil_div(d, BLOCK_THREADS * VEC_SIZE); ++i) {
+    probs_vec.fill(DType(0));
+    const uint32_t base_col = i * BLOCK_THREADS * VEC_SIZE + tx * VEC_SIZE;
+    if (base_col < d) {
+      probs_vec.load(probs + row_idx * d + base_col);
+    }
+
+    int thread_count = 0;
+    bool selected[VEC_SIZE];
+#pragma unroll
+    for (uint32_t j = 0; j < VEC_SIZE; ++j) {
+      const uint32_t col = base_col + j;
+      selected[j] = col < d && probs_vec[j] > low;
+      thread_count += selected[j] ? 1 : 0;
+    }
+
+    int thread_offset, block_count;
+    BlockScan<int, BLOCK_THREADS, SCAN_ALGO>(temp_storage.block_prim.scan)
+        .ExclusiveSum(thread_count, thread_offset, block_count);
+    __syncthreads();
+
+    uint32_t write_offset = row_count + thread_offset;
+#pragma unroll
+    for (uint32_t j = 0; j < VEC_SIZE; ++j) {
+      if (selected[j]) {
+        const uint32_t col = base_col + j;
+        if (write_offset < output_stride) {
+          output_indices[row_idx * output_stride + write_offset] =
+              input_indices == nullptr ? static_cast<int32_t>(col)
+                                       : input_indices[row_idx * d + col];
+        }
+        ++write_offset;
+      }
+    }
+
+    if (tx == 0) {
+      temp_storage.block_aggregate.count = row_count + block_count;
+    }
+    __syncthreads();
+    row_count = temp_storage.block_aggregate.count;
+  }
+
+  if (tx == 0) {
+    output_counts[row_idx] = row_count;
+  }
+}
+
 template <typename DType>
 cudaError_t TopPReturnMask(DType* probs, uint8_t* mask, float* top_p_arr, uint32_t num_blocks,
                            float top_p_val, uint32_t d, cudaStream_t stream = 0) {
@@ -242,6 +405,28 @@ cudaError_t TopPReturnMask(DType* probs, uint8_t* mask, float* top_p_arr, uint32
   void* args[] = {&probs, &mask, &top_p_arr, &top_p_val, &d};
   DISPATCH_ALIGNED_VEC_SIZE(vec_size, VEC_SIZE, {
     auto kernel = TopPReturnMaskKernel<BLOCK_THREADS, REDUCE_ALGO, VEC_SIZE, DType>;
+    FLASHINFER_CUDA_CALL(
+        cudaFuncSetAttribute(kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size));
+    FLASHINFER_CUDA_CALL(cudaLaunchKernel((void*)kernel, nblks, nthrs, args, smem_size, stream));
+  });
+  return cudaSuccess;
+}
+
+template <typename DType>
+cudaError_t TopPReturnIndices(DType* probs, int32_t* output_indices, int32_t* output_counts,
+                              int32_t* input_indices, float* top_p_arr, uint32_t num_blocks,
+                              float top_p_val, uint32_t d, uint32_t output_stride,
+                              cudaStream_t stream = 0) {
+  constexpr uint32_t BLOCK_THREADS = 1024;
+  const uint32_t vec_size = std::gcd(16 / sizeof(DType), d);
+
+  const uint32_t smem_size = sizeof(RenormIndicesTempStorage<DType, BLOCK_THREADS, REDUCE_ALGO>);
+  dim3 nblks(num_blocks);
+  dim3 nthrs(BLOCK_THREADS);
+  void* args[] = {&probs,        &output_indices, &output_counts, &input_indices,
+                  &top_p_arr,    &top_p_val,      &d,             &output_stride};
+  DISPATCH_ALIGNED_VEC_SIZE(vec_size, VEC_SIZE, {
+    auto kernel = TopPReturnIndicesKernel<BLOCK_THREADS, REDUCE_ALGO, VEC_SIZE, DType>;
     FLASHINFER_CUDA_CALL(
         cudaFuncSetAttribute(kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, smem_size));
     FLASHINFER_CUDA_CALL(cudaLaunchKernel((void*)kernel, nblks, nthrs, args, smem_size, stream));

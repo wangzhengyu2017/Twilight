@@ -99,10 +99,55 @@ def get_sampling_module():
                 )
                 return mask
 
+        @register_custom_op("flashinfer::top_p_fp16_return_indices", mutates_args=())
+        def top_p_fp16_return_indices(
+            probs: torch.Tensor,
+            maybe_input_indices: Optional[torch.Tensor],
+            maybe_top_p_arr: Optional[torch.Tensor],
+            top_p_val: float,
+        ) -> Tuple[torch.Tensor, torch.Tensor]:
+            with probs.device as device:
+                indices = torch.empty_like(probs, dtype=torch.int32)
+                counts = torch.empty(probs.shape[:-1], dtype=torch.int32, device=device)
+                module.top_p_fp16_return_indices(
+                    probs,
+                    indices,
+                    counts,
+                    maybe_input_indices,
+                    maybe_top_p_arr,
+                    top_p_val,
+                    get_cuda_stream(device),
+                )
+                return indices, counts
+
+        @register_custom_op("flashinfer::top_p_fp32_return_indices", mutates_args=())
+        def top_p_fp32_return_indices(
+            probs: torch.Tensor,
+            maybe_input_indices: Optional[torch.Tensor],
+            maybe_top_p_arr: Optional[torch.Tensor],
+            top_p_val: float,
+        ) -> Tuple[torch.Tensor, torch.Tensor]:
+            with probs.device as device:
+                indices = torch.empty_like(probs, dtype=torch.int32)
+                counts = torch.empty(probs.shape[:-1], dtype=torch.int32, device=device)
+                module.top_p_fp32_return_indices(
+                    probs,
+                    indices,
+                    counts,
+                    maybe_input_indices,
+                    maybe_top_p_arr,
+                    top_p_val,
+                    get_cuda_stream(device),
+                )
+                return indices, counts
+
         # Register the module
         _sampling_module = SimpleNamespace(
+            _raw_module=module,
             top_p_fp16_return_mask=top_p_fp16_return_mask,
             top_p_fp32_return_mask=top_p_fp32_return_mask,
+            top_p_fp16_return_indices=top_p_fp16_return_indices,
+            top_p_fp32_return_indices=top_p_fp32_return_indices,
         )
 
     return _sampling_module
@@ -131,3 +176,98 @@ def top_p_fp32_return_mask(
     return get_sampling_module().top_p_fp32_return_mask(
         probs, *_to_tensor_scalar_tuple(top_p)
     )
+
+
+def top_p_fp16_return_indices(
+    probs: torch.Tensor,
+    top_p: Union[torch.Tensor, float],
+    input_indices: Optional[torch.Tensor] = None,
+    max_output_len: Optional[int] = None,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Return compact selected indices and per-row true counts.
+
+    Counts are not clipped by max_output_len; choose capacity >= counts.max()
+    when the full index list is required.
+    """
+    output_len = max_output_len if max_output_len is not None else probs.shape[-1]
+    indices = torch.empty(
+        (*probs.shape[:-1], output_len), dtype=torch.int32, device=probs.device
+    )
+    counts = torch.empty(probs.shape[:-1], dtype=torch.int32, device=probs.device)
+    return top_p_fp16_return_indices_out(probs, indices, counts, top_p, input_indices)
+
+
+def top_p_fp32_return_indices(
+    probs: torch.Tensor,
+    top_p: Union[torch.Tensor, float],
+    input_indices: Optional[torch.Tensor] = None,
+    max_output_len: Optional[int] = None,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Return compact selected indices and per-row true counts.
+
+    Counts are not clipped by max_output_len; choose capacity >= counts.max()
+    when the full index list is required.
+    """
+    output_len = max_output_len if max_output_len is not None else probs.shape[-1]
+    indices = torch.empty(
+        (*probs.shape[:-1], output_len), dtype=torch.int32, device=probs.device
+    )
+    counts = torch.empty(probs.shape[:-1], dtype=torch.int32, device=probs.device)
+    return top_p_fp32_return_indices_out(probs, indices, counts, top_p, input_indices)
+
+
+def top_p_fp16_return_indices_out(
+    probs: torch.Tensor,
+    output_indices: torch.Tensor,
+    output_counts: torch.Tensor,
+    top_p: Union[torch.Tensor, float],
+    input_indices: Optional[torch.Tensor] = None,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Write compact selected indices into preallocated output tensors.
+
+    Counts are not clipped by output_indices.shape[-1].
+    """
+    module = get_sampling_module()
+    maybe_top_p_arr, top_p_val = _to_tensor_scalar_tuple(top_p)
+    # The registered custom op allocates outputs. Use the JIT module directly for reusable buffers.
+    raw_module = getattr(module, "_raw_module", None)
+    if raw_module is None:
+        raise RuntimeError("raw twilight sampling module is unavailable")
+    raw_module.top_p_fp16_return_indices(
+        probs,
+        output_indices,
+        output_counts,
+        input_indices,
+        maybe_top_p_arr,
+        top_p_val,
+        get_cuda_stream(probs.device),
+    )
+    return output_indices, output_counts
+
+
+def top_p_fp32_return_indices_out(
+    probs: torch.Tensor,
+    output_indices: torch.Tensor,
+    output_counts: torch.Tensor,
+    top_p: Union[torch.Tensor, float],
+    input_indices: Optional[torch.Tensor] = None,
+) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Write compact selected indices into preallocated output tensors.
+
+    Counts are not clipped by output_indices.shape[-1].
+    """
+    module = get_sampling_module()
+    maybe_top_p_arr, top_p_val = _to_tensor_scalar_tuple(top_p)
+    raw_module = getattr(module, "_raw_module", None)
+    if raw_module is None:
+        raise RuntimeError("raw twilight sampling module is unavailable")
+    raw_module.top_p_fp32_return_indices(
+        probs,
+        output_indices,
+        output_counts,
+        input_indices,
+        maybe_top_p_arr,
+        top_p_val,
+        get_cuda_stream(probs.device),
+    )
+    return output_indices, output_counts

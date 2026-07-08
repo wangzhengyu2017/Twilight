@@ -106,6 +106,33 @@ cd benchmark/efficiency
 python3 bench_gemv.py
 ```
 
+#### Bench top-p pruning
+
+```bash
+cd benchmark/efficiency
+python3 bench_top_p.py
+```
+
+#### Bench operator breakdown
+
+```bash
+cd benchmark/efficiency
+python3 bench_breakdown.py --mode quest-twi
+python3 bench_breakdown.py --mode quest-twi --compare-traditional-attention
+python3 bench_breakdown.py --mode quest
+```
+
+`quest-twi` uses top-p output indices/counts to build the ragged FlashInfer
+attention metadata by default. Use `--attention-source profile` to run the
+synthetic per-head budget path.
+
+#### Bench ragged GQA attention
+
+```bash
+cd benchmark/efficiency
+python3 bench_gqa.py
+```
+
 
 
 ## Citation
