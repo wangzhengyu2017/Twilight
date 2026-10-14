@@ -1,3 +1,4 @@
+# ======== modify the following params ========
 MODEL=Meta-Llama-3.1-8B-Instruct
 MODELPATH=/workspace/models/Meta-Llama-3.1-8B-Instruct
 
