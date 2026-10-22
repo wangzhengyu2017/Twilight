@@ -1,0 +1,198 @@
+{
+  "search_date": "2026-10-22",
+  "mode": "standard",
+  "baseline": "f69ec467ce5a81e26b1e828a2a040839c389ac7f",
+  "branch": "STP_test",
+  "policy": {
+    "primary_sources_only": true,
+    "private_draft_queries_used": false,
+    "verbatim_quotes_stored": false
+  },
+  "safe_queries": [
+    "LoRA-Sparse CVPR 2024",
+    "SALS Sparse Attention in Latent Space",
+    "InfiniGen partial weights",
+    "attention bilinear sparse SVD weights",
+    "Sparse Attention Decomposition Applied to Circuit Tracing",
+    "Analytical Low-Rank Approximation Framework for Attention",
+    "CLOVER Cross-Layer Orthogonal Vectors Pruning",
+    "DOTA Detect and Omit Weak Attentions",
+    "DeepSeek sparse attention indexer"
+  ],
+  "records": [
+    {
+      "title": "A3",
+      "status": "ICML 2026; arXiv 2025",
+      "source": "https://arxiv.org/html/2505.12942v2",
+      "location": "3.1 Eq9,12,13; 3.4; 4.2",
+      "mechanism_note": "original-weight joint bilinear SVD with activation covariance; compression, not B0",
+      "identity_or_secondary_primary_source": "https://proceedings.mlr.press/v306/wong26b.html"
+    },
+    {
+      "title": "CLOVER",
+      "status": "ICML 2025; arXiv 2024",
+      "source": "https://arxiv.org/html/2411.17426v1",
+      "location": "3.1; 6; author blog Cross-Layer Absorption and Orthogonal Decomposition",
+      "mechanism_note": "joint WqWkT SVD and dimension pruning; v1 title differs from proceedings",
+      "identity_or_secondary_primary_source": "https://proceedings.mlr.press/v267/meng25d.html"
+    },
+    {
+      "title": "Palu",
+      "status": "ICLR 2025; arXiv 2024",
+      "source": "https://arxiv.org/html/2407.21118v2",
+      "location": "3.1.1 Eq6; 3.1.2; 4.5",
+      "mechanism_note": "Wk factor fused into Wq; RoPE prevents fixed fusion; not B0",
+      "identity_or_secondary_primary_source": "https://openreview.net/pdf?id=LWMS4pk2vK"
+    },
+    {
+      "title": "Sparse Attention Decomposition Applied to Circuit Tracing",
+      "status": "arXiv 2024; venue not asserted",
+      "source": "https://arxiv.org/html/2410.00340v1",
+      "location": "3 Eq1-3; 4.1 Eq5-6",
+      "mechanism_note": "joint bilinear SVD and pair-dependent sparse contributions; interpretability only",
+      "identity_or_secondary_primary_source": "https://arxiv.org/abs/2410.00340"
+    },
+    {
+      "title": "Singular Vectors of Attention Heads Align with Features",
+      "status": "ICML 2026",
+      "source": "https://arxiv.org/html/2602.13524v2",
+      "location": "6 Fig8-9",
+      "mechanism_note": "small singular values can contribute large relative attention; conditional feature alignment",
+      "identity_or_secondary_primary_source": "https://proceedings.mlr.press/v306/franco26a.html"
+    },
+    {
+      "title": "LoRA-Sparse",
+      "status": "CVPR 2024",
+      "source": "https://www.yingcong.me/publication/2024-song-lora/2024-song-lora.pdf",
+      "location": "3.3 Eq4 p4; 3.4; 3.2 oracle study; 4",
+      "mechanism_note": "Qhat=Q Wqhat and Khat=K Wkhat, NOT independent direct-X paper implementation; needs order-mimic training",
+      "identity_or_secondary_primary_source": "https://openaccess.thecvf.com/content/CVPR2024/html/Song_Low-Rank_Approximation_for_Sparse_Attention_in_Multi-Modal_LLMs_CVPR_2024_paper.html"
+    },
+    {
+      "title": "InfiniGen",
+      "status": "OSDI 2024",
+      "source": "https://www.usenix.org/system/files/osdi24-lee.pdf",
+      "location": "4.2-4.3 Fig8-10 pp161-162",
+      "mechanism_note": "prior-layer attention input, target-layer partial query weights, partial key cache; partial QK prefetch",
+      "identity_or_secondary_primary_source": "https://www.usenix.org/conference/osdi24/presentation/lee"
+    },
+    {
+      "title": "Double Sparsity",
+      "status": "arXiv 2024",
+      "source": "https://arxiv.org/html/2408.07092v2",
+      "location": "4.1-4.2; 5.1; 6",
+      "mechanism_note": "heavy Q/K channels and label cache; offload variant uses preceding-layer embeddings",
+      "identity_or_secondary_primary_source": "https://arxiv.org/abs/2408.07092"
+    },
+    {
+      "title": "SparQ",
+      "status": "ICML 2024; arXiv 2023",
+      "source": "https://arxiv.org/html/2312.04985v6",
+      "location": "3 Algorithm1",
+      "mechanism_note": "current query heavy channels, partial key reads, proxy scores",
+      "identity_or_secondary_primary_source": "https://proceedings.mlr.press/v235/ribar24a.html"
+    },
+    {
+      "title": "Loki",
+      "status": "arXiv 2024",
+      "source": "https://arxiv.org/html/2406.02542v2",
+      "location": "method and kernel evaluation",
+      "mechanism_note": "PCA of key activations; low-dimensional scores rank tokens",
+      "identity_or_secondary_primary_source": "https://arxiv.org/abs/2406.02542"
+    },
+    {
+      "title": "SALS",
+      "status": "NeurIPS 2025",
+      "source": "https://arxiv.org/html/2510.24273v1",
+      "location": "3;4.2;4.3 Algorithm1;5",
+      "mechanism_note": "pre-RoPE q/k projected to latent space, dot-product selection then reconstruct selected keys and apply RoPE",
+      "identity_or_secondary_primary_source": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/00a0ebcad584c59dbc439c2af8793638-Abstract-Conference.html"
+    },
+    {
+      "title": "ShadowKV",
+      "status": "ICML 2025; arXiv 2024",
+      "source": "https://arxiv.org/html/2410.21465v2",
+      "location": "3-4;5;7.9",
+      "mechanism_note": "pre-RoPE activation key SVD, sparse reconstruction and value offload",
+      "identity_or_secondary_primary_source": "https://github.com/ByteDance-Seed/ShadowKV"
+    },
+    {
+      "title": "Quest",
+      "status": "ICML 2024",
+      "source": "https://arxiv.org/abs/2406.10774",
+      "location": "method; author code README; official ICML slides page9",
+      "mechanism_note": "current query and page key min/max upper-bound metadata",
+      "identity_or_secondary_primary_source": "https://github.com/mit-han-lab/quest"
+    },
+    {
+      "title": "ELSA",
+      "status": "ISCA 2021",
+      "source": "https://taejunham.github.io/data/elsa_isca21.pdf",
+      "location": "III-D Fig4; hardware motivation",
+      "mechanism_note": "Q/K-derived sign-random-projection hash, Hamming-angle and norm; GPU approximation can be slower",
+      "identity_or_secondary_primary_source": "https://doi.org/10.1109/ISCA52012.2021.00060"
+    },
+    {
+      "title": "DOTA",
+      "status": "ASPLOS 2022; full-text access incomplete",
+      "source": "https://par.nsf.gov/servlets/purl/10357543",
+      "location": "indexed original-text 3.1-3.2 Fig4; PDF open timeout, ACM403",
+      "mechanism_note": "direct-X low-rank detector and joint training located; formula and evaluation status require full-text recheck",
+      "identity_or_secondary_primary_source": "https://doi.org/10.1145/3503222.3507738"
+    },
+    {
+      "title": "DeepSeek-V3.2",
+      "status": "2025 technical report",
+      "source": "https://arxiv.org/html/2512.02556v1",
+      "location": "DSA architecture and indexer training",
+      "mechanism_note": "learned indexer query/key score and top-k, distinct from main attention; not no-similarity",
+      "identity_or_secondary_primary_source": "https://arxiv.org/abs/2512.02556"
+    },
+    {
+      "title": "HISA",
+      "status": "2026 preprint",
+      "source": "https://arxiv.org/html/2603.28458v1",
+      "location": "method and experiments",
+      "mechanism_note": "coarse pooled-block selection then original token indexer refinement",
+      "identity_or_secondary_primary_source": "https://arxiv.org/abs/2603.28458"
+    },
+    {
+      "title": "Fathom",
+      "status": "2026-09 preprint; partial screening",
+      "source": "https://arxiv.org/html/2609.17652v1",
+      "location": "method, baselines and experiments; training protocol not fully inspected",
+      "mechanism_note": "per-query compressed-key read depth; not WqWk fusion",
+      "identity_or_secondary_primary_source": "https://arxiv.org/abs/2609.17652"
+    }
+  ],
+  "presentation_anomalies": [
+    {
+      "title": "Sparse Attention Decomposition Applied to Circuit Tracing",
+      "abs_history": "v1 2024-10-01; v2 2024-10-10; v3 2024-10-28",
+      "read_html_version": "v1",
+      "body_date_seen": "August 24, 2026",
+      "resolution": "retain discrepancy; do not infer venue or exact equation first-appearance date from HTML"
+    }
+  ],
+  "screened_not_deeply_verified": [
+    {
+      "title": "LONG EXPOSURE",
+      "source": "https://www.likun.tech/pdf/sc24_longexposure.pdf"
+    },
+    {
+      "title": "PADE",
+      "source": "https://arxiv.org/abs/2512.14322"
+    },
+    {
+      "title": "Lorsa",
+      "source": "https://openreview.net/pdf/06f90fda76178076b5c15b7a7e6ae52cf77cd29b.pdf"
+    }
+  ],
+  "limitations": [
+    "not exhaustive through October 2026",
+    "DOTA full text access incomplete",
+    "no external implementation reproduced",
+    "ANN/MIPS/safe-screening and interval methods require further search",
+    "citation locations refer to explicitly read versions, which can differ from final proceedings"
+  ]
+}

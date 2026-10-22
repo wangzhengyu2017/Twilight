@@ -1,0 +1,143 @@
+{
+  "iteration": "ED-R002",
+  "date": "2026-10-22",
+  "baseline_commit": "f69ec467ce5a81e26b1e828a2a040839c389ac7f",
+  "runtime": {
+    "python": "3.11.17",
+    "torch": "2.5.0+cpu",
+    "device": "cpu"
+  },
+  "execution_commands": [
+    "python -m unittest discover -s \"early decision/tests\" -v",
+    "python \"early decision/compare_attention.py\" --output \"early decision/measurements/2026-10-22-attention-comparison.json\"",
+    "python \"early decision/summarize_comparison.py\" --input \"early decision/measurements/2026-10-22-attention-comparison.json.gz\" --json-output summary.json --markdown-output summary.md"
+  ],
+  "validation": {
+    "tests_passed": 24,
+    "configurations": 144,
+    "steps": 576,
+    "full_keep_steps_allclose": 192,
+    "no_rope_bound_steps_recall_one": 144
+  },
+  "raw_json_bytes": 8737356,
+  "raw_json_sha256": "547d4bac2b745a0a7700f5496583d3b78e20973cc785fe9a0bd8490c4cd90b93",
+  "gzip_decompressed_matches_raw": true,
+  "scope": "synthetic Torch attention components and stub runtime plumbing; no installed Transformers/model checkpoint/GPU verification",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 2987,
+      "sha256": "0093a719a49ef8489ec49b5cd536e73d574a469f6ede1e0dbb345e646e9bddfb"
+    },
+    {
+      "path": ".codex/config.toml",
+      "bytes": 162,
+      "sha256": "26199b9eed57db18f24bb5afc52e5d539bec403decef569aae3fc0efbe74cbd3"
+    },
+    {
+      "path": ".codex/README.md",
+      "bytes": 1097,
+      "sha256": "4f2e421ea5a72fa7251c96c0e7395c7e773990053bdb3e349dd2294e37c9375e"
+    },
+    {
+      "path": ".codex/documentation-conventions.md",
+      "bytes": 6824,
+      "sha256": "e0c938e92fff4637f08ac78af89f66edfa1208aa86233602f8703103bfa9ac54"
+    },
+    {
+      "path": ".codex/history/README.md",
+      "bytes": 1569,
+      "sha256": "795b3ead3b3dab8d440f0f88758276b4cf9cdf066d1cb81e45b47e031b83afd4"
+    },
+    {
+      "path": ".codex/history/ED-R002.md",
+      "bytes": 5442,
+      "sha256": "2a2352fab4eb90aeb64aafc3f5959979001197b22d5530a8810daed20e52ce5c"
+    },
+    {
+      "path": ".codex/tasks/early-decision.md",
+      "bytes": 1253,
+      "sha256": "c81dfbd20fe2627943c2a3cd3c3ad44aa5937ff2bae6eaa7818d4cfcea8893a5"
+    },
+    {
+      "path": "twilight/early_decision_attention.py",
+      "bytes": 11624,
+      "sha256": "b47899b9dcaf47dd49f9aa4dd73d9dbc8b4052e066dff3885203766b32562a17"
+    },
+    {
+      "path": "twilight/pyimpl/attention.py",
+      "bytes": 17868,
+      "sha256": "722ade3fd8d296e0a815b4b36a21042422ecec47f0b0466fa4fd59212171b373"
+    },
+    {
+      "path": "early decision/.gitignore",
+      "bytes": 114,
+      "sha256": "d486f4d2f84f5ec553b2581a67a5f14e87a43a0b71b74fecb39ab51711dfdb16"
+    },
+    {
+      "path": "early decision/README.md",
+      "bytes": 10718,
+      "sha256": "aac2fdf1fb6da7ffc736a2dd0110f41ef5c493a142dfe9068b1fba16d76118d0"
+    },
+    {
+      "path": "early decision/ATTENTION_PROTOCOL.md",
+      "bytes": 5470,
+      "sha256": "c5a1cb49c2968ae41e916fec63108442da15092a99a49cdda2e804e40aee8434"
+    },
+    {
+      "path": "early decision/RELATED_WORK.md",
+      "bytes": 22904,
+      "sha256": "ae4fcad786433d02747310428b118fdc451d69f96493ce9313c2215c50f57988"
+    },
+    {
+      "path": "early decision/TWILIGHT_INTEGRATION.md",
+      "bytes": 13152,
+      "sha256": "59df8a2baea98a7665bd85253ddd5c490d83c5a810db236d5693666ca32f37c9"
+    },
+    {
+      "path": "early decision/compare_attention.py",
+      "bytes": 11083,
+      "sha256": "8fc822138450cf9db7f5eaf17e3bdaa4f1954aee9930be7957ec049e17be9329"
+    },
+    {
+      "path": "early decision/summarize_comparison.py",
+      "bytes": 5295,
+      "sha256": "2aaa974a765c59597278cffcd2d3c846637c2428f692eae793322b0bdcb73e50"
+    },
+    {
+      "path": "early decision/tests/test_twilight_integration.py",
+      "bytes": 10188,
+      "sha256": "cbe0bae858bb23c0224ca337c6c669a0dc5c78b7d5cfe5714962ca4a38fe2e28"
+    },
+    {
+      "path": "early decision/measurements/2026-10-22-attention-comparison.json.gz",
+      "bytes": 1841588,
+      "sha256": "83d85b3a1b976d6441f57536f628a556372615933e14b99ea89885b49f32506c"
+    },
+    {
+      "path": "early decision/measurements/2026-10-22-attention-comparison.log",
+      "bytes": 207,
+      "sha256": "24a6396767c96e66780518080c2576334a63772d04aeda80cc32b273681ea0e0"
+    },
+    {
+      "path": "early decision/measurements/2026-10-22-attention-summary.json",
+      "bytes": 7170,
+      "sha256": "0fc37ef8ebed17b26ec5e7ad68289dea3db6e41d2a0b89167e2ad2f06c40940d"
+    },
+    {
+      "path": "early decision/measurements/2026-10-22-attention-summary.md",
+      "bytes": 1845,
+      "sha256": "ccad6de393c29e2b01726a2212e9735649065009c80a4c4256ff3d759cc0d6d3"
+    },
+    {
+      "path": "early decision/measurements/2026-10-22-integration-tests.txt",
+      "bytes": 3110,
+      "sha256": "d6629788c67375e706d7a897259735f99b5960f27b7b5eb9f29c6de6ba3a49af"
+    },
+    {
+      "path": "early decision/measurements/2026-10-22-literature-sources.json",
+      "bytes": 9016,
+      "sha256": "64b2394145de0f8d2df586159b0d065c539ff34650612b6a0b7d6771aa5a1ebe"
+    }
+  ]
+}

@@ -67,6 +67,13 @@ def attention_forward(
     use_cache: bool = False,
     **kwargs,
 ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
+    # Opt-in dispatch precedes dense QK, DS, Top-p and FlashAttention prefill.
+    if hasattr(self, "_early_decision_forward"):
+        return self._early_decision_forward(
+            hidden_states, attention_mask=attention_mask, position_ids=position_ids,
+            past_key_value=past_key_value, output_attentions=output_attentions,
+            use_cache=use_cache, **kwargs,
+        )
     torch.cuda.empty_cache()
 
     bsz, q_len, _ = hidden_states.size()

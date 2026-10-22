@@ -1,0 +1,29 @@
+test_append_retains_only_features_and_norms (test_early_decision.EarlyDecisionTests.test_append_retains_only_features_and_norms) ... ok
+test_both_interval_modes_cover_exact_scores_at_all_ranks (test_early_decision.EarlyDecisionTests.test_both_interval_modes_cover_exact_scores_at_all_ranks) ... ok
+test_empty_and_full_subset_mass (test_early_decision.EarlyDecisionTests.test_empty_and_full_subset_mass) ... ok
+test_fixed_score_transform_is_supported (test_early_decision.EarlyDecisionTests.test_fixed_score_transform_is_supported) ... ok
+test_full_rank_recovers_bilinear_scores (test_early_decision.EarlyDecisionTests.test_full_rank_recovers_bilinear_scores) ... ok
+test_invalid_shapes_nonfinite_and_arguments (test_early_decision.EarlyDecisionTests.test_invalid_shapes_nonfinite_and_arguments) ... ok
+test_log_space_avoids_large_logit_overflow (test_early_decision.EarlyDecisionTests.test_log_space_avoids_large_logit_overflow) ... ok
+test_mass_bound_and_selection_hold (test_early_decision.EarlyDecisionTests.test_mass_bound_and_selection_hold) ... ok
+test_quantized_reference_is_covered (test_early_decision.EarlyDecisionTests.test_quantized_reference_is_covered) ... ok
+test_rope_cannot_be_silently_ignored (test_early_decision.EarlyDecisionTests.test_rope_cannot_be_silently_ignored) ... ok
+test_shared_weights_do_not_imply_fixed_token_ranking (test_early_decision.EarlyDecisionTests.test_shared_weights_do_not_imply_fixed_token_ranking) ... ok
+test_tail_mode_tighter_than_input_norm (test_early_decision.EarlyDecisionTests.test_tail_mode_tighter_than_input_norm) ... ok
+test_ties_are_conservative_for_topk (test_early_decision.EarlyDecisionTests.test_ties_are_conservative_for_topk) ... ok
+test_topk_superset_for_all_ranks (test_early_decision.EarlyDecisionTests.test_topk_superset_for_all_ranks) ... ok
+test_zero_weights_and_zero_input (test_early_decision.EarlyDecisionTests.test_zero_weights_and_zero_input) ... ok
+test_bounds_superset_and_same_budget (test_twilight_integration.IntegrationTest.test_bounds_superset_and_same_budget) ... ok
+test_dispatch_before_dense_or_old_selectors (test_twilight_integration.IntegrationTest.test_dispatch_before_dense_or_old_selectors) ... ok
+test_full_keep_and_full_rank (test_twilight_integration.IntegrationTest.test_full_keep_and_full_rank) ... ok
+test_persistence_and_no_dense_qk_in_selector (test_twilight_integration.IntegrationTest.test_persistence_and_no_dense_qk_in_selector) ... ok
+test_rejections_and_zero (test_twilight_integration.IntegrationTest.test_rejections_and_zero) ... ok
+test_report_roundtrip_plain_and_gzip (test_twilight_integration.IntegrationTest.test_report_roundtrip_plain_and_gzip) ... ok
+test_rope_explicit_and_full_keep (test_twilight_integration.IntegrationTest.test_rope_explicit_and_full_keep) ... ok
+test_runtime_stub_gqa_causal_reset (test_twilight_integration.IntegrationTest.test_runtime_stub_gqa_causal_reset) ... ok
+test_tensor_input_comparison (test_twilight_integration.IntegrationTest.test_tensor_input_comparison) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.946s
+
+OK

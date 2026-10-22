@@ -1,0 +1,3 @@
+# Portable project configuration; official key checked on 2026-10-22.
+# https://learn.chatgpt.com/docs/config-file/config-reference
+project_doc_max_bytes = 65536

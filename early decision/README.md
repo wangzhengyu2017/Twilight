@@ -1,6 +1,15 @@
 # Early decision：从 X 与投影权重提前生成 B0
 
-日期：2026-10-22。状态：CPU 数学原型和合成验证，尚未接入完整模型。此目录按用户要求位于 `STP_test` 的 `early decision/`。
+日期：2026-10-22。当前包含 ED-R001 数学原型与 ED-R002 的 Twilight opt-in 接入、CPU attention 对照；尚未运行完整模型。此目录位于 `STP_test` 的 `early decision/`。
+
+当前入口：
+
+- [相关论文与公式级先例](RELATED_WORK.md)：CLOVER／A³、Palu、LoRA-Sparse、SALS、InfiniGen 等；不将联合权重分解本身声称为新意。
+- [Early Decision-only attention 实验说明](TWILIGHT_INTEGRATION.md)：启用后绕过 DS 和 Twilight Top-p，仅用 B0 中 KV 计算正式 attention。
+- [自动生成的结果摘要](measurements/2026-10-22-attention-summary.md)、[完整原始 JSON.gz](measurements/2026-10-22-attention-comparison.json.gz)：144 配置、576 个 decode step，输出质量、两套 KV oracle、CPU 时间与完整成本。
+- [本轮历史总结](../.codex/history/ED-R002.md)：从前序数学原型到当前发现及下一步。
+
+以下保留数学原型的定义、推导和 ED-R001 验证范围；新接入接口及本轮结果以上述 ED-R002 文档为准。
 
 ## 1. 先回答数学问题
 
