@@ -1,0 +1,1099 @@
+{
+  "experiment": "early-decision-bilinear-v1",
+  "date": "2026-10-22",
+  "kind": "provided tensor validation",
+  "input_sha256": "7ff224ad31588cf9323cbe3c5bf4440e25c8b38fb588c42c1b9dca77289b9159",
+  "environment": {
+    "python": "3.11.17",
+    "torch": "2.5.0+cpu",
+    "device": "cpu",
+    "threads": 1,
+    "dtype": "float64"
+  },
+  "scope": "no LLM/PPL, no native INT kernel, no per-token RoPE, no latency or energy measurement",
+  "interval_violations": 0,
+  "topk_missed_tokens": 0,
+  "configurations": 18,
+  "rows": [
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": null,
+      "bound_mode": "norm",
+      "rank": 0,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.840623756760071,
+      "singular_values": [
+        1.840623756760071,
+        1.2764052346688066
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 2.549930208636816,
+      "max_interval_width": 10.227396336394015,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 56,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 0,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 0,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 0,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": null,
+      "bound_mode": "tail",
+      "rank": 0,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.840623756760071,
+      "singular_values": [
+        1.840623756760071,
+        1.2764052346688066
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 2.549930208636816,
+      "max_interval_width": 6.073007458364282,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 56,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 0,
+        "extra_history_tail_norm_projection": 56,
+        "query_feature_projection": 0,
+        "query_tail_norm_projection": 8,
+        "B0_score_scan_per_query": 0,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": null,
+      "bound_mode": "norm",
+      "rank": 1,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.2764052346688066,
+      "singular_values": [
+        1.840623756760071,
+        1.2764052346688066
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 0.145449061077626,
+      "max_interval_width": 7.092325182566716,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 112,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 28,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 4,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 7,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": null,
+      "bound_mode": "tail",
+      "rank": 1,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.2764052346688066,
+      "singular_values": [
+        1.840623756760071,
+        1.2764052346688066
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 0.145449061077626,
+      "max_interval_width": 0.2908981225906575,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.666666666666667,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 0.9172298813458959,
+          "min_mass_bound": 0.9163166958006991
+        },
+        "0.99": {
+          "mean_B0_size": 6.333333333333333,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 0.9906654310213662,
+          "min_mass_bound": 0.9903330739312266
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 112,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 28,
+        "extra_history_tail_norm_projection": 28,
+        "query_feature_projection": 4,
+        "query_tail_norm_projection": 4,
+        "B0_score_scan_per_query": 7,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": null,
+      "bound_mode": "norm",
+      "rank": 2,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 0.0,
+      "singular_values": [
+        1.840623756760071,
+        1.2764052346688066
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 1.3322676295501878e-15,
+      "max_interval_width": 7.099858478909482e-10,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.666666666666667,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 0.9172298813458959,
+          "min_mass_bound": 0.917229881323968
+        },
+        "0.99": {
+          "mean_B0_size": 6.333333333333333,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 0.9906654310213662,
+          "min_mass_bound": 0.990665431015925
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 168,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 56,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 8,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 14,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 0.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": null,
+      "bound_mode": "tail",
+      "rank": 2,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 0.0,
+      "singular_values": [
+        1.840623756760071,
+        1.2764052346688066
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 1.3322676295501878e-15,
+      "max_interval_width": 7.099858478909482e-10,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.666666666666667,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 0.9172298813458959,
+          "min_mass_bound": 0.917229881323968
+        },
+        "0.99": {
+          "mean_B0_size": 6.333333333333333,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 0.9906654310213662,
+          "min_mass_bound": 0.990665431015925
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 168,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 56,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 8,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 14,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 0.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 4,
+      "bound_mode": "norm",
+      "rank": 0,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.9275579512612835,
+      "singular_values": [
+        1.9275579512612835,
+        1.2041282761138439
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 2.7025128743394173,
+      "max_interval_width": 10.710444791607221,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 56,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 0,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 0,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 0,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 4,
+      "bound_mode": "tail",
+      "rank": 0,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.9275579512612835,
+      "singular_values": [
+        1.9275579512612835,
+        1.2041282761138439
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 2.7025128743394173,
+      "max_interval_width": 6.387229384246497,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 56,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 0,
+        "extra_history_tail_norm_projection": 56,
+        "query_feature_projection": 0,
+        "query_tail_norm_projection": 8,
+        "B0_score_scan_per_query": 0,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 4,
+      "bound_mode": "norm",
+      "rank": 1,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.2041282761138439,
+      "singular_values": [
+        1.9275579512612835,
+        1.2041282761138439
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 0.22840161729945363,
+      "max_interval_width": 6.690719423413967,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 112,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 28,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 4,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 7,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 4,
+      "bound_mode": "tail",
+      "rank": 1,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.2041282761138439,
+      "singular_values": [
+        1.9275579512612835,
+        1.2041282761138439
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 0.22840161729945363,
+      "max_interval_width": 0.4568032350310808,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.333333333333333,
+          "mean_oracle_top_p_size": 4.333333333333333,
+          "min_actual_mass": 0.9094937980469863,
+          "min_mass_bound": 0.9072406372451026
+        },
+        "0.99": {
+          "mean_B0_size": 6.666666666666667,
+          "mean_oracle_top_p_size": 6.666666666666667,
+          "min_actual_mass": 0.9953441664551412,
+          "min_mass_bound": 0.9953115712735758
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 112,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 28,
+        "extra_history_tail_norm_projection": 28,
+        "query_feature_projection": 4,
+        "query_tail_norm_projection": 4,
+        "B0_score_scan_per_query": 7,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 4,
+      "bound_mode": "norm",
+      "rank": 2,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 0.0,
+      "singular_values": [
+        1.9275579512612835,
+        1.2041282761138439
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 6.661338147750939e-16,
+      "max_interval_width": 7.405027702134248e-10,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.333333333333333,
+          "mean_oracle_top_p_size": 4.333333333333333,
+          "min_actual_mass": 0.9094937980469863,
+          "min_mass_bound": 0.9094937980063675
+        },
+        "0.99": {
+          "mean_B0_size": 6.666666666666667,
+          "mean_oracle_top_p_size": 6.666666666666667,
+          "min_actual_mass": 0.9953441664551412,
+          "min_mass_bound": 0.9953441664520478
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 168,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 56,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 8,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 14,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 0.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 4,
+      "bound_mode": "tail",
+      "rank": 2,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 0.0,
+      "singular_values": [
+        1.9275579512612835,
+        1.2041282761138439
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 6.661338147750939e-16,
+      "max_interval_width": 7.405027702134248e-10,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.333333333333333,
+          "mean_oracle_top_p_size": 4.333333333333333,
+          "min_actual_mass": 0.9094937980469863,
+          "min_mass_bound": 0.9094937980063675
+        },
+        "0.99": {
+          "mean_B0_size": 6.666666666666667,
+          "mean_oracle_top_p_size": 6.666666666666667,
+          "min_actual_mass": 0.9953441664551412,
+          "min_mass_bound": 0.9953441664520478
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 168,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 56,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 8,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 14,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 0.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 8,
+      "bound_mode": "norm",
+      "rank": 0,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.8365950934514943,
+      "singular_values": [
+        1.8365950934514943,
+        1.279986761352126
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 2.549193123378239,
+      "max_interval_width": 10.20501113343737,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 56,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 0,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 0,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 0,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 8,
+      "bound_mode": "tail",
+      "rank": 0,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.8365950934514943,
+      "singular_values": [
+        1.8365950934514943,
+        1.279986761352126
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 2.549193123378239,
+      "max_interval_width": 6.075613963286685,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 56,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 0,
+        "extra_history_tail_norm_projection": 56,
+        "query_feature_projection": 0,
+        "query_tail_norm_projection": 8,
+        "B0_score_scan_per_query": 0,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 8,
+      "bound_mode": "norm",
+      "rank": 1,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.279986761352126,
+      "singular_values": [
+        1.8365950934514943,
+        1.279986761352126
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 0.14089534616588306,
+      "max_interval_width": 7.112225878048585,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        },
+        "0.99": {
+          "mean_B0_size": 7.0,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 1.0,
+          "min_mass_bound": 1.0
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 112,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 28,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 4,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 7,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 8,
+      "bound_mode": "tail",
+      "rank": 1,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 1.279986761352126,
+      "singular_values": [
+        1.8365950934514943,
+        1.279986761352126
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 0.14089534616588306,
+      "max_interval_width": 0.28179069276885815,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.666666666666667,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 0.9174917856804764,
+          "min_mass_bound": 0.916676823989804
+        },
+        "0.99": {
+          "mean_B0_size": 6.333333333333333,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 0.9906016915035116,
+          "min_mass_bound": 0.9902913432929953
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 112,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 28,
+        "extra_history_tail_norm_projection": 28,
+        "query_feature_projection": 4,
+        "query_tail_norm_projection": 4,
+        "B0_score_scan_per_query": 7,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 14.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 8,
+      "bound_mode": "norm",
+      "rank": 2,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 0.0,
+      "singular_values": [
+        1.8365950934514943,
+        1.279986761352126
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 1.7763568394002505e-15,
+      "max_interval_width": 7.09838410273278e-10,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.666666666666667,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 0.9174917856804764,
+          "min_mass_bound": 0.9174917856585812
+        },
+        "0.99": {
+          "mean_B0_size": 6.333333333333333,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 0.9906016915035116,
+          "min_mass_bound": 0.9906016914980392
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 168,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 56,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 8,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 14,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 0.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    },
+    {
+      "case": "provided_tensors",
+      "seed": null,
+      "weight_bits": 8,
+      "bound_mode": "tail",
+      "rank": 2,
+      "shape": {
+        "D": 4,
+        "d": 2,
+        "N": 7,
+        "queries": 3
+      },
+      "reference": "linear FP64 over frozen QDQ weights; no per-token RoPE or activation QDQ",
+      "residual_sigma": 0.0,
+      "singular_values": [
+        1.8365950934514943,
+        1.279986761352126
+      ],
+      "interval_violations": 0,
+      "max_estimate_abs_error": 1.7763568394002505e-15,
+      "max_interval_width": 7.09838410273278e-10,
+      "topk": {
+        "k": 7,
+        "mean_B0_size": 7.0,
+        "min_B0_size": 7,
+        "max_B0_size": 7,
+        "missed_oracle_tokens": 0
+      },
+      "mass": {
+        "0.9": {
+          "mean_B0_size": 4.666666666666667,
+          "mean_oracle_top_p_size": 4.666666666666667,
+          "min_actual_mass": 0.9174917856804764,
+          "min_mass_bound": 0.9174917856585812
+        },
+        "0.99": {
+          "mean_B0_size": 6.333333333333333,
+          "mean_oracle_top_p_size": 6.333333333333333,
+          "min_actual_mass": 0.9906016915035116,
+          "min_mass_bound": 0.9906016914980392
+        }
+      },
+      "storage": {
+        "input_cache_actual_fp64_bytes": 168,
+        "full_K_fp64_bytes_for_comparison": 112,
+        "factors_and_tail_bases_actual_fp64_bytes": 144
+      },
+      "logical_MAC_counts": {
+        "offline_QR_SVD": "excluded from online counts; must amortize separately",
+        "extra_history_feature_build": 56,
+        "extra_history_tail_norm_projection": 0,
+        "query_feature_projection": 8,
+        "query_tail_norm_projection": 0,
+        "B0_score_scan_per_query": 14,
+        "baseline_full_QK_per_query": 14,
+        "full_QK_on_topk_B0_unreused": 14.0,
+        "full_QK_on_topk_B0_if_full_rank_scores_reused": 0.0,
+        "notes": "no selection/exp/sort/norm/metadata transactions or bit-cost weighting; no speedup claim"
+      }
+    }
+  ]
+}

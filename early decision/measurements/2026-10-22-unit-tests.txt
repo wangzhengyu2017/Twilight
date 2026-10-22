@@ -1,0 +1,20 @@
+test_append_retains_only_features_and_norms (test_early_decision.EarlyDecisionTests.test_append_retains_only_features_and_norms) ... ok
+test_both_interval_modes_cover_exact_scores_at_all_ranks (test_early_decision.EarlyDecisionTests.test_both_interval_modes_cover_exact_scores_at_all_ranks) ... ok
+test_empty_and_full_subset_mass (test_early_decision.EarlyDecisionTests.test_empty_and_full_subset_mass) ... ok
+test_fixed_score_transform_is_supported (test_early_decision.EarlyDecisionTests.test_fixed_score_transform_is_supported) ... ok
+test_full_rank_recovers_bilinear_scores (test_early_decision.EarlyDecisionTests.test_full_rank_recovers_bilinear_scores) ... ok
+test_invalid_shapes_nonfinite_and_arguments (test_early_decision.EarlyDecisionTests.test_invalid_shapes_nonfinite_and_arguments) ... ok
+test_log_space_avoids_large_logit_overflow (test_early_decision.EarlyDecisionTests.test_log_space_avoids_large_logit_overflow) ... ok
+test_mass_bound_and_selection_hold (test_early_decision.EarlyDecisionTests.test_mass_bound_and_selection_hold) ... ok
+test_quantized_reference_is_covered (test_early_decision.EarlyDecisionTests.test_quantized_reference_is_covered) ... ok
+test_rope_cannot_be_silently_ignored (test_early_decision.EarlyDecisionTests.test_rope_cannot_be_silently_ignored) ... ok
+test_shared_weights_do_not_imply_fixed_token_ranking (test_early_decision.EarlyDecisionTests.test_shared_weights_do_not_imply_fixed_token_ranking) ... ok
+test_tail_mode_tighter_than_input_norm (test_early_decision.EarlyDecisionTests.test_tail_mode_tighter_than_input_norm) ... ok
+test_ties_are_conservative_for_topk (test_early_decision.EarlyDecisionTests.test_ties_are_conservative_for_topk) ... ok
+test_topk_superset_for_all_ranks (test_early_decision.EarlyDecisionTests.test_topk_superset_for_all_ranks) ... ok
+test_zero_weights_and_zero_input (test_early_decision.EarlyDecisionTests.test_zero_weights_and_zero_input) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.069s
+
+OK

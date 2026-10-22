@@ -1,0 +1,16 @@
+{
+  "saved_with": "torch.save; regenerate with the recorded PyTorch version",
+  "score_transform": [
+    [
+      0,
+      -1
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "generation": "torch.manual_seed(12); randn(4,2) W_q; randn(4,2) W_k; randn(3,4) x_query; randn(7,4) x_keys",
+  "source_dtype": "float32",
+  "seed": 12
+}
