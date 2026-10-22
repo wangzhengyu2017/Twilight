@@ -162,7 +162,7 @@ def main():
               "topk_missed_tokens": sum(row["topk"]["missed_oracle_tokens"] for row in rows),
               "configurations": len(rows), "rows": rows}
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     print(json.dumps({key: report[key] for key in ("configurations", "interval_violations", "topk_missed_tokens")}))
 
 
