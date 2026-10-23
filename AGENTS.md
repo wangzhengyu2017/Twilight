@@ -1,4 +1,37 @@
-# Twilight STP_test 项目规则
+# Subagent Model Mapping
+
+Builder check subagents use `gpt-6.1-sol` with `high` reasoning effort.
+
+For implementer subagents, use the following model mappings:
+- Cheap: `gpt-6-luna` with `high` reasoning effort.
+- Standard: `gpt-6.1-sol` with `low` reasoning effort.
+- Most capable: `gpt-6.1-sol` with `medium` reasoning effort.
+
+For task reviewer and re-reviewer subagents, use the following model mappings:
+- Cheap: `gpt-6.1-sol` with `low` reasoning effort.
+- Standard: `gpt-6.1-sol` with `low` reasoning effort.
+- Most capable: `gpt-6.1-sol` with `medium` reasoning effort.
+
+Code reviewer subagents use `gpt-6.1-sol` with `high` reasoning effort.
+
+Always dispatch task reviewers, re-reviewers, and code reviewers as fresh subagents
+with `fork_turns: "none"`.
+
+# Language Policy
+English is the default language for all content within the project.
+
+# Documentation Workflow
+
+The upstream STP policy is pinned to [STP AGENTS.md](https://github.com/wangzhengyu2017/STP/blob/57926aee44ab066a136b7cf7d6ecf0d0db5d17d0/AGENTS.md).
+Its `PADE/docs/` paths belong to the upstream project. In this branch, follow
+[.codex/documentation-conventions.md](.codex/documentation-conventions.md) and keep
+[.codex/history/README.md](.codex/history/README.md) and the current preparation /
+experiment entry points synchronized. Maintain current preparation, experiment
+evidence, and causal round summaries separately. Record planned, implemented,
+executed, and verified scopes distinctly and freeze historical evidence before
+updating the current design. A chat or file is not automatically a new round.
+
+# Twilight STP_early_decision 项目规则
 
 适用于本仓库及其子目录的研究、实现、实验与文档。开始编写文档前，阅读 [.codex/documentation-conventions.md](.codex/documentation-conventions.md)。用户新指示优先。
 
