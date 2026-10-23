@@ -20,32 +20,21 @@ with `fork_turns: "none"`.
 # Language Policy
 English is the default language for all content within the project.
 
-# Documentation Workflow
-
-The upstream STP policy is pinned to [STP AGENTS.md](https://github.com/wangzhengyu2017/STP/blob/57926aee44ab066a136b7cf7d6ecf0d0db5d17d0/AGENTS.md).
-Its `PADE/docs/` paths belong to the upstream project. In this branch, follow
-[.codex/documentation-conventions.md](.codex/documentation-conventions.md) and keep
-[.codex/history/README.md](.codex/history/README.md) and the current preparation /
-experiment entry points synchronized. Maintain current preparation, experiment
-evidence, and causal round summaries separately. Record planned, implemented,
-executed, and verified scopes distinctly and freeze historical evidence before
-updating the current design. A chat or file is not automatically a new round.
-
 # Twilight STP_early_decision 项目规则
 
-适用于本仓库及其子目录的研究、实现、实验与文档。开始编写文档前，阅读 [.codex/documentation-conventions.md](.codex/documentation-conventions.md)。用户新指示优先。
+适用于本仓库及其子目录的研究、实现、实验与文档。用户新指示优先。
 
 ## 文档与历史
 
-1. 按“准备工作 → 实验 → 本轮总结归档 → 更新下一轮准备工作”循环。
-2. 准备工作和实验文档面向当前方案整合；历史方案和旧证据进入总结，不堆积在当前 Spec 中。
-3. 每轮总结使用稳定编号，关联前序、当时方案／Spec、diff／提交、配置、执行记录与结果、后继方案。
-4. 历史关联解释沿用、变化、修改原因、证据适用范围及重验要求；仅有链接列表不足。
-5. 历史依据使用固定提交或归档副本。更正追加日期、原因与新证据，保留当时结论。
-6. 代码修改按“功能｜修改前｜修改后｜涉及文件／diff｜验证结果”组织。
-7. 分清规划、实现、执行、验证；局部测试、合成数据、模型质量、CPU 时间、GPU／硬件测量分别报告。
-8. 归档后更新 [.codex/history/README.md](.codex/history/README.md) 与前后链接。未知历史标为待核实，不从文件日期推断轮次。
-9. 技能、子 agent 与交接均继承这些规则；需要委派时说明文件所有权，避免覆盖其他人的工作。
+文档约定见 [.codex/documentation-conventions.md](.codex/documentation-conventions.md)；上游来源固定为 [STP AGENTS.md](https://github.com/wangzhengyu2017/STP/blob/57926aee44ab066a136b7cf7d6ecf0d0db5d17d0/AGENTS.md)，其中 `PADE/docs/` 路径不适用于本分支。
+
+后续文档用简洁直接的语言，先说明结论与当前重点，避免重复、冗长流程和无助于理解的术语。明确已完成与未完成；历史材料只保留理解当前工作必要的信息，并链接证据。
+
+1. 按“准备工作 → 实验 → 本轮总结归档 → 更新下一轮准备工作”循环；当前方案、实验依据与历史总结分开维护。
+2. 每轮使用稳定编号，串联“前序 → 当时方案／Spec → 实现与结果 → 判断及修改原因 → 后继”；说明沿用与变化、旧证据适用范围及重验要求。未知历史标为待核实，不按文件日期、单次对话或文件划分轮次。
+3. 更新当前方案前固定历史依据（提交或归档副本），关联 diff、配置、执行记录与结果；更正追加日期、原因与新证据，保留原始结论。归档后同步 [.codex/history/README.md](.codex/history/README.md)、当前入口及前后链接。
+4. 代码修改按“功能｜修改前｜修改后｜涉及文件／diff｜验证结果”组织。分清规划、实现、执行、验证；局部测试、合成数据、模型质量、CPU 时间、GPU／硬件测量分别报告。
+5. 技能、子 agent 与交接继承这些规则；委派时明确文件所有权，避免覆盖他人工作。
 
 ## 当前 Early Decision 分支
 
