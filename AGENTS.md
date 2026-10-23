@@ -30,3 +30,5 @@ summaries separately. Keep [PADE/docs/README.md](PADE/docs/README.md) and
 implemented, executed, and verified scopes distinctly and freeze historical
 evidence before updating the current design. A chat or file is not automatically
 a new round.
+
+Use concise, direct language in future documents: lead with conclusions and current priorities, and avoid repetition, lengthy process descriptions, and terms that do not aid understanding. State what is complete and incomplete; retain only the history needed to understand the current work and link supporting evidence.
