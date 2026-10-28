@@ -8,7 +8,7 @@ from ..trace import current_context
 
 PARAMETERS={'group_axis':'head_token','quantizer_input_dtype':'float16','source_input_cast':'bf16_to_fp16','scale_dtype':'source','rounding':'torch_round','zero_group':'scale_one'}
 
-def validate_config(config):
+def validate_config(config, slice_config=None):
     if set(config)-{'method','backend','scope','cache_storage','parameters','source_revision'}: raise ValueError('Unknown attention quantization fields')
     if config.get('method') not in ('fp_common','intflash_qk8'): raise ValueError('Unsupported quantization method')
     for key,value in {'backend':'torch_qdq','scope':'prefill_and_decode','cache_storage':'original_float'}.items():
@@ -16,6 +16,9 @@ def validate_config(config):
     expected=PARAMETERS if config['method']=='intflash_qk8' else {}
     if config.get('parameters')!=expected: raise ValueError('Unsupported quantization parameters')
     if config.get('source_revision')!=(SOURCE_REVISION if expected else None): raise ValueError('Unsupported source revision')
+    if slice_config is not None:
+        from .slice_backend import validate_slice_config
+        validate_slice_config(slice_config, config['method'])
 
 def common_forward(self,hidden_states,attention_mask=None,position_ids=None,past_key_value=None,output_attentions=False,use_cache=False,cache_position=None,position_embeddings=None,**kwargs):
     if output_attentions: raise ValueError('output_attentions=True is unsupported')
@@ -67,8 +70,14 @@ def common_forward(self,hidden_states,attention_mask=None,position_ids=None,past
     kk=prepare_operand(k, 'k')
     recorder=ctx.get('recorder')
     if recorder is not None: recorder.attention_inputs(self,hidden_states,q,k,v,qq,kk,allowed)
+    slice_config=getattr(self.state, "attention_slice", None)
     observer=None if recorder is None else lambda start,end,logits,probs,pv: recorder.attention_chunk(self.layer_id,start,end,logits,probs,pv,allowed)
-    pv=attention(q if qq is None else qq.dq,k if kk is None else kk.dq,v,allowed,self.state.query_chunk,observer)
+    if slice_config is None:
+        pv=attention(q if qq is None else qq.dq,k if kk is None else kk.dq,v,allowed,self.state.query_chunk,observer)
+    else:
+        from .slice_backend import attention_slice
+        observer=None if recorder is None else lambda start,end,payload: recorder.attention_slice_chunk(self.layer_id,start,end,payload,allowed)
+        pv=attention_slice(q,k,v,allowed,qq,kk,slice_config,self.state.query_chunk,observer,ctx.get('counters'))
     project_input=pv.to(hidden_states.dtype).transpose(1,2).reshape(b,m,self.hidden_size).contiguous()
     output=self.o_proj(project_input)
     if recorder is not None: recorder.attention_outputs(self.layer_id,project_input,output)

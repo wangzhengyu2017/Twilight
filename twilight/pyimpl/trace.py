@@ -36,6 +36,9 @@ class CallCounters:
         self.quantization_events = []
         self.quantization_event_limit = 32
         self.quantization_event_count = 0
+        self.slice_statistics = {}
+        self.slice_cost_totals = {}
+        self.slice_labels = {}
     def record(self, layer_id, method, stage, cache_length):
         stage_counts = self.counts.setdefault(str(layer_id), {}).setdefault(method, {})
         stage_counts[stage] = stage_counts.get(stage, 0) + 1
@@ -61,8 +64,52 @@ class CallCounters:
                 'examples':diagnostics.get('examples', [])[:8],
                 'example_limit':8, 'examples_truncated':diagnostics.get('examples_truncated', False),
             })
+    def record_slice_statistics(self, **data):
+        """Accumulate backend work on device; synchronize only when serializing."""
+        labels = {'selection_passes','selected_row_chunk','heads_parallel','actual_pv','variant_id','final_execution'}
+        for key, value in data.items():
+            if isinstance(value, dict):
+                self.record_slice_statistics(**value)
+                continue
+            if key in labels or isinstance(value, (str, bool)) or value is None:
+                old = self.slice_labels.setdefault(key, value)
+                if old != value: raise ValueError('Inconsistent slice statistic label: ' + key)
+                continue
+            if isinstance(value, torch.Tensor):
+                if value.numel() != 1: raise ValueError('Slice statistics must be scalar')
+                value = value.detach()
+            elif not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError('Invalid slice statistic: ' + key)
+            target = self.slice_cost_totals if ('mac' in key or 'cost' in key or 'bytes' in key) else self.slice_statistics
+            old = target.get(key)
+            if old is None: target[key] = value
+            elif key.endswith('_min'):
+                target[key] = torch.minimum(old,value) if isinstance(old,torch.Tensor) else min(old,value)
+            elif key.endswith('_max'):
+                target[key] = torch.maximum(old,value) if isinstance(old,torch.Tensor) else max(old,value)
+            else: target[key] = old + value
+    def _slice_serialized(self, values):
+        result = {}
+        for key, value in values.items():
+            value = value.item() if isinstance(value, torch.Tensor) else value
+            if isinstance(value, (int,float)) and not math.isfinite(value):
+                raise ValueError('Nonfinite slice statistic: ' + key)
+            result[key] = value
+        return dict(result, **self.slice_labels)
+    def slice_summary(self):
+        result = self._slice_serialized(self.slice_statistics)
+        rows = result.get('rows', 0)
+        if rows:
+            result['mean_selected_keys'] = result.get('selected_count', 0) / rows
+            if 'selected_count_squared' in result:
+                result['selected_count_std'] = math.sqrt(max(0, result['selected_count_squared']/rows-result['mean_selected_keys']**2))
+            result['selected_fraction'] = result.get('selected_count',0)/result['allowed_count'] if result.get('allowed_count') else None
+        return result
+    def slice_costs(self):
+        return self._slice_serialized(self.slice_cost_totals)
     def as_dict(self):
         return {'layer_calls':self.counts, 'cache_lengths':self.cache_lengths,
+                'attention_slice': {'statistics':self.slice_summary(), 'costs':self.slice_costs()},
                 'quantization_diagnostics':{
                     'input_cast_policy':INPUT_CAST_POLICY, 'count_semantics':QUANTIZATION_COUNT_SEMANTICS,
                     'by_layer_operand':self.quantization_by_layer_operand,

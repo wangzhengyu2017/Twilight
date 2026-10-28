@@ -382,8 +382,8 @@ def enable_sparse_attention(
     quantization = sparse_config.get("attention_quantization", {"method": "none"})
     if quantization.get("method", "none") != "none":
         from .quant_attention.forward import validate_config
-        validate_config(quantization)
-        allowed = {"compressor", "selector", "weight_estimator", "weight_pruner", "skip_first_two_layers", "use_estimated_weights_in_attn", "attention_quantization"}
+        validate_config(quantization, sparse_config.get("attention_slice"))
+        allowed = {"compressor", "selector", "weight_estimator", "weight_pruner", "skip_first_two_layers", "use_estimated_weights_in_attn", "attention_quantization", "attention_slice"}
         if set(sparse_config) - allowed:
             raise ValueError("Unknown algorithm configuration fields")
         if any(sparse_config.get(k) != {"type": "none"} for k in ("compressor", "selector", "weight_estimator", "weight_pruner")):
@@ -441,6 +441,7 @@ def enable_sparse_attention(
         skip_first_two_layers=skip_first_two_layers,
         attention_quantization=quantization,
         query_chunk=query_chunk,
+        attention_slice=sparse_config.get("attention_slice"),
     )
 
     return budget_info, score_info
@@ -468,6 +469,7 @@ def _enable_sparse_attention(
     skip_first_two_layers: bool = True,
     attention_quantization: Optional[Dict] = None,
     query_chunk: int = 64,
+    attention_slice: Optional[Dict] = None,
 ) -> None:
     """Enable Sparse Attention.
 
@@ -490,6 +492,7 @@ def _enable_sparse_attention(
             skip_first_two_layers=skip_first_two_layers,
             attention_quantization=attention_quantization,
             query_chunk=query_chunk,
+            attention_slice=attention_slice,
         )
 
         if selector == IndexSelectorType.DS:
