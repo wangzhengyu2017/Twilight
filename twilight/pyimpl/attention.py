@@ -29,22 +29,6 @@ from transformers.cache_utils import DynamicCache
 
 from transformers.models.mistral.modeling_mistral import MistralAttention
 
-# Prefill compression policies
-from .snap_kv import snap_kv_compression, prepare_inputs_for_generation_llama_snapkv
-
-# Index selector policies
-from .streaming_llm import streaming_selector
-from .quest import quest_selector
-from .top_k import oracle_topk_selector
-from .tidal_decode import tidal_decode_selector
-from .sparq import sparq_selector
-from .double_sparse import double_sparse_selector, init_model_channel_config
-
-# Weight estimator policies
-from .top_p import top_p_unnormalized
-from .elementwise_threshold import elementwise_threshold
-from .quantize import min_max_per_token_quant_kv, max_per_token_quant_kv
-
 # States
 from .state import (
     CompressorType,
@@ -57,6 +41,19 @@ from .state import (
 )
 
 
+def _load_legacy_policies():
+    global snap_kv_compression, prepare_inputs_for_generation_llama_snapkv, streaming_selector, quest_selector, oracle_topk_selector, tidal_decode_selector, sparq_selector, double_sparse_selector, init_model_channel_config, top_p_unnormalized, elementwise_threshold, min_max_per_token_quant_kv, max_per_token_quant_kv
+    from .snap_kv import snap_kv_compression, prepare_inputs_for_generation_llama_snapkv
+    from .streaming_llm import streaming_selector
+    from .quest import quest_selector
+    from .top_k import oracle_topk_selector
+    from .tidal_decode import tidal_decode_selector
+    from .sparq import sparq_selector
+    from .double_sparse import double_sparse_selector, init_model_channel_config
+    from .top_p import top_p_unnormalized
+    from .elementwise_threshold import elementwise_threshold
+    from .quantize import min_max_per_token_quant_kv, max_per_token_quant_kv
+
 def attention_forward(
     self,
     hidden_states: torch.Tensor,
@@ -67,7 +64,12 @@ def attention_forward(
     use_cache: bool = False,
     **kwargs,
 ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
-    torch.cuda.empty_cache()
+    quantization = getattr(self.state, "attention_quantization", None)
+    if quantization and quantization.get("method", "none") != "none":
+        from .quant_attention.forward import common_forward
+        return common_forward(self, hidden_states, attention_mask, position_ids,
+                              past_key_value, output_attentions, use_cache, **kwargs)
+    _load_legacy_policies()
 
     bsz, q_len, _ = hidden_states.size()
 
@@ -353,6 +355,7 @@ def enable_sparse_attention(
     sparse_config: Dict,
     enable_budget_info: bool = False,
     enable_score_info: bool = False,
+    query_chunk: int = 64,
 ) -> (Optional[HistoryBudgetInfo], Optional[HistoryAccumulatedScoreInfo]):
     """
     Enable Sparse Attention via config dict.
@@ -375,6 +378,29 @@ def enable_sparse_attention(
         "skip_first_two_layers": True,
     }
     """
+
+    quantization = sparse_config.get("attention_quantization", {"method": "none"})
+    if quantization.get("method", "none") != "none":
+        from .quant_attention.forward import validate_config
+        validate_config(quantization)
+        allowed = {"compressor", "selector", "weight_estimator", "weight_pruner", "skip_first_two_layers", "use_estimated_weights_in_attn", "attention_quantization"}
+        if set(sparse_config) - allowed:
+            raise ValueError("Unknown algorithm configuration fields")
+        if any(sparse_config.get(k) != {"type": "none"} for k in ("compressor", "selector", "weight_estimator", "weight_pruner")):
+            raise ValueError("Common attention requires all legacy policies disabled")
+        if sparse_config.get("skip_first_two_layers") or sparse_config.get("use_estimated_weights_in_attn") or enable_budget_info or enable_score_info:
+            raise ValueError("Common attention cannot use legacy history or skipped layers")
+        config = model.config
+        if config.model_type != "llama" or getattr(config, "pretraining_tp", 1) != 1 or getattr(config, "sliding_window", None) or getattr(config, "quantization_config", None):
+            raise ValueError("Only unquantized Llama with pretraining_tp=1 is supported")
+        if getattr(config, "_attn_implementation", None) != "eager":
+            raise ValueError("Load the model with attn_implementation='eager'")
+        if query_chunk < 1:
+            raise ValueError("query_chunk must be positive")
+        reset_sparse_config()
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        torch.set_float32_matmul_precision("highest")
 
     def _split_type_args(config: Dict) -> Tuple:
         config1 = config.copy()
@@ -413,6 +439,8 @@ def enable_sparse_attention(
         score_info=score_info,
         use_estimated_weights_in_attn=use_estimated_weights_in_attn,
         skip_first_two_layers=skip_first_two_layers,
+        attention_quantization=quantization,
+        query_chunk=query_chunk,
     )
 
     return budget_info, score_info
@@ -438,6 +466,8 @@ def _enable_sparse_attention(
     use_estimated_weights_in_attn: bool = False,
     # To ensure a fair comparsion, we skip the first two layers
     skip_first_two_layers: bool = True,
+    attention_quantization: Optional[Dict] = None,
+    query_chunk: int = 64,
 ) -> None:
     """Enable Sparse Attention.
 
@@ -458,9 +488,12 @@ def _enable_sparse_attention(
             score_info=score_info,
             use_estimated_weights_in_attn=use_estimated_weights_in_attn,
             skip_first_two_layers=skip_first_two_layers,
+            attention_quantization=attention_quantization,
+            query_chunk=query_chunk,
         )
 
         if selector == IndexSelectorType.DS:
+            _load_legacy_policies()
             config_path = selector_args["config_path"]
 
             with open(config_path, "r") as f:
@@ -481,17 +514,24 @@ def _enable_sparse_attention(
     #         prepare_inputs_for_generation_llama_snapkv, model
     #     )
 
+    patched = []
     for name, module in model.named_modules():
         if isinstance(module, (LlamaAttention, MistralAttention)):
             # For longchat model
             # print(name)
-            layer_id = int(name.split(".")[2])
+            layer_id = module.layer_idx
+            if layer_id is None: raise ValueError("Missing layer_idx")
+            patched.append(layer_id)
             module.layer_id = layer_id
 
             # Hack the forward function
             module.forward = types.MethodType(attention_forward, module)
 
             module.state = local_state
+    model._twilight_patch_count = len(patched)
+    if attention_quantization and attention_quantization.get("method", "none") != "none":
+        if sorted(patched) != list(range(model.config.num_hidden_layers)):
+            raise ValueError("Not all Llama decoder attention layers were patched")
 
 
 def reset_sparse_config() -> None:
