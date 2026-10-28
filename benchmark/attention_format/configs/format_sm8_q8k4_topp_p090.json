@@ -1,0 +1,50 @@
+{
+  "attention_quantization": {
+    "backend": "torch_qdq",
+    "cache_storage": "original_float",
+    "method": "intflash_qk8",
+    "parameters": {
+      "group_axis": "head_token",
+      "quantizer_input_dtype": "float16",
+      "rounding": "torch_round",
+      "scale_dtype": "source",
+      "source_input_cast": "bf16_to_fp16",
+      "zero_group": "scale_one"
+    },
+    "scope": "prefill_and_decode",
+    "source_revision": "7f7bfb00bcd26b2cef49e7783f51ef610e05abf7"
+  },
+  "attention_slice": {
+    "baseline_name": "sm8 Q8K4 TopP",
+    "diagnostics": "targets_only",
+    "encoding": "sign_magnitude",
+    "estimator": "format_msb",
+    "final_execution": "selected_full_qk_recompute",
+    "final_scores": "full_int8_qk_dq",
+    "k_prefix_bits": 4,
+    "q_prefix_bits": 8,
+    "scope": "prefill_and_decode",
+    "selection": {
+      "kind": "top_p",
+      "p": 0.9,
+      "tie_break": "key_position_ascending"
+    },
+    "variant_id": "format_sm8_q8k4_topp_p090",
+    "predictor_format": "sm8",
+    "format_parameters": {}
+  },
+  "compressor": {
+    "type": "none"
+  },
+  "selector": {
+    "type": "none"
+  },
+  "skip_first_two_layers": false,
+  "use_estimated_weights_in_attn": false,
+  "weight_estimator": {
+    "type": "none"
+  },
+  "weight_pruner": {
+    "type": "none"
+  }
+}

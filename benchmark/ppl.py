@@ -94,7 +94,10 @@ def run(args):
             if slice_config:
                 if not args.slice_gate_report:
                     raise ValueError('Full TopP windows require --slice-gate-report')
-                from benchmark.attention_slice.gate import validate_gate_report
+                if slice_config.get('estimator') == 'format_msb':
+                    from benchmark.attention_format.gate import validate_gate_report
+                else:
+                    from benchmark.attention_slice.gate import validate_gate_report
                 validate_gate_report(args.slice_gate_report, args.model_path, args.assets, config, query_chunk=args.query_chunk)
                 gate_hash = sha256_file(args.slice_gate_report)
             else:
@@ -120,8 +123,12 @@ def run(args):
         counters = CallCounters()
         run_id = output.name
         if slice_config:
-            from twilight.pyimpl.slice_trace import SliceTraceRecorder
-            recorder_class = SliceTraceRecorder
+            if slice_config.get('estimator') == 'format_msb':
+                from twilight.pyimpl.format_trace import FormatTraceRecorder
+                recorder_class = FormatTraceRecorder
+            else:
+                from twilight.pyimpl.slice_trace import SliceTraceRecorder
+                recorder_class = SliceTraceRecorder
         else:
             recorder_class = TraceRecorder
         recorder = recorder_class(output / 'trace', args.trace_targets, metadata={**metrics, 'run_id': run_id, 'model_file_hashes': assets['model_file_hashes'], 'config_sha256': canonical_hash(config), 'code_sha256': code['code_sha256'], 'algorithm': config}).attach(model) if args.trace_targets else None

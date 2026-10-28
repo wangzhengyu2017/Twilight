@@ -8,6 +8,9 @@ import torch
 
 
 def validate_slice_config(config, method):
+    if isinstance(config, dict) and config.get('estimator') == 'format_msb':
+        from .format_backend import validate_format_config
+        return validate_format_config(config, method)
     required = {'variant_id', 'baseline_name', 'estimator', 'encoding', 'q_prefix_bits',
                 'k_prefix_bits', 'selection', 'final_scores', 'final_execution', 'scope', 'diagnostics'}
     if not isinstance(config, dict) or set(config) != required:
@@ -116,6 +119,9 @@ def selected_full_logits(qq, kk, start, end, indices, valid, row_chunk=8):
 
 
 def attention_slice(q, k, v, allowed, qq, kk, slice_config, query_chunk=64, observer=None, stats=None):
+    if slice_config.get('estimator') == 'format_msb':
+        from .format_backend import attention_format
+        return attention_format(q,k,v,allowed,qq,kk,slice_config,query_chunk,observer,stats)
     if query_chunk < 1 or q.ndim != 4 or k.shape != v.shape or q.shape[:2] != k.shape[:2] or q.shape[-1] != k.shape[-1]:
         raise ValueError('Invalid slice attention layout/chunk')
     est = slice_config['estimator']
