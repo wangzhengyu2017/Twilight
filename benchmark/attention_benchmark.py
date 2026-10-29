@@ -17,7 +17,7 @@ def parser():
     p.add_argument('--profile',choices=['smoke','full'],required=True);p.add_argument('--output-root',required=True)
     p.add_argument('--model-path',default='/hyperai/input/input0');p.add_argument('--asset-dir',default='/output/project/assets/tq-wt2-v1')
     for flag in ('smoke-root','review-report','controls-manifest','baselines-manifest','dense-smoke-root','dense-summary-manifest'):p.add_argument('--'+flag)
-    p.add_argument('--events-path',default=REGISTERED_EVENTS);p.add_argument('--execute',action='store_true');return p
+    p.add_argument('--events-path');p.add_argument('--execute',action='store_true');return p
 
 
 def slice_config_root(suffix):
@@ -26,7 +26,9 @@ def slice_config_root(suffix):
 
 def resolve(args):
     fmt=args.encoding;msb=args.msb=='on';topp=args.top_p=='on'
-    if fmt=='rsint8':raise ValueError('RS selector profiles remain unavailable until their independent implementation gate passes')
+    if fmt=='rsint8':
+        from benchmark.attention_rs.selector_adapter import resolve_rs
+        return resolve_rs(args,ROOT/'benchmark/attention_rs/matrix.json')
     if not topp and args.p is not None:raise ValueError('--p requires --top-p on; dense diagnostic thresholds are separate and unused in forward')
     if msb and not topp:raise ValueError('MSB without TopP is undefined for the predictor study')
     if topp:
@@ -75,6 +77,15 @@ def resolve(args):
     return dict(encoding=fmt,msb=msb,top_p=topp,p=args.p,q_bits=widths[0],k_bits=widths[1],final_operands=final,final_operand_profile=profile,final_operand_origin=origin,selection_passes=passes,variant_id=vid,suite=suite,config_path=str(path.resolve()),config_sha256=sha256_file(path),semantic_config_sha256=canonical_hash(config),config=config,matrix_path=str(matrix.resolve()) if matrix else None,historical_completed_profile=historical,execution_authorized=not historical)
 
 
+def forwarded_args(args,resolved,**extra):
+    rs=resolved['suite']=='attention_rs'
+    values=dict(vars(args),matrix=resolved['matrix_path'],variant=resolved['variant_id'] if rs or args.profile=='full' else None,**extra)
+    values['events_path']=args.events_path or ('/output/project/experiments/stp-rs-study/events.jsonl' if rs else REGISTERED_EVENTS)
+    if rs:
+        values['handoff_dir']=str(Path(resolved['matrix_path']).parent)
+        values['baseline_root']=None
+    return Namespace(**values)
+
 def plan(args):
     resolved=resolve(args);output=Path(args.output_root).resolve()
     if output.exists():raise FileExistsError('Refusing to overwrite '+str(output))
@@ -87,9 +98,11 @@ def plan(args):
         else:argv+=['--slice-gate-report' if resolved['top_p'] else '--gate-report',str(Path(args.smoke_root).resolve()/'gate.json') if args.smoke_root else '<required-matching-historical-gate>']
         effective_scope='historical completed profile; plan only under current no-rerun authorization'
     else:
-        argv=base+['benchmark.'+resolved['suite']+'.run','--profile',args.profile,'--matrix',resolved['matrix_path'],'--model-path',args.model_path,'--asset-dir',str(assets),'--output-root',str(output),'--events-path',args.events_path]
+        events=args.events_path or ('/output/project/experiments/stp-rs-study/events.jsonl' if resolved['suite']=='attention_rs' else REGISTERED_EVENTS)
+        argv=base+['benchmark.'+resolved['suite']+'.run','--profile',args.profile,'--matrix',resolved['matrix_path'],'--model-path',args.model_path,'--asset-dir',str(assets),'--output-root',str(output),'--events-path',events]
         for key in ('smoke_root','review_report','controls_manifest','baselines_manifest'):
             if getattr(args,key):argv+=['--'+key.replace('_','-'),str(Path(getattr(args,key)).resolve())]
+        if resolved['suite']=='attention_rs':argv+=['--handoff-dir',str(Path(resolved['matrix_path']).parent)]
         if resolved['suite']=='attention_full_format':
             for key in ('dense_smoke_root','dense_summary_manifest'):
                 if getattr(args,key):argv+=['--'+key.replace('_','-'),str(Path(getattr(args,key)).resolve())]
@@ -98,8 +111,10 @@ def plan(args):
     execution_commands=[]
     prerequisites=[]
     if not resolved['historical_completed_profile']:
-        forwarded=Namespace(**vars(args),matrix=resolved['matrix_path'],variant=resolved['variant_id'] if args.profile=='full' else None)
-        if resolved['suite']=='attention_dense_format':
+        forwarded=forwarded_args(args,resolved)
+        if resolved['suite']=='attention_rs':
+            from benchmark.attention_rs.run import commands as build_commands
+        elif resolved['suite']=='attention_dense_format':
             from benchmark.attention_dense_format.run import commands as build_commands
         else:
             from benchmark.attention_full_format.run import commands as build_commands
@@ -116,7 +131,11 @@ def execute(args,resolved_plan):
     if resolved['historical_completed_profile']:raise ValueError('This profile belongs to the completed frozen studies; this authorization excludes rerunning those measurements')
     if not args.review_report:raise ValueError('--execute requires independent --review-report')
     if args.profile=='full' and not args.smoke_root:raise ValueError('Full execution requires matching --smoke-root before any model load')
-    forwarded=Namespace(**vars(args),matrix=resolved['matrix_path'],variant=resolved['variant_id'] if args.profile=='full' else None,selector_resolution=resolved_plan)
+    forwarded=forwarded_args(args,resolved,selector_resolution=resolved_plan)
+    if resolved['suite']=='attention_rs':
+        from benchmark.attention_rs.run import run as rs_run,commands as rs_commands
+        def selected_rs(a):return ((name,argv) for name,argv in rs_commands(a) if args.profile=='full' or name=='validate' or name.startswith(resolved['variant_id']+'-'))
+        return rs_run(forwarded,plan_builder=selected_rs)
     from benchmark.attention_dense_format.run import run as serial_run
     if resolved['suite']=='attention_dense_format':
         if args.profile=='full':return serial_run(forwarded)

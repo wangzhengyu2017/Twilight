@@ -53,7 +53,7 @@ def semantic_config(config):
 def load_config(path):
     config = load_json(path)
     allowed = {'compressor', 'selector', 'weight_estimator', 'weight_pruner', 'skip_first_two_layers', 'use_estimated_weights_in_attn', 'attention_quantization'}
-    if set(config) - {'attention_slice', 'attention_dense_format', 'attention_full_format'} != allowed:
+    if set(config) - {'attention_slice', 'attention_dense_format', 'attention_full_format', 'attention_rs'} != allowed:
         raise ValueError(f'Unsupported/missing algorithm fields: {set(config) ^ allowed}')
     for field in ('compressor', 'selector', 'weight_estimator', 'weight_pruner'):
         if config[field] != {'type': 'none'}:
@@ -70,6 +70,10 @@ def load_config(path):
             raise ValueError('FP method cannot have quantizer parameters')
     elif q['parameters'] != {'group_axis': 'head_token', 'quantizer_input_dtype': 'float16', 'source_input_cast': 'bf16_to_fp16', 'scale_dtype': 'source', 'rounding': 'torch_round', 'zero_group': 'scale_one'} or q['source_revision'] != '7f7bfb00bcd26b2cef49e7783f51ef610e05abf7':
         raise ValueError('INT source/quantizer parameters do not match the fixed protocol')
+    if 'attention_rs' in config:
+        if any(key in config for key in ('attention_slice','attention_dense_format','attention_full_format')):raise ValueError('RS must be the only attention intervention')
+        from twilight.pyimpl.quant_attention.rs_backend import validate_rs_config
+        validate_rs_config(config['attention_rs'],q['method'])
     if 'attention_full_format' in config:
         if 'attention_slice' in config or 'attention_dense_format' in config: raise ValueError('Attention execution profiles are mutually exclusive')
         from twilight.pyimpl.quant_attention.full_format_backend import validate_full_format_config

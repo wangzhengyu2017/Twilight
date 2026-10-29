@@ -1,0 +1,47 @@
+{
+  "schema_version": "trace-targets-v1",
+  "targets": [
+    {
+      "sample_id": 0,
+      "window_id": null,
+      "layer_id": 0,
+      "query_position": 127,
+      "stage": "prefill"
+    },
+    {
+      "sample_id": 0,
+      "window_id": null,
+      "layer_id": 16,
+      "query_position": 127,
+      "stage": "prefill"
+    },
+    {
+      "sample_id": 0,
+      "window_id": null,
+      "layer_id": 31,
+      "query_position": 127,
+      "stage": "prefill"
+    },
+    {
+      "sample_id": 0,
+      "window_id": null,
+      "layer_id": 0,
+      "query_position": 128,
+      "stage": "decode"
+    },
+    {
+      "sample_id": 0,
+      "window_id": null,
+      "layer_id": 16,
+      "query_position": 128,
+      "stage": "decode"
+    },
+    {
+      "sample_id": 0,
+      "window_id": null,
+      "layer_id": 31,
+      "query_position": 128,
+      "stage": "decode"
+    }
+  ]
+}

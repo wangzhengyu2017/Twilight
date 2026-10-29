@@ -32,6 +32,7 @@ def parser():
     p.add_argument('--slice-gate-report')
     p.add_argument('--dense-format-gate-report')
     p.add_argument('--full-format-gate-report')
+    p.add_argument('--rs-gate-report')
     return p
 
 
@@ -58,6 +59,10 @@ def run(args):
         slice_config = config.get('attention_slice')
         dense_config = config.get('attention_dense_format')
         full_config = config.get('attention_full_format')
+        rs_config=config.get('attention_rs')
+        if rs_config:
+            from benchmark.attention_rs.formal import validate_formal_config
+            validate_formal_config(config)
         if args.query_chunk < 1:
             raise ValueError('query_chunk must be positive')
         if (args.context_length, args.stride) != (2048, 1024):
@@ -88,6 +93,9 @@ def run(args):
         resolved = {'algorithm': config, 'dtype': args.dtype, 'query_chunk': args.query_chunk, 'context_length': 2048, 'stride': 1024, 'prefill_tokens': 128, 'decode_targets': 16, 'ppl_mode': args.ppl_mode, 'profile': profile, 'trace_targets': args.trace_targets, 'model_path': str(Path(args.model_path).resolve())}
         write_json(output / 'resolved_config.json', resolved)
         method_manifest = {**config['attention_quantization'], 'baseline_kind': 'bf16_model_fp32_attention', 'model_dtype': 'bfloat16', 'qk_compute': 'fp32', 'quantization_at': 'attention_read', 'actual_matmul': 'fp32_after_dq' if method == 'intflash_qk8' else 'fp32', 'quantized_operands': 'qk' if method == 'intflash_qk8' else None, 'qk_codes_dtype': 'int8' if method == 'intflash_qk8' else None, 'source_delta': list(SOURCE_DELTA) if method == 'intflash_qk8' else [], 'input_cast_policy': INPUT_CAST_POLICY if method == 'intflash_qk8' else None}
+        if rs_config:
+            method_manifest.update(attention_rs=rs_config,**{key:rs_config[key] for key in ('variant_id','mode','selection_passes','final_operand_origin','final_scores','final_execution')},actual_matmul='DQ_first_FP32_from_packed_RS_bytes',actual_pv='dense_zero_masked')
+            write_json(output/'rs_manifest.json',method_manifest)
         if full_config:
             method_manifest.update(attention_full_format=full_config,variant_id=full_config['variant_id'],selection_mode='top_p',selection_passes=1,final_operand_profile='decoded_full_format',final_operand_origin='stored_format_bytes',actual_matmul='fp32_after_actual_format_byte_decode',actual_pv='dense_zero_masked')
             write_json(output / 'full_format_manifest.json',method_manifest)
@@ -101,7 +109,12 @@ def run(args):
         gate_hash = None
         if profile == 'full':
             stage = 'gate_validation'
-            if full_config:
+            if rs_config:
+                if not args.rs_gate_report:raise ValueError('Full RS requires --rs-gate-report')
+                from benchmark.attention_rs.gate import validate_gate_report
+                validate_gate_report(args.rs_gate_report,args.model_path,args.assets,config,query_chunk=args.query_chunk)
+                gate_hash=sha256_file(args.rs_gate_report)
+            elif full_config:
                 if not args.full_format_gate_report: raise ValueError('Full full-format TopP windows require --full-format-gate-report')
                 from benchmark.attention_full_format.gate import validate_gate_report
                 validate_gate_report(args.full_format_gate_report,args.model_path,args.assets,config,query_chunk=args.query_chunk)
@@ -129,6 +142,8 @@ def run(args):
         metrics = {'protocol_id': 'TQ-WT2-v1' if args.ppl_mode == 'windows' else 'TQ-WT2-decode-v1', 'profile': profile, 'mode': args.ppl_mode, 'baseline_kind': 'bf16_model_fp32_attention', 'method': method, 'backend': 'torch_qdq', 'model_dtype': args.dtype, 'qk_compute': 'fp32', 'cache_storage': 'original_float', 'tokens_sha256': assets['tokens_sha256'], 'subset_sha256': tokens_hash(ids), 'scoring_ranges_sha256': canonical_hash(ranges), 'asset_manifest_sha256': canonical_hash(assets), 'semantic_config_sha256': canonical_hash(config), 'capture_config_sha256': sha256_file(args.trace_targets) if args.trace_targets else None, 'code_sha256': code['code_sha256'], 'environment_sha256': env['environment_sha256'], 'gate_report_sha256': gate_hash, 'num_input_tokens': ids.numel(), 'context_length': 2048, 'stride': 1024, 'query_chunk': args.query_chunk, 'prefill_tokens': 128, 'decode_targets': 16, 'sum_nll': None, 'num_targets': None, 'ppl': None, 'timing_valid': not bool(args.trace_targets), 'peak_memory_bytes': None, 'dataset_identity_verified': assets.get('dataset_identity_verified', False), 'quantized_operands': method_manifest['quantized_operands'], 'qk_codes_dtype': method_manifest['qk_codes_dtype'], 'actual_matmul': method_manifest['actual_matmul'], 'source_delta': method_manifest['source_delta'], 'input_cast_policy': method_manifest['input_cast_policy']}
         if slice_config:
             metrics.update(variant_id=slice_config['variant_id'], baseline_name=slice_config['baseline_name'], attention_slice=slice_config, q_prefix_bits=slice_config['q_prefix_bits'], k_prefix_bits=slice_config['k_prefix_bits'], selection_passes=1, actual_pv='dense_zero_masked')
+        if rs_config:
+            metrics.update(attention_rs=rs_config,rs_mode=rs_config['mode'],**{key:rs_config[key] for key in ('variant_id','selection_passes','final_operand_origin','final_scores','final_execution')},actual_matmul='DQ_first_FP32_from_packed_RS_bytes',actual_pv='dense_zero_masked')
         write_json(output / 'metrics.json', metrics)
         stage = 'model_load'
         torch.cuda.synchronize()
@@ -144,9 +159,15 @@ def run(args):
             raise ValueError('Not all decoder attention layers were patched')
         torch.cuda.synchronize()
         load_seconds = time.perf_counter() - load_start
-        counters = CallCounters()
+        if rs_config:
+            from twilight.pyimpl.rs_trace import RSCallCounters
+            counters=RSCallCounters()
+        else:counters = CallCounters()
         run_id = output.name
-        if full_config:
+        if rs_config:
+            from twilight.pyimpl.rs_trace import RSTraceRecorder
+            recorder_class=RSTraceRecorder
+        elif full_config:
             from twilight.pyimpl.full_format_trace import FullFormatTraceRecorder
             recorder_class=FullFormatTraceRecorder
         elif dense_config:
@@ -235,7 +256,10 @@ def run(args):
         metrics['quantization_diagnostics'] = diagnostics
         coverage = {'quantization_diagnostics': diagnostics, 'input_cast_policy': method_manifest['input_cast_policy'], 'scoring_ranges': ranges, 'scoring_ranges_sha256': canonical_hash(ranges), 'num_targets': num_targets, 'layers': counters.counts, 'cache_lengths': counters.cache_lengths, 'expected_layer_count': model.config.num_hidden_layers, 'expected_calls_per_layer': expected_counts, 'all_layers_covered': True}
         write_json(output / 'coverage.json', coverage)
-        if slice_config or dense_config or full_config:
+        if rs_config:
+            write_json(output/'rs_statistics.json',counters.rs_summary())
+            metrics['rs_statistics_file']='rs_statistics.json'
+        if slice_config or dense_config or full_config or rs_config:
             selection_stats = counters.slice_summary()
             write_json(output / 'selection_stats.json', selection_stats)
             write_json(output / 'costs.json', counters.slice_costs())

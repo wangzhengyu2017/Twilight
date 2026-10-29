@@ -1,0 +1,62 @@
+{
+  "attention_quantization": {
+    "backend": "torch_qdq",
+    "cache_storage": "original_float",
+    "method": "intflash_qk8",
+    "parameters": {
+      "group_axis": "head_token",
+      "quantizer_input_dtype": "float16",
+      "rounding": "torch_round",
+      "scale_dtype": "source",
+      "source_input_cast": "bf16_to_fp16",
+      "zero_group": "scale_one"
+    },
+    "scope": "prefill_and_decode",
+    "source_revision": "7f7bfb00bcd26b2cef49e7783f51ef610e05abf7"
+  },
+  "attention_rs": {
+    "diagnostics": "targets_only",
+    "final_execution": "reuse_full_rs_scores",
+    "final_operand_origin": "rs_full_decoded",
+    "final_scores": "rs_full_dq",
+    "format_parameters": {
+      "codec_version": "bada-native-source-scale-v1",
+      "native_range": [
+        -136,
+        119
+      ],
+      "packed_layout": "post_bsu_H4_L4",
+      "paper_sha256": "7c2e22b91543435aeb83f230ac6579a07bcfa8f43a138454b77e18149d2609a7",
+      "scale_policy": "reuse_original_head_token",
+      "slice_bits": 4,
+      "source_conversion": "integer_clamp_at_source_scale",
+      "zero_point": 0
+    },
+    "k_bits": 8,
+    "mode": "full_topp",
+    "predictor_format": "rsint8_native_source_scale",
+    "q_bits": 8,
+    "scope": "prefill_and_decode",
+    "selection": {
+      "kind": "top_p",
+      "p": 0.95,
+      "tie_break": "key_position_ascending"
+    },
+    "selection_passes": 1,
+    "variant_id": "rs_full_q8k8_topp_p095"
+  },
+  "compressor": {
+    "type": "none"
+  },
+  "selector": {
+    "type": "none"
+  },
+  "skip_first_two_layers": false,
+  "use_estimated_weights_in_attn": false,
+  "weight_estimator": {
+    "type": "none"
+  },
+  "weight_pruner": {
+    "type": "none"
+  }
+}

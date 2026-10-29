@@ -39,7 +39,7 @@ def test_dispatch():
 
 
 def test_invalid():
-    for flags,message in [(['--encoding','sm8','--p','.95'],'--p requires'),(['--encoding','sm8','--msb','on'],'MSB without'),(['--encoding','fp','--msb','on','--top-p','on','--p','.95'],'no compatible'),(['--encoding','mxfp4','--msb','on','--top-p','on','--p','.95'],'native FP4'),(['--encoding','mxint8q_mxfp4k','--top-p','on','--p','.95'],'not an implemented'),(['--encoding','mxfp4','--q-bits','8'],'width differs'),(['--encoding','rsint8'],'unavailable'),(['--encoding','sm8','--top-p','on','--p','1'],'authorized executable'),(['--encoding','mxint8','--top-p','on','--p','0'],'0 <'),(['--encoding','sm8','--msb','on','--top-p','on','--p','.95','--final-operands','format'],'original source')]:
+    for flags,message in [(['--encoding','sm8','--p','.95'],'--p requires'),(['--encoding','sm8','--msb','on'],'MSB without'),(['--encoding','fp','--msb','on','--top-p','on','--p','.95'],'no compatible'),(['--encoding','mxfp4','--msb','on','--top-p','on','--p','.95'],'native FP4'),(['--encoding','mxint8q_mxfp4k','--top-p','on','--p','.95'],'not an implemented'),(['--encoding','mxfp4','--q-bits','8'],'width differs'),(['--encoding','rsint8','--final-operands','source-int8'],'final operand'),(['--encoding','sm8','--top-p','on','--p','1'],'authorized executable'),(['--encoding','mxint8','--top-p','on','--p','0'],'0 <'),(['--encoding','sm8','--msb','on','--top-p','on','--p','.95','--final-operands','format'],'original source')]:
         must_fail(lambda:resolve(args(*flags)),message)
 
 
@@ -64,6 +64,6 @@ def test_plan_and_gate():
 
 
 def main():
-    count=test_dispatch();test_invalid();test_plan_and_gate();report=dict(status='passed',resolved_study_profiles=count,single_config_smoke_and_full_dispatch=True,plan_only_no_model_or_cuda=True,invalid_profiles_and_missing_gates_rejected=True,historical_semantics_preserved=True,RS_unavailable=True)
+    count=test_dispatch();test_invalid();test_plan_and_gate();report=dict(status='passed',resolved_study_profiles=count,single_config_smoke_and_full_dispatch=True,plan_only_no_model_or_cuda=True,invalid_profiles_and_missing_gates_rejected=True,historical_semantics_preserved=True,RS_available_with_independent_review_gate=True)
     write_json('/output/project/experiments/stp-dense-formats/preparation/selector-cpu-validation.json',report);print(report)
 if __name__=='__main__':main()
