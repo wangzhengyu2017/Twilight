@@ -26,7 +26,17 @@ class ModelRowReplay:
 
     def replay(self,meta,a):
         device=self.device;layer=meta['layer_id'];D=meta['D'];h=meta['Hq'];hkv=meta['Hkv']
-        def linear(x,name):return F.linear(x,self.weight(layer,name+'.weight'))
+        # A captured row is independent of the other rows, but the CUDA GEMM
+        # algorithm depends on the original M dimension. Recreate that shape
+        # rather than silently changing prefill M=128 into decode M=1.
+        rows=len(meta['position_ids']);local=meta['local_query_position']
+        check(rows>=1 and 0<=local<rows,'invalid original linear row metadata')
+        check(meta['position_ids'][local]==meta['query_position'],'captured linear row/absolute position mismatch')
+        def linear(x,name):
+            check(x.shape[:2]==(1,1),'model-row replay requires one authentic row')
+            padded=torch.zeros((1,rows,x.shape[-1]),device=x.device,dtype=x.dtype)
+            padded[:,local:local+1]=x
+            return F.linear(padded,self.weight(layer,name+'.weight'))[:,local:local+1]
         def norm(x,name):
             z=x.float();z=z*torch.rsqrt(z.pow(2).mean(-1,keepdim=True)+self.config.rms_norm_eps)
             return self.weight(layer,name+'.weight')*z.to(x.dtype)
@@ -50,4 +60,4 @@ class ModelRowReplay:
         residual=hidden+projected;mlp_input=norm(residual,'post_attention_layernorm')
         mlp=linear(F.silu(linear(mlp_input,'mlp.gate_proj'))*linear(mlp_input,'mlp.up_proj'),'mlp.down_proj')
         compare(a['layer_output'],(residual+mlp).cpu(),'independent residual/MLP layer output',True)
-        return dict(status='passed',projection_and_RoPE_exact=True,o_proj_exact=True,layer_output_exact=True,model_definition='pinned_HF_RoPE_frequency_initialization; independent_linear_norm_rotate_MLP')
+        return dict(status='passed',projection_and_RoPE_exact=True,o_proj_exact=True,layer_output_exact=True,model_definition='pinned_HF_RoPE_frequency_initialization; independent_linear_norm_rotate_MLP',linear_replay='original_M_shape_zero_padded_independent_row',original_linear_rows=rows,original_local_row=local)

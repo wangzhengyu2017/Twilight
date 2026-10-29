@@ -23,7 +23,9 @@ def commands(args):
         for cfg,name in CONTROLS:
             yield 'regression-'+name,[py,'-m','benchmark.ppl','--model-path',args.model_path,'--tokens',str(assets/'tokens.pt'),'--assets',str(assets/'asset_manifest.json'),'--algo-config-path',str(CONTROL_CONFIG_ROOT/(cfg+'.json')),'--output-dir',str(root/'regression'/name),'--ppl-mode','windows','--max-tokens','4096']
         yield 'regression-compare',[py,'-m','benchmark.attention_format.regression','--runs-root',str(root/'regression'),'--output',str(root/'regression/report.json')]
+    if getattr(args,'variant',None) and args.profile!='full':raise ValueError('Single-cell filtering requires full profile; smoke gate covers the complete suite')
     for row in matrix['variants']:
+        if getattr(args,'variant',None) and row['variant_id']!=args.variant:continue
         vid=row['variant_id'];base=[py,'-m','benchmark.ppl','--model-path',args.model_path,'--tokens',str(assets/'tokens.pt'),'--assets',str(assets/'asset_manifest.json'),'--algo-config-path',str(matrix_path.parent/row['config'])]
         profiles=[('windows','windows',['--max-tokens','4096']),('decode-off','cached_decode',[]),('decode-on','cached_decode',['--trace-targets',str((matrix_path.parent/matrix['trace_targets']).resolve())])] if args.profile=='smoke' else [('windows-full','windows',['--dense-format-gate-report',str(Path(args.smoke_root).resolve()/'gate.json')])]
         for suffix,mode,extra in profiles:yield vid+'-'+suffix,base+['--output-dir',str(root/(vid+'-'+suffix)),'--ppl-mode',mode]+extra
@@ -46,17 +48,19 @@ def emit(args,kind,**fields):
         with path.open('a') as stream:stream.write(json.dumps(row,sort_keys=True,allow_nan=False)+'\n')
 
 
-def run(args):
-    plan=list(commands(args))
+def run(args,*,plan_builder=commands,matrix_reader=read_matrix,gate_validator=None,summarizer=None):
+    plan=list(plan_builder(args))
     if not args.execute:return dict(status='dry_run',commands=[dict(name=n,argv=v) for n,v in plan])
     check(bool(args.events_path) and Path(args.events_path).resolve()==REGISTERED_EVENTS,'execution requires registered --events-path '+str(REGISTERED_EVENTS))
     check(bool(args.review_report),'execution requires --review-report')
     review=load_json(args.review_report);code=code_provenance()
     check(review.get('status')=='complete' and review.get('passed') is True and review.get('independent_reviewer') is True and review.get('code_sha256')==code['code_sha256'],'independent implementation acceptance missing/stale')
-    matrix,configs=read_matrix(args.matrix)
+    matrix,configs=matrix_reader(args.matrix)
     if args.profile=='full':
-        from .gate import validate_gate_report
-        for cfg in configs.values():validate_gate_report(Path(args.smoke_root).resolve()/'gate.json',args.model_path,Path(args.asset_dir)/'asset_manifest.json',cfg)
+        if gate_validator is None:
+            from .gate import validate_gate_report
+            gate_validator=validate_gate_report
+        for cfg in configs.values():gate_validator(Path(args.smoke_root).resolve()/'gate.json',args.model_path,Path(args.asset_dir)/'asset_manifest.json',cfg)
     root=Path(args.output_root).resolve();root.mkdir(parents=True,exist_ok=False);(root/'command_logs').mkdir()
     code_provenance(root);write_json(root/'invocation.json',dict(vars(args),matrix_sha256=sha256_file(args.matrix),review_report_sha256=sha256_file(args.review_report)))
     if args.profile=='full':
@@ -93,8 +97,10 @@ def run(args):
         emit(args,'experiment_failed',run=str(root),failure_scope='runner',**failure)
     status['status']='failed' if status['failed_commands'] else 'complete';write_json(root/'status.json',status)
     # Missing or failed measurements remain null even when a batch stops early.
-    from .summarize import summarize
-    summarize(args.matrix,root,root/'summary',args.profile,args.baselines_manifest)
+    if summarizer is None:
+        from .summarize import summarize
+        summarizer=summarize
+    summarizer(args.matrix,root,root/'summary',args.profile,args.baselines_manifest)
     emit(args,'summary_complete',run=str(root),result_table=str(root/'summary/BASELINE.csv'),summary_manifest=str(root/'summary/summary_manifest.json'),batch_status=status['status'],independently_audited=False)
     emit(args,'batch_failed' if status['failed_commands'] else 'batch_completed',run=str(root),completed_commands=len(status['completed_commands']),failed_commands=len(status['failed_commands']))
     return status
@@ -104,5 +110,6 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--profile',choices=['smoke','full'],required=True)
     for flag in ('matrix','model-path','asset-dir','output-root'):p.add_argument('--'+flag,required=True)
     for flag in ('smoke-root','review-report','events-path','controls-manifest','baselines-manifest'):p.add_argument('--'+flag)
+    p.add_argument('--variant',choices=list(__import__('benchmark.attention_dense_format.formal',fromlist=['VARIANTS']).VARIANTS))
     p.add_argument('--execute',action='store_true');a=p.parse_args();result=run(a);print(json.dumps(result,indent=2));sys.exit(result['status']=='failed')
 if __name__=='__main__':main()

@@ -26,7 +26,7 @@ def cache_check(device,config):
     from twilight.pyimpl.quant_attention.torch_backend import causal_allowed
     torch.manual_seed(51)
     mod=SimpleNamespace(layer_id=0,layer_idx=0,num_heads=4,num_key_value_heads=2,num_key_value_groups=2,head_dim=32,hidden_size=128)
-    mod.state=SimpleNamespace(attention_quantization=config['attention_quantization'],attention_slice=None,attention_dense_format=config['attention_dense_format'],query_chunk=3)
+    mod.state=SimpleNamespace(attention_quantization=config['attention_quantization'],attention_slice=None,attention_dense_format=config.get('attention_dense_format'),attention_full_format=config.get('attention_full_format'),query_chunk=3)
     for name,nout in [('q_proj',128),('k_proj',64),('v_proj',64),('o_proj',128)]:setattr(mod,name,torch.nn.Linear(128,nout,bias=False,device=device,dtype=torch.bfloat16))
     cache=DynamicCache();allk=[];allv=[]
     for positions in (list(range(5)),[5],[6]):
@@ -39,8 +39,12 @@ def cache_check(device,config):
         q=q*cos[:,None]+rotate(q)*sin[:,None];k=k*cos[:,None]+rotate(k)*sin[:,None]
         k=k.repeat_interleave(2,1);v=v.repeat_interleave(2,1);allk.append(k);allv.append(v)
         fullk=torch.cat(allk,-2);fullv=torch.cat(allv,-2);keys=list(range(fullk.shape[-2]))
-        domain=causal_allowed(pos,torch.tensor(keys,device=device));s=config['attention_dense_format']
-        pv=attention_dense_format(q,fullk,fullv,domain,quantize_per_token(q),quantize_per_token(fullk),s,3)
+        domain=causal_allowed(pos,torch.tensor(keys,device=device))
+        if config.get('attention_full_format'):
+            from twilight.pyimpl.quant_attention.full_format_backend import attention_full_format
+            backend=attention_full_format;s=config['attention_full_format']
+        else:backend=attention_dense_format;s=config['attention_dense_format']
+        pv=backend(q,fullk,fullv,domain,quantize_per_token(q),quantize_per_token(fullk),s,3)
         expected=mod.o_proj(pv.to(hidden.dtype).transpose(1,2).reshape(1,-1,128).contiguous())
         with forward_context(run_id='test',sample_id=0,window_id=None,stage='prefill' if len(positions)>1 else 'decode',global_query_positions=positions,position_ids=positions,key_positions=keys,expected_cache_length=len(keys),cache_position=positions):
             actual,_,returned=common_forward(mod,hidden,position_ids=pos[None],past_key_value=cache,use_cache=True,cache_position=pos,position_embeddings=(cos,sin))

@@ -382,8 +382,8 @@ def enable_sparse_attention(
     quantization = sparse_config.get("attention_quantization", {"method": "none"})
     if quantization.get("method", "none") != "none":
         from .quant_attention.forward import validate_config
-        validate_config(quantization, sparse_config.get("attention_slice"), sparse_config.get("attention_dense_format"))
-        allowed = {"compressor", "selector", "weight_estimator", "weight_pruner", "skip_first_two_layers", "use_estimated_weights_in_attn", "attention_quantization", "attention_slice", "attention_dense_format"}
+        validate_config(quantization, sparse_config.get("attention_slice"), sparse_config.get("attention_dense_format"), sparse_config.get("attention_full_format"))
+        allowed = {"compressor", "selector", "weight_estimator", "weight_pruner", "skip_first_two_layers", "use_estimated_weights_in_attn", "attention_quantization", "attention_slice", "attention_dense_format", "attention_full_format"}
         if set(sparse_config) - allowed:
             raise ValueError("Unknown algorithm configuration fields")
         if any(sparse_config.get(k) != {"type": "none"} for k in ("compressor", "selector", "weight_estimator", "weight_pruner")):
@@ -443,6 +443,7 @@ def enable_sparse_attention(
         query_chunk=query_chunk,
         attention_slice=sparse_config.get("attention_slice"),
         attention_dense_format=sparse_config.get("attention_dense_format"),
+        attention_full_format=sparse_config.get("attention_full_format"),
     )
 
     return budget_info, score_info
@@ -472,6 +473,7 @@ def _enable_sparse_attention(
     query_chunk: int = 64,
     attention_slice: Optional[Dict] = None,
     attention_dense_format: Optional[Dict] = None,
+    attention_full_format: Optional[Dict] = None,
 ) -> None:
     """Enable Sparse Attention.
 
@@ -496,6 +498,7 @@ def _enable_sparse_attention(
             query_chunk=query_chunk,
             attention_slice=attention_slice,
             attention_dense_format=attention_dense_format,
+            attention_full_format=attention_full_format,
         )
 
         if selector == IndexSelectorType.DS:

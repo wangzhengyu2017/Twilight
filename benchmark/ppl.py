@@ -31,6 +31,7 @@ def parser():
     p.add_argument('--gate-report')
     p.add_argument('--slice-gate-report')
     p.add_argument('--dense-format-gate-report')
+    p.add_argument('--full-format-gate-report')
     return p
 
 
@@ -56,6 +57,7 @@ def run(args):
         method = config['attention_quantization']['method']
         slice_config = config.get('attention_slice')
         dense_config = config.get('attention_dense_format')
+        full_config = config.get('attention_full_format')
         if args.query_chunk < 1:
             raise ValueError('query_chunk must be positive')
         if (args.context_length, args.stride) != (2048, 1024):
@@ -86,6 +88,9 @@ def run(args):
         resolved = {'algorithm': config, 'dtype': args.dtype, 'query_chunk': args.query_chunk, 'context_length': 2048, 'stride': 1024, 'prefill_tokens': 128, 'decode_targets': 16, 'ppl_mode': args.ppl_mode, 'profile': profile, 'trace_targets': args.trace_targets, 'model_path': str(Path(args.model_path).resolve())}
         write_json(output / 'resolved_config.json', resolved)
         method_manifest = {**config['attention_quantization'], 'baseline_kind': 'bf16_model_fp32_attention', 'model_dtype': 'bfloat16', 'qk_compute': 'fp32', 'quantization_at': 'attention_read', 'actual_matmul': 'fp32_after_dq' if method == 'intflash_qk8' else 'fp32', 'quantized_operands': 'qk' if method == 'intflash_qk8' else None, 'qk_codes_dtype': 'int8' if method == 'intflash_qk8' else None, 'source_delta': list(SOURCE_DELTA) if method == 'intflash_qk8' else [], 'input_cast_policy': INPUT_CAST_POLICY if method == 'intflash_qk8' else None}
+        if full_config:
+            method_manifest.update(attention_full_format=full_config,variant_id=full_config['variant_id'],selection_mode='top_p',selection_passes=1,final_operand_profile='decoded_full_format',final_operand_origin='stored_format_bytes',actual_matmul='fp32_after_actual_format_byte_decode',actual_pv='dense_zero_masked')
+            write_json(output / 'full_format_manifest.json',method_manifest)
         if dense_config:
             method_manifest.update(attention_dense_format=dense_config, variant_id=dense_config['variant_id'], selection_mode='dense', selection_passes=0, final_operand_origin='stored_format_bytes', actual_matmul='fp32_after_actual_format_byte_decode', actual_pv='dense')
             write_json(output / 'dense_format_manifest.json', method_manifest)
@@ -96,7 +101,12 @@ def run(args):
         gate_hash = None
         if profile == 'full':
             stage = 'gate_validation'
-            if dense_config:
+            if full_config:
+                if not args.full_format_gate_report: raise ValueError('Full full-format TopP windows require --full-format-gate-report')
+                from benchmark.attention_full_format.gate import validate_gate_report
+                validate_gate_report(args.full_format_gate_report,args.model_path,args.assets,config,query_chunk=args.query_chunk)
+                gate_hash=sha256_file(args.full_format_gate_report)
+            elif dense_config:
                 if not args.dense_format_gate_report: raise ValueError('Full dense-format windows require --dense-format-gate-report')
                 from benchmark.attention_dense_format.gate import validate_gate_report
                 validate_gate_report(args.dense_format_gate_report, args.model_path, args.assets, config, query_chunk=args.query_chunk)
@@ -122,6 +132,8 @@ def run(args):
         write_json(output / 'metrics.json', metrics)
         stage = 'model_load'
         torch.cuda.synchronize()
+        if full_config:
+            metrics.update(variant_id=full_config['variant_id'],attention_full_format=full_config,selection_mode='top_p',selection_passes=1,final_operand_profile='decoded_full_format',final_operand_origin='stored_format_bytes')
         if dense_config:
             metrics.update(variant_id=dense_config['variant_id'], selection_mode='dense', selection_passes=0, final_operand_origin='stored_format_bytes')
         load_start = time.perf_counter()
@@ -134,7 +146,10 @@ def run(args):
         load_seconds = time.perf_counter() - load_start
         counters = CallCounters()
         run_id = output.name
-        if dense_config:
+        if full_config:
+            from twilight.pyimpl.full_format_trace import FullFormatTraceRecorder
+            recorder_class=FullFormatTraceRecorder
+        elif dense_config:
             from twilight.pyimpl.dense_format_trace import DenseFormatTraceRecorder
             recorder_class = DenseFormatTraceRecorder
         elif slice_config:
@@ -220,7 +235,7 @@ def run(args):
         metrics['quantization_diagnostics'] = diagnostics
         coverage = {'quantization_diagnostics': diagnostics, 'input_cast_policy': method_manifest['input_cast_policy'], 'scoring_ranges': ranges, 'scoring_ranges_sha256': canonical_hash(ranges), 'num_targets': num_targets, 'layers': counters.counts, 'cache_lengths': counters.cache_lengths, 'expected_layer_count': model.config.num_hidden_layers, 'expected_calls_per_layer': expected_counts, 'all_layers_covered': True}
         write_json(output / 'coverage.json', coverage)
-        if slice_config or dense_config:
+        if slice_config or dense_config or full_config:
             selection_stats = counters.slice_summary()
             write_json(output / 'selection_stats.json', selection_stats)
             write_json(output / 'costs.json', counters.slice_costs())

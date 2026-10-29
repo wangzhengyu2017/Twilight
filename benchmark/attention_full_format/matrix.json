@@ -1,0 +1,92 @@
+{
+  "status": "planned_pending_independent_review_and_implementation",
+  "spec_sha256": "098767f4e7ef947948e239504117297b5bfb147bc40757c916c8c0fc20585cba",
+  "scope": "six full-format Q8K8 TopP jobs; separate from four dense jobs and separate RS10",
+  "variants": [
+    {
+      "variant_id": "sm8_q8k8_topp_p095",
+      "format": "sm8",
+      "p": 0.95,
+      "q_bits": 8,
+      "k_bits": 8,
+      "selection_passes": 1,
+      "final_operand_profile": "decoded_full_format",
+      "expected_traces": 6,
+      "status": "planned",
+      "config": "configs/sm8_q8k8_topp_p095.json"
+    },
+    {
+      "variant_id": "sm8_q8k8_topp_p090",
+      "format": "sm8",
+      "p": 0.9,
+      "q_bits": 8,
+      "k_bits": 8,
+      "selection_passes": 1,
+      "final_operand_profile": "decoded_full_format",
+      "expected_traces": 6,
+      "status": "planned",
+      "config": "configs/sm8_q8k8_topp_p090.json"
+    },
+    {
+      "variant_id": "sm8_q8k8_topp_p085",
+      "format": "sm8",
+      "p": 0.85,
+      "q_bits": 8,
+      "k_bits": 8,
+      "selection_passes": 1,
+      "final_operand_profile": "decoded_full_format",
+      "expected_traces": 6,
+      "status": "planned",
+      "config": "configs/sm8_q8k8_topp_p085.json"
+    },
+    {
+      "variant_id": "mxint8_q8k8_topp_p095",
+      "format": "mxint8",
+      "p": 0.95,
+      "q_bits": 8,
+      "k_bits": 8,
+      "selection_passes": 1,
+      "final_operand_profile": "decoded_full_format",
+      "expected_traces": 6,
+      "status": "planned",
+      "config": "configs/mxint8_q8k8_topp_p095.json"
+    },
+    {
+      "variant_id": "mxint8_q8k8_topp_p090",
+      "format": "mxint8",
+      "p": 0.9,
+      "q_bits": 8,
+      "k_bits": 8,
+      "selection_passes": 1,
+      "final_operand_profile": "decoded_full_format",
+      "expected_traces": 6,
+      "status": "planned",
+      "config": "configs/mxint8_q8k8_topp_p090.json"
+    },
+    {
+      "variant_id": "mxint8_q8k8_topp_p085",
+      "format": "mxint8",
+      "p": 0.85,
+      "q_bits": 8,
+      "k_bits": 8,
+      "selection_passes": 1,
+      "final_operand_profile": "decoded_full_format",
+      "expected_traces": 6,
+      "status": "planned",
+      "config": "configs/mxint8_q8k8_topp_p085.json"
+    }
+  ],
+  "schema_version": "full-format-topp-execution-v1",
+  "trace_targets": "../attention_format/trace_targets.json",
+  "trace_targets_sha256": "e1e7ca7b59def099214be6c1dd429cd6368cf4b61e0357e39df492fff985b8ad",
+  "expected_heads_per_record": 32,
+  "expected_full_targets": 289075,
+  "expected_full_windows": 282,
+  "specification_files": {
+    "/output/project/experiments/stp-dense-formats/spec/SPEC.md": "a91981a77424328c428b02de1f2d3a3206253735c9f62c3e91b780b5ae7a03e8",
+    "/output/project/experiments/stp-dense-formats/spec/MATRIX.json": "45fb8a7a9f1592ac71930202e25e33b378decc758f3f91e8c03b5568d946589d",
+    "/output/project/experiments/stp-dense-formats/spec/TOPP_SPEC.md": "098767f4e7ef947948e239504117297b5bfb147bc40757c916c8c0fc20585cba",
+    "/output/project/experiments/stp-dense-formats/spec/TOPP_MATRIX.json": "74a4ea703fceae01742075347796e71a12f995bf46dda99491fd01d65f0480f0",
+    "/output/project/experiments/stp-dense-formats/spec/TOPP_REVIEW.md": "0834581446c1323c34119ebb36e1819cd467bcd4ea5601db33c2f42143b8ed01"
+  }
+}
