@@ -84,3 +84,49 @@ def operands(qq, kk, config):
             item = mx_sidecar(values,bits,fp4)
         result.append(item)
     return result
+
+
+def decode_sm8_bytes(words, scales):
+    """Decode stored sign/magnitude bytes; both zero encodings map to +0."""
+    if words.dtype != torch.uint8 or scales.shape != words.shape[:-1]:
+        raise ValueError('Invalid SM byte/scale layout')
+    magnitude=words.to(torch.int16).bitwise_and(127)
+    signed=torch.where((words >= 128) & (magnitude != 0), -magnitude, magnitude)
+    result=signed.float()*scales.float()[...,None]
+    if not torch.isfinite(result).all() or not (scales > 0).all():
+        raise ValueError('Invalid SM reconstruction/scale')
+    return result.contiguous()
+
+
+def decode_mx_bytes(codes, e8m0, fp4=False):
+    """Reconstruct full operands exclusively from stored codes and E8M0 bytes."""
+    if codes.shape[-1] % 32 or e8m0.shape != (*codes.shape[:-1],codes.shape[-1]//32):
+        raise ValueError('Invalid MX stored block layout')
+    if e8m0.dtype != torch.uint8 or (e8m0 == 255).any():
+        raise ValueError('MX requires finite E8M0 bytes')
+    exponent=e8m0.to(torch.int32)-127
+    if fp4:
+        if codes.dtype != torch.uint8 or (codes > 15).any(): raise ValueError('Invalid E2M1 nibble')
+        table=torch.tensor([0.,.5,1.,1.5,2.,3.,4.,6.],device=codes.device,dtype=torch.float32)
+        magnitude=codes.long().bitwise_and(7)
+        raw=table[magnitude]*torch.where((codes >= 8) & (magnitude != 0),-1.,1.)
+    else:
+        if codes.dtype != torch.int8 or (codes == -128).any(): raise ValueError('Invalid symmetric MXINT8 code')
+        raw=codes.float()
+    blocks=raw.reshape(*codes.shape[:-1],-1,32)
+    result=_bounded_ldexp(blocks,exponent[...,None]-(0 if fp4 else 6)).reshape(codes.shape)
+    if not torch.isfinite(result).all(): raise ValueError('Nonfinite decoded MX operand')
+    return result.contiguous()
+
+
+def dense_sidecar(source, fmt):
+    """Actual dense operand: encoder metadata and byte-decoded reconstruction."""
+    if fmt == 'sm8':
+        encoded=sm8(source.codes,8)
+        return dict(full_codes=encoded['full_codes'],full_dq=decode_sm8_bytes(encoded['full_codes'],source.scales))
+    if fmt not in ('mxint8','mxfp4'): raise ValueError('Unknown dense operand format')
+    fp4=fmt == 'mxfp4'
+    encoded=mx_sidecar(source.codes.float()*source.scales.float()[...,None],4 if fp4 else 8,fp4)
+    result={k:encoded[k] for k in ('full_codes','exponent','e8m0','clamp_mask','zero_blocks','underflow_mask')}
+    result['full_dq']=decode_mx_bytes(result['full_codes'],result['e8m0'],fp4)
+    return result

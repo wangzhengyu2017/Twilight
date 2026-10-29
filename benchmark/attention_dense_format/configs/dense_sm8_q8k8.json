@@ -1,0 +1,47 @@
+{
+  "attention_quantization": {
+    "backend": "torch_qdq",
+    "cache_storage": "original_float",
+    "method": "intflash_qk8",
+    "parameters": {
+      "group_axis": "head_token",
+      "quantizer_input_dtype": "float16",
+      "rounding": "torch_round",
+      "scale_dtype": "source",
+      "source_input_cast": "bf16_to_fp16",
+      "zero_group": "scale_one"
+    },
+    "scope": "prefill_and_decode",
+    "source_revision": "7f7bfb00bcd26b2cef49e7783f51ef610e05abf7"
+  },
+  "compressor": {
+    "type": "none"
+  },
+  "selector": {
+    "type": "none"
+  },
+  "skip_first_two_layers": false,
+  "use_estimated_weights_in_attn": false,
+  "weight_estimator": {
+    "type": "none"
+  },
+  "weight_pruner": {
+    "type": "none"
+  },
+  "attention_dense_format": {
+    "variant_id": "dense_sm8_q8k8",
+    "format": "sm8",
+    "q_bits": 8,
+    "k_bits": 8,
+    "selection_mode": "dense",
+    "selection_passes": 0,
+    "final_scores": "actual_decoded_format_qk",
+    "scope": "prefill_and_decode",
+    "diagnostic_only_p": [
+      0.95,
+      0.9,
+      0.85
+    ],
+    "format_parameters": {}
+  }
+}
