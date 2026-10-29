@@ -1,10 +1,15 @@
-# Format-aware MSB predictor study
+# Format study: delivered results
 
-Implemented: sign-magnitude and MXINT8 predictor sidecars for Q4K4/Q8K4 at p=.95/.90/.85; conditional native/mixed MXFP4 paths are implemented but run only after the frozen MXINT8 result rule. Final scores always use original INT-Flash Q8/K8, with one Top-p selection. RS-INT8 remains blocked pending a verified BADA encoding definition.
+Execution is terminal complete. Conditional FP4 activated: true. Independent terminal audit verified 18 format full cells. RS-INT8 remains blocked; proposed other-cause supplements remain unapproved and unexecuted.
 
-- [SPEC](SPEC.md), [execution and conditional rule](MX_EXECUTION_DECISION.md).
-- [MSB information analysis](MSB_INFORMATION_ANALYSIS.md), [additional source statistics](SOURCE_DISTRIBUTIONS.md).
-- [Supplemental causal SPEC, separate approval required](SUPPLEMENT_SPEC.md).
-- [Preceding measured baseline](../stp-baselines/THRESHOLD_BASELINE.md).
+Execution source commit: `124b78ae3e542bba3dc66bb35e58048373892ced`. The later delivery commit records documentation and reproducibility tools; it is not the source used by these runs.
 
-Implementation and synthetic CPU/CUDA validation are complete. Actual format model smoke, replay and full PPL are pending; no format PPL is claimed in this commit. Full machine evidence and historical links live at `/output/project/experiments/stp-format-study`; source checkout is `/output/project/Twilight-STP_test_Format`. Files copied here are review snapshots; execution freezes their authoritative external sources and hashes.
+- complete; verified=no: 2
+- complete; verified=yes: 30
+- planned_source_blocked; verified=no: 6
+
+[Actual report and per-threshold signed CE changes](results/REPORT.md), [unified PPL table](results/PPL_TABLE.csv), [full precision/status table](results/FULL_TABLE.csv), [paired sets](results/PAIRED_SETS.csv), [delivery hashes](results/DELIVERY.manifest.json), [independent audit](results/INDEPENDENT_AUDIT.json).
+
+[Main cause analysis](MSB_INFORMATION_ANALYSIS.md), [source distributions](SOURCE_DISTRIBUTIONS.md), [mathematics](MATHEMATICAL_NOTE.md), [selection budget](SMOKE_SELECTION_BUDGET.md), [metric definitions](METRIC_DEFINITIONS.md), [proposed supplemental specification](SUPPLEMENT_PROPOSAL.md), [proposal reasoning](SUPPLEMENT_REASONING.md), [proposal review](SUPPLEMENT_REVIEW.md), [history](history/README.md).
+
+Authoritative external execution: `/output/project/experiments/stp-format-study/execution-v1`; delivery: `/output/project/experiments/stp-format-study/delivery-v1`. Machine-local absolute evidence links and manifests require those archived artifacts. Historical dense rows retain their parser-matched gate limitation. Same-input estimator comparisons and cross-run trajectories have separate scopes; no unique corpus-level causal attribution or native integer speedup is claimed. Original full Q8/K8 final operands and one Top-p selection remain the execution semantics.

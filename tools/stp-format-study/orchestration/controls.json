@@ -1,0 +1,20 @@
+{
+  "095": {
+    "fp_run": "/output/project/experiments/stp-slice/20261028-v2-smoke/fp_topp_p095-decode-on",
+    "int_run": "/output/project/experiments/stp-slice/20261028-v2-smoke/int_topp_p095-decode-on",
+    "q4_run": "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q4k4_topp_p095-decode-on",
+    "q8_run": "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q8k4_topp_p095-decode-on"
+  },
+  "090": {
+    "fp_run": "/output/project/experiments/stp-slice-thresholds/p090-smoke/fp_topp_p090-decode-on",
+    "int_run": "/output/project/experiments/stp-slice-thresholds/p090-smoke/int_topp_p090-decode-on",
+    "q4_run": "/output/project/experiments/stp-slice-thresholds/p090-smoke/msb_q4k4_topp_p090-decode-on",
+    "q8_run": "/output/project/experiments/stp-slice-thresholds/p090-smoke/msb_q8k4_topp_p090-decode-on"
+  },
+  "085": {
+    "fp_run": "/output/project/experiments/stp-slice-thresholds/p085-smoke/fp_topp_p085-decode-on",
+    "int_run": "/output/project/experiments/stp-slice-thresholds/p085-smoke/int_topp_p085-decode-on",
+    "q4_run": "/output/project/experiments/stp-slice-thresholds/p085-smoke/msb_q4k4_topp_p085-decode-on",
+    "q8_run": "/output/project/experiments/stp-slice-thresholds/p085-smoke/msb_q8k4_topp_p085-decode-on"
+  }
+}

@@ -1,0 +1,15 @@
+method,p095_ppl_or_status,p090_ppl_or_status,p085_ppl_or_status,evidence
+Dense FP,6.484759140305276,same dense reference,same dense reference,historical measurement; no parser-matched full gate
+Dense INT,6.486693431357931,same dense reference,same dense reference,historical measurement; no parser-matched full gate
+FP Top-p,6.482529,6.530140,6.613165,full corpus
+INT Top-p,6.485039,6.532782,6.614929,full corpus
+TC Q4K4,6.836825,7.317663,7.921542,full corpus
+TC Q8K4,6.500290,6.563772,6.667327,full corpus
+SM Q4K4,6.497612,6.557247,6.675108,full corpus
+SM Q8K4,6.498413,6.574305,6.697492,full corpus
+MXINT8-TC4 Q4K4,6.673347,6.921718,7.238384,full corpus
+MXINT8-TC4 Q8K4,6.503503,6.571011,6.675618,full corpus
+RS Q4K4,planned_source_blocked; unverified,planned_source_blocked; unverified,planned_source_blocked; unverified,see cell status
+RS Q8K4,planned_source_blocked; unverified,planned_source_blocked; unverified,planned_source_blocked; unverified,see cell status
+MXFP4 Q4K4,6.492194,6.544645,6.638278,full corpus
+MXINT8-Q8 / MXFP4-K4,6.484025,6.530161,6.603273,full corpus

@@ -1,0 +1,13 @@
+{
+  "source": "/output/project/experiments/stp-format-study/review-tools/independent_auditor_v1.py",
+  "source_sha256": "9e2f34fc6c793670a9430647f0a884fa06529e765554bdd9c567ce523e41823a",
+  "source_origin": "Exact Python body originally launched inline through stdin in exec session74840; archive only, not relaunched.",
+  "active_exec_session": 74840,
+  "status_race_handling": {
+    "missing_index": "No terminal audit branch until artifact-index.json exists.",
+    "partial_json": "JSONDecodeError logs transient_incomplete_write and retries after60seconds.",
+    "concurrent_missing_file": "FileNotFoundError logs transient_incomplete_write and retries after60seconds."
+  },
+  "experiment_mutations": false,
+  "gpu_restart": false
+}
