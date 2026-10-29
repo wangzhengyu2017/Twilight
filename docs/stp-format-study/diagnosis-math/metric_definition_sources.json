@@ -1,0 +1,40 @@
+{
+  "scope": "Read-only source inspection; no metric recomputation, experiment, source edit, or replay modification",
+  "sources": [
+    {
+      "path": "/output/project/experiments/stp-format-study/diagnosis/analyze_tc.py",
+      "sha256": "da990aaf0ab77f877bdc5732409f8bf7288c8105c9540f25ef747fea3c7526c7"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/diagnosis/manifest.json",
+      "sha256": "fefa400a7c51d8bb06c0ec96b811db53aacb20f55fbe6264bdba9a9603955af3"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/diagnostics.py",
+      "sha256": "2426b6c4f2a80f099d9764c2067205c84e1d5d7d9274670e9369012e16ced703"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/diagnose_tc.py",
+      "sha256": "4be68fc9aa3edb7fb7cf7b1fd5a1974ade035cebfa6b08f42a71db5d2d13806d"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/oracle.py",
+      "sha256": "0f1e2038159ee1722a29e7ebc6ed306826fe6dce99d8680c005e11d53160ae65"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/replay.py",
+      "sha256": "d4de5055e7da44d442228a2fbc04f36dc8d094835419fcc3739affb744edc258"
+    },
+    {
+      "path": "/output/project/Twilight-STP_test_Format/benchmark/attention_format/diagnostics.py",
+      "sha256": "2426b6c4f2a80f099d9764c2067205c84e1d5d7d9274670e9369012e16ced703"
+    }
+  ],
+  "artifacts": {
+    "METRIC_DEFINITIONS.md": "926c813d1215cb54b37fee96b6007a3db7208469eba4c1df4394afff3e4623dc"
+  },
+  "checks": [
+    "legacy script digest matches its original diagnosis manifest",
+    "inspected live diagnostics.py matches frozen diagnostics.py"
+  ]
+}

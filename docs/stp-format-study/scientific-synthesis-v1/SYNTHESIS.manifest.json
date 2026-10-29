@@ -1,0 +1,24 @@
+{
+  "status": "generated_pending_independent_document_review",
+  "source_files": {
+    "/output/project/experiments/stp-format-study/delivery-v1/FULL_TABLE.csv": "2b3b7449df965bfe6918736fd270997387bd11df8e1d8fd37148ca3b048c15eb",
+    "/output/project/experiments/stp-format-study/delivery-v1/DELIVERY.manifest.json": "9dcf0aa0ee862d179bfb7e15445360e39f0d62e77fa31abeb3ee73a620647f3e",
+    "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+    "/output/project/experiments/stp-format-study/analysis-final-readable/RENDER.manifest.json": "820ab7f993e4e9dca2624c875f17a3e4c7d09a38e1a72f0385dcb17f8a404f98",
+    "/output/project/experiments/stp-format-study/diagnosis-math/NOTE.md": "0081173685c9de50dbd632d7b75e9e1d43ddbd201ddb592675ba992cec0d1a32",
+    "/output/project/experiments/stp-format-study/diagnosis-math/LOGIT_CALIBRATION_OBSERVATIONS.md": "f4f4f83ee0fe5c153a979c8d3ebe85800d86e0d708e3af26f4886a51fda006bc",
+    "/output/project/experiments/stp-format-study/review/calibration-observations-review.md": "f608170356f0c0842978625a51f5e14abee224d51b8f32ebcedf2b420993948f",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/synthesize.py": "5b5944ac5bc7b0f46bc63e7d4cfdac9773dd18f678767a691773cc173eef4523"
+  },
+  "artifacts": {
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/REPORT.md": "c04543d4844b41ed27a9d49ffe89606355c852886687f67c2e57834aa4cd88d7",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv": "1107b11bde72d43179c6a606e63e00aac8eab5726734335d35a877b0ba0890bc",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/STATUS.md": "f50f94cdaffdc385d1693a1ec677a51389e537118dfe3d0e9cf3efc44cf82fba"
+  },
+  "measured_rows": 32,
+  "verified_rows": 30,
+  "historical_dense_gate_missing_rows": 2,
+  "new_format_rows": 18,
+  "targets_per_row": 289075,
+  "root_visual_check": "Both readable PNGs inspected; non-overlapping threshold marker legend; no numerical change"
+}

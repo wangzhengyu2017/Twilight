@@ -1,0 +1,465 @@
+{
+  "schema": "stp-results-publication-copy-v1",
+  "source_head_before_publication": "e69121d91a9520c9a52fe462dfdd762c3d39fbb0",
+  "warning": "Published Markdown contains path/link relocations and publication-status-only updates; original manifests bind external originals, not transformed report copies. Numerical/scientific claims and data files are unchanged. Historical first-publication result files remain frozen.",
+  "excluded": "User-supplied PDF; credentials; weights; tensors; logs; active six-TopP and RS execution artifacts",
+  "copies": [
+    {
+      "external_path": "/output/project/experiments/stp-format-study/scientific-synthesis-v1/REPORT.md",
+      "repository_path": "docs/stp-format-study/scientific-synthesis-v1/REPORT.md",
+      "external_sha256": "c04543d4844b41ed27a9d49ffe89606355c852886687f67c2e57834aa4cd88d7",
+      "repository_sha256": "d3b841948831731ef449c430e510b28e556fc93a69f996b89b35085051167766",
+      "external_bytes": 9768,
+      "repository_bytes": 9864,
+      "transformations": [
+        {
+          "from": "../delivery-v1/REPORT.md",
+          "to": "../results/REPORT.md",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../delivery-v1/PAIRED_SETS.csv",
+          "to": "../results/PAIRED_SETS.csv",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../review/execution-v1-full-independent-audit.json",
+          "to": "../results/INDEPENDENT_AUDIT.json",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../execution-v1/artifact-index.json",
+          "to": "/output/project/experiments/stp-format-study/execution-v1/artifact-index.json",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../supplement-proposal-v2/SPEC.md",
+          "to": "/output/project/experiments/stp-format-study/supplement-proposal-v2/SPEC.md",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "This synthesis and improved figures are a later deliverable, pending independent document review and their own upload.",
+          "to": "This repository copy publishes the later synthesis and improved figures after independent document review; see [publication status](PUBLICATION_STATUS.md).",
+          "kind": "publication_status_only"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+      "repository_path": "docs/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+      "external_sha256": "1107b11bde72d43179c6a606e63e00aac8eab5726734335d35a877b0ba0890bc",
+      "repository_sha256": "1107b11bde72d43179c6a606e63e00aac8eab5726734335d35a877b0ba0890bc",
+      "external_bytes": 18407,
+      "repository_bytes": 18407,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/scientific-synthesis-v1/SYNTHESIS.manifest.json",
+      "repository_path": "docs/stp-format-study/scientific-synthesis-v1/SYNTHESIS.manifest.json",
+      "external_sha256": "47a6947e62b80837e9589c7f0ee3f883e4e6733b82629efea2093583da54b28b",
+      "repository_sha256": "47a6947e62b80837e9589c7f0ee3f883e4e6733b82629efea2093583da54b28b",
+      "external_bytes": 2109,
+      "repository_bytes": 2109,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/scientific-synthesis-v1/STATUS.md",
+      "repository_path": "docs/stp-format-study/scientific-synthesis-v1/STATUS.md",
+      "external_sha256": "f50f94cdaffdc385d1693a1ec677a51389e537118dfe3d0e9cf3efc44cf82fba",
+      "repository_sha256": "0ab910025d16891c9b442a9533ca2711004b493c666b3378a1567d94f6ace3e6",
+      "external_bytes": 350,
+      "repository_bytes": 399,
+      "transformations": [
+        {
+          "from": "Independent document review and publication of this later synthesis remain pending.",
+          "to": "Independent document review passed; this repository copy is the later publication (see [publication status](PUBLICATION_STATUS.md)).",
+          "kind": "publication_status_only"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/INTERPRETATION.md",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/INTERPRETATION.md",
+      "external_sha256": "608841a4fc1789b45248325e282c0223d8dc39c0f20af75f28e686d74d21715f",
+      "repository_sha256": "608841a4fc1789b45248325e282c0223d8dc39c0f20af75f28e686d74d21715f",
+      "external_bytes": 5625,
+      "repository_bytes": 5625,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/RENDER.manifest.json",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/RENDER.manifest.json",
+      "external_sha256": "820ab7f993e4e9dca2624c875f17a3e4c7d09a38e1a72f0385dcb17f8a404f98",
+      "repository_sha256": "820ab7f993e4e9dca2624c875f17a3e4c7d09a38e1a72f0385dcb17f8a404f98",
+      "external_bytes": 2681,
+      "repository_bytes": 2681,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/plot_data.csv",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/plot_data.csv",
+      "external_sha256": "9f08e1f7d7b8df633d0bfbed5e760c28aea8f6e51720248b8860ec5ea5dc725f",
+      "repository_sha256": "9f08e1f7d7b8df633d0bfbed5e760c28aea8f6e51720248b8860ec5ea5dc725f",
+      "external_bytes": 19166,
+      "repository_bytes": 19166,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_selected_fraction.pdf",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/ppl_vs_selected_fraction.pdf",
+      "external_sha256": "a5d313cb80902bfb6abd55814bd045e21866d98b2f081fdcb5a2285c7c127dda",
+      "repository_sha256": "a5d313cb80902bfb6abd55814bd045e21866d98b2f081fdcb5a2285c7c127dda",
+      "external_bytes": 20380,
+      "repository_bytes": 20380,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_selected_fraction.png",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/ppl_vs_selected_fraction.png",
+      "external_sha256": "04d81fab79df17470f852414b615ea94300764965f3b0933521f2245f96ad9c2",
+      "repository_sha256": "04d81fab79df17470f852414b615ea94300764965f3b0933521f2245f96ad9c2",
+      "external_bytes": 173848,
+      "repository_bytes": 173848,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_top_p.pdf",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/ppl_vs_top_p.pdf",
+      "external_sha256": "6aba5c5ad0376522e7495b7e585183cd17316a9170c1d18c32e546d6821a23cf",
+      "repository_sha256": "6aba5c5ad0376522e7495b7e585183cd17316a9170c1d18c32e546d6821a23cf",
+      "external_bytes": 19369,
+      "repository_bytes": 19369,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_top_p.png",
+      "repository_path": "docs/stp-format-study/analysis-final-readable/ppl_vs_top_p.png",
+      "external_sha256": "0b1e9f788868ccc882ddae08e99790622cec655fba8efe1a177c8243476e4521",
+      "repository_sha256": "0b1e9f788868ccc882ddae08e99790622cec655fba8efe1a177c8243476e4521",
+      "external_bytes": 179872,
+      "repository_bytes": 179872,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/NOTE.md",
+      "repository_path": "docs/stp-format-study/diagnosis-math/NOTE.md",
+      "external_sha256": "0081173685c9de50dbd632d7b75e9e1d43ddbd201ddb592675ba992cec0d1a32",
+      "repository_sha256": "12689904d021792746834c37c41046c460fb3d13407f2ef5e6f0cdbb528738c3",
+      "external_bytes": 12233,
+      "repository_bytes": 12401,
+      "transformations": [
+        {
+          "from": "../diagnosis/REPORT.md",
+          "to": "/output/project/experiments/stp-format-study/diagnosis/REPORT.md",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../diagnosis-distributions/REPORT.md",
+          "to": "/output/project/experiments/stp-format-study/diagnosis-distributions/REPORT.md",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../diagnosis/worst_head_example.json",
+          "to": "/output/project/experiments/stp-format-study/diagnosis/worst_head_example.json",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../spec/SPEC.md",
+          "to": "/output/project/experiments/stp-format-study/spec/SPEC.md",
+          "kind": "link_relocation"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/LOGIT_CALIBRATION_OBSERVATIONS.md",
+      "repository_path": "docs/stp-format-study/diagnosis-math/LOGIT_CALIBRATION_OBSERVATIONS.md",
+      "external_sha256": "f4f4f83ee0fe5c153a979c8d3ebe85800d86e0d708e3af26f4886a51fda006bc",
+      "repository_sha256": "041e962be5c4c282b5e453a5cc930bdc8d14205c2f6399b8984ba5d5fc4c9548",
+      "external_bytes": 7545,
+      "repository_bytes": 7647,
+      "transformations": [
+        {
+          "from": "observe_saved_logit_calibration.py",
+          "to": "/output/project/experiments/stp-format-study/diagnosis-math/observe_saved_logit_calibration.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../supplement-proposal/SPEC.md",
+          "to": "/output/project/experiments/stp-format-study/supplement-proposal/SPEC.md",
+          "kind": "link_relocation"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/METRIC_DEFINITIONS.md",
+      "repository_path": "docs/stp-format-study/diagnosis-math/METRIC_DEFINITIONS.md",
+      "external_sha256": "926c813d1215cb54b37fee96b6007a3db7208469eba4c1df4394afff3e4623dc",
+      "repository_sha256": "939994428edb30934e60c8341ee7a0e4d3dccb0627b88b0a5e84be8502011629",
+      "external_bytes": 6152,
+      "repository_bytes": 6404,
+      "transformations": [
+        {
+          "from": "../diagnosis/analyze_tc.py",
+          "to": "/output/project/experiments/stp-format-study/diagnosis/analyze_tc.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../execution-v1/freeze/source/benchmark/attention_format/diagnostics.py",
+          "to": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/diagnostics.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../execution-v1/freeze/source/benchmark/attention_format/diagnose_tc.py",
+          "to": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/diagnose_tc.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../execution-v1/freeze/source/benchmark/attention_format/replay.py",
+          "to": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/replay.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../execution-v1/freeze/source/benchmark/attention_format/oracle.py",
+          "to": "/output/project/experiments/stp-format-study/execution-v1/freeze/source/benchmark/attention_format/oracle.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../diagnosis/manifest.json",
+          "to": "/output/project/experiments/stp-format-study/diagnosis/manifest.json",
+          "kind": "link_relocation"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/SMOKE_SELECTION_BUDGET.md",
+      "repository_path": "docs/stp-format-study/diagnosis-math/SMOKE_SELECTION_BUDGET.md",
+      "external_sha256": "5e7eeb1d49184dd21784a35d233bb47a897871bacaad8bf95d12bc9dfd59aa46",
+      "repository_sha256": "71e71365fa2c5209b49d33d711f8c95bd0a0938daa3a25c0c4dcf309eae94e65",
+      "external_bytes": 10928,
+      "repository_bytes": 11252,
+      "transformations": [
+        {
+          "from": "summarize_smoke_selection.py",
+          "to": "/output/project/experiments/stp-format-study/diagnosis-math/summarize_smoke_selection.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "layer0_input_equality_manifest.json",
+          "to": "/output/project/experiments/stp-format-study/diagnosis-math/layer0_input_equality_manifest.json",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../diagnosis/worst_head_example.json",
+          "to": "/output/project/experiments/stp-format-study/diagnosis/worst_head_example.json",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "layer0_query128_head2.csv",
+          "to": "/output/project/experiments/stp-format-study/diagnosis-math/layer0_query128_head2.csv",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "compare_saved_layer0.py",
+          "to": "/output/project/experiments/stp-format-study/diagnosis-math/compare_saved_layer0.py",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "../supplement-proposal/SPEC.md",
+          "to": "/output/project/experiments/stp-format-study/supplement-proposal/SPEC.md",
+          "kind": "link_relocation"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/layer0_logit_calibration_heads.csv",
+      "repository_path": "docs/stp-format-study/diagnosis-math/layer0_logit_calibration_heads.csv",
+      "external_sha256": "5f748178295962545b902ebfe515cfe77277e5bec5360e318eddff12ad268629",
+      "repository_sha256": "5f748178295962545b902ebfe515cfe77277e5bec5360e318eddff12ad268629",
+      "external_bytes": 102506,
+      "repository_bytes": 102506,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/layer0_logit_calibration_summary.csv",
+      "repository_path": "docs/stp-format-study/diagnosis-math/layer0_logit_calibration_summary.csv",
+      "external_sha256": "6928b97d97415da4d5232a63a6e679c69068fb66a76a5f22466e3407606a46ad",
+      "repository_sha256": "6928b97d97415da4d5232a63a6e679c69068fb66a76a5f22466e3407606a46ad",
+      "external_bytes": 1701,
+      "repository_bytes": 1701,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/layer0_worst_head_key_probabilities.csv",
+      "repository_path": "docs/stp-format-study/diagnosis-math/layer0_worst_head_key_probabilities.csv",
+      "external_sha256": "ca7fb32a13190c377cffe699619bafb99193e72d1bae65db5de480258025e5d7",
+      "repository_sha256": "ca7fb32a13190c377cffe699619bafb99193e72d1bae65db5de480258025e5d7",
+      "external_bytes": 2448,
+      "repository_bytes": 2448,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/logit_calibration_manifest.json",
+      "repository_path": "docs/stp-format-study/diagnosis-math/logit_calibration_manifest.json",
+      "external_sha256": "009695d400262ef91d7fdad3967709cc69c3ecad3fb7cf552503e4673c81030b",
+      "repository_sha256": "009695d400262ef91d7fdad3967709cc69c3ecad3fb7cf552503e4673c81030b",
+      "external_bytes": 24977,
+      "repository_bytes": 24977,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/metric_definition_sources.json",
+      "repository_path": "docs/stp-format-study/diagnosis-math/metric_definition_sources.json",
+      "external_sha256": "de925501ac3deb2b05e58c558d782b9d549ed1efa3efc3c28cafb7ac1e246981",
+      "repository_sha256": "de925501ac3deb2b05e58c558d782b9d549ed1efa3efc3c28cafb7ac1e246981",
+      "external_bytes": 1867,
+      "repository_bytes": 1867,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/smoke_selection_cross_tc.csv",
+      "repository_path": "docs/stp-format-study/diagnosis-math/smoke_selection_cross_tc.csv",
+      "external_sha256": "6e4e4e73dee3c181f03c3ba8318420bdf39989dd069e2e74957e86e30c8bba18",
+      "repository_sha256": "6e4e4e73dee3c181f03c3ba8318420bdf39989dd069e2e74957e86e30c8bba18",
+      "external_bytes": 2528,
+      "repository_bytes": 2528,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/smoke_selection_own_source.csv",
+      "repository_path": "docs/stp-format-study/diagnosis-math/smoke_selection_own_source.csv",
+      "external_sha256": "99a3e210c10e317f136dfaa3b5ec0e09d4733c1e10d9ba59d258b39bd80de62f",
+      "repository_sha256": "99a3e210c10e317f136dfaa3b5ec0e09d4733c1e10d9ba59d258b39bd80de62f",
+      "external_bytes": 4398,
+      "repository_bytes": 4398,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/diagnosis-math/smoke_selection_manifest.json",
+      "repository_path": "docs/stp-format-study/diagnosis-math/smoke_selection_manifest.json",
+      "external_sha256": "0ceaa77a84135ed7200d279a02c59417a48898509f888a7058c9726a998d9708",
+      "repository_sha256": "0ceaa77a84135ed7200d279a02c59417a48898509f888a7058c9726a998d9708",
+      "external_bytes": 6791,
+      "repository_bytes": 6791,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/review/scientific-synthesis-v1-independent-review.json",
+      "repository_path": "docs/stp-format-study/review/scientific-synthesis-v1-independent-review.json",
+      "external_sha256": "1f9e2ba06b6bbe56c0ac1df5d346734e90329debe6aec1c1da6137b12a629e3b",
+      "repository_sha256": "1f9e2ba06b6bbe56c0ac1df5d346734e90329debe6aec1c1da6137b12a629e3b",
+      "external_bytes": 179659,
+      "repository_bytes": 179659,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-format-study/review/calibration-observations-review.md",
+      "repository_path": "docs/stp-format-study/review/calibration-observations-review.md",
+      "external_sha256": "f608170356f0c0842978625a51f5e14abee224d51b8f32ebcedf2b420993948f",
+      "repository_sha256": "f608170356f0c0842978625a51f5e14abee224d51b8f32ebcedf2b420993948f",
+      "external_bytes": 7778,
+      "repository_bytes": 7778,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/delivery-dense-v1/REPORT.md",
+      "repository_path": "docs/stp-dense-formats/results/REPORT.md",
+      "external_sha256": "5b727f1f1698d00955dc8aaa7f6db4536f1529e8ab2aed109b596ddba2594be5",
+      "repository_sha256": "09c27f04f4a1e6a0b697a428d7b1484b0bb0a2e501b2ca41d7a902e458961583",
+      "external_bytes": 4916,
+      "repository_bytes": 5240,
+      "transformations": [
+        {
+          "kind": "evidence_path_relocation",
+          "details": "Plain-text execution/recovery references made absolute server artifact paths; independent acceptance references point to published sibling copies."
+        },
+        {
+          "from": "Exact four-row data: RESULTS.csv",
+          "to": "Exact four-row data: [RESULTS.csv](RESULTS.csv)",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "Independent24-trace acceptance: ../review/independent-results/smoke-independent-acceptance.json",
+          "to": "Independent24-trace acceptance: [smoke-independent-acceptance.json](../review/independent-results/smoke-independent-acceptance.json)",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "Independent full acceptance: ../review/independent-results/full-independent-audit.json",
+          "to": "Independent full acceptance: [full-independent-audit.json](../review/independent-results/full-independent-audit.json)",
+          "kind": "link_relocation"
+        },
+        {
+          "from": "Complete frozen-output and acceptance index: ARTIFACT_INDEX.json",
+          "to": "Complete frozen-output and acceptance index: [ARTIFACT_INDEX.json](ARTIFACT_INDEX.json)",
+          "kind": "link_relocation"
+        }
+      ]
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/delivery-dense-v1/RESULTS.csv",
+      "repository_path": "docs/stp-dense-formats/results/RESULTS.csv",
+      "external_sha256": "5db5bd9ee9f93b38a32528b88e26f2706f7c1cddb5e4a87e1ee1a0af5d3303c7",
+      "repository_sha256": "5db5bd9ee9f93b38a32528b88e26f2706f7c1cddb5e4a87e1ee1a0af5d3303c7",
+      "external_bytes": 1547,
+      "repository_bytes": 1547,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/delivery-dense-v1/ARTIFACT_INDEX.json",
+      "repository_path": "docs/stp-dense-formats/results/ARTIFACT_INDEX.json",
+      "external_sha256": "2824d7d2f1bd9060415261471c63367c483a6066e0a0dadef9aec85ecb2f574e",
+      "repository_sha256": "2824d7d2f1bd9060415261471c63367c483a6066e0a0dadef9aec85ecb2f574e",
+      "external_bytes": 205458,
+      "repository_bytes": 205458,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/review/delivery-doc-correction/REVIEW.json",
+      "repository_path": "docs/stp-dense-formats/review/delivery-doc-correction/REVIEW.json",
+      "external_sha256": "92319736572225cb457097ed37b1b04a67ce7d01ab9a5aebe8d5f89de08bb710",
+      "repository_sha256": "92319736572225cb457097ed37b1b04a67ce7d01ab9a5aebe8d5f89de08bb710",
+      "external_bytes": 7391,
+      "repository_bytes": 7391,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/review/delivery-doc-correction/REVIEW.md",
+      "repository_path": "docs/stp-dense-formats/review/delivery-doc-correction/REVIEW.md",
+      "external_sha256": "0bf47eb1649fbc0cf25aa7ece587ac1d5135e364127b702fece603dd7ecc5511",
+      "repository_sha256": "0bf47eb1649fbc0cf25aa7ece587ac1d5135e364127b702fece603dd7ecc5511",
+      "external_bytes": 4081,
+      "repository_bytes": 4081,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/review/replay-amendment-v1/independent-results/full-independent-audit.json",
+      "repository_path": "docs/stp-dense-formats/review/independent-results/full-independent-audit.json",
+      "external_sha256": "3fafeeb73271ecf081c1eba3d378f7e4d99a8f7407bcec64be24266592598644",
+      "repository_sha256": "3fafeeb73271ecf081c1eba3d378f7e4d99a8f7407bcec64be24266592598644",
+      "external_bytes": 2141,
+      "repository_bytes": 2141,
+      "transformations": []
+    },
+    {
+      "external_path": "/output/project/experiments/stp-dense-formats/review/replay-amendment-v1/independent-results/smoke-independent-acceptance.json",
+      "repository_path": "docs/stp-dense-formats/review/independent-results/smoke-independent-acceptance.json",
+      "external_sha256": "f33234f03805db600a0a6b020bdc82e1d4656dcef2d67790d862da3c10cae4fb",
+      "repository_sha256": "f33234f03805db600a0a6b020bdc82e1d4656dcef2d67790d862da3c10cae4fb",
+      "external_bytes": 334,
+      "repository_bytes": 334,
+      "transformations": []
+    }
+  ],
+  "repository_authored_or_updated_files": [
+    "docs/stp-format-study/scientific-synthesis-v1/PUBLICATION_STATUS.md",
+    "docs/stp-dense-formats/README.md",
+    "docs/stp-format-study/README.md",
+    "docs/stp-format-study/history/README.md"
+  ],
+  "no_model_gpu_tests_or_git_mutations": true,
+  "repository_authored_sha256": {
+    "docs/stp-format-study/scientific-synthesis-v1/PUBLICATION_STATUS.md": "93cd7e78e10926faf9c74031d393d7e0dd61a0495d56ba236d15baa183a4266c",
+    "docs/stp-dense-formats/README.md": "130504f9859d926d2546c6312c11635631696d1550c15f614a53fd098d311920",
+    "docs/stp-format-study/README.md": "88881dd39204febdd1222956182605c0ce3c1eceacd5b0ee22dd267f221d9fbc",
+    "docs/stp-format-study/history/README.md": "2cc790668b44de6b7b04fd52bd1b56927b416885a73ccb4f0815412155616fd9"
+  }
+}

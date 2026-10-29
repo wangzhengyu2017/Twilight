@@ -1,0 +1,120 @@
+{
+  "scope": "Existing actual smoke pairing JSONL and manifests only; aggregation, no new estimator or experiment",
+  "weighting": "192 equally weighted head/query records per cell; 6 captures x 32 heads",
+  "source_files": [
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q4k4_topp_p085/paired_sets.jsonl",
+      "sha256": "63ecf99d1830bf3cbc5496b1fbf1ac856bdd0f9bf3566bf811c82a7f1c37122a"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q4k4_topp_p085/pairing_manifest.json",
+      "sha256": "6957dd06f1365be80731f64f53178866213be4ca1f622e33c0e65cff615d2dd1"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q4k4_topp_p090/paired_sets.jsonl",
+      "sha256": "d5d3775aec309948b7e836767510d7faf1b73cd0ce6e0be98010364cf1328456"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q4k4_topp_p090/pairing_manifest.json",
+      "sha256": "d3c32121a04cdd64b1f420848073ec984055ac8a3196553e9fd3f8509462be15"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q4k4_topp_p095/paired_sets.jsonl",
+      "sha256": "40e1e07b43981df2a724003738db4fec550707883659625acadc7cbec7310143"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q4k4_topp_p095/pairing_manifest.json",
+      "sha256": "d0384dfc5184aadaffa70dec938db4d9c9946c69f35e4060acf2ee714ca57355"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q8k4_topp_p085/paired_sets.jsonl",
+      "sha256": "4bded279fc3fce4489647d5b431be48d1f893ccb7d318027b33663b5cf0cad71"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q8k4_topp_p085/pairing_manifest.json",
+      "sha256": "dec3766c01e23bdf185ada4ca0cb26dfb4c2d920a182af0aad54e53e2fb6054f"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q8k4_topp_p090/paired_sets.jsonl",
+      "sha256": "dc42d99a52abac9d98dd240aaf38d91af50ed33eb85ecdf8ec423693dc0e1d5f"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q8k4_topp_p090/pairing_manifest.json",
+      "sha256": "5699e49de361977b960a08addb59bc137881a1b812c4eafdfb3d295664501e60"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q8k4_topp_p095/paired_sets.jsonl",
+      "sha256": "7c5e8e2704638f6d7856c91312a8344be7f69cf66a3a6293ecd9c03439726dc0"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_mxint8_tc4_q8k4_topp_p095/pairing_manifest.json",
+      "sha256": "da1c2f50def8b34ddee59244509ef219b32e0c639801a9eafda3e9abf1fc6468"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q4k4_topp_p085/paired_sets.jsonl",
+      "sha256": "520fcfaa65771c4af34a36d6cc25d69f793ea89a03ba3eec8939cb375274416e"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q4k4_topp_p085/pairing_manifest.json",
+      "sha256": "d5b2de08af68fe3aa430092c7e85ef03715ecaf8a33654a1f1126faa1c59c942"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q4k4_topp_p090/paired_sets.jsonl",
+      "sha256": "3ab283e3f03f7e294d8a2137721a9f67150f3f16e911c4c2c4692d2015b1b6b3"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q4k4_topp_p090/pairing_manifest.json",
+      "sha256": "7e7be43cefb4b650b7a07f6b60a5c817e6e430928270a669c83ef7eb523e80f8"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q4k4_topp_p095/paired_sets.jsonl",
+      "sha256": "2e7f6de534487ed8f05a68ad24f870886e14907a6435ca47b9870196e67b246a"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q4k4_topp_p095/pairing_manifest.json",
+      "sha256": "89293a6d1278629e3b223724fc10fbbecd1624cb48ede47987f44fc3960e8e62"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q8k4_topp_p085/paired_sets.jsonl",
+      "sha256": "bf2d94c0224103eb4557889751b0ed760d659d00bf36da2b0b85b27660edb595"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q8k4_topp_p085/pairing_manifest.json",
+      "sha256": "617bfd9a55958e15429f53caf76cc08d1e7f7ff1045d562b7ec55fce1541fa77"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q8k4_topp_p090/paired_sets.jsonl",
+      "sha256": "2a8dc9ce5bf5fcece8f8d5d31c858d92f5827721f850b942e2b4c416699fd167"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q8k4_topp_p090/pairing_manifest.json",
+      "sha256": "459e085c015089cd04cc265a18165525f230f5a5061a3c0c7a9bc350131ae377"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q8k4_topp_p095/paired_sets.jsonl",
+      "sha256": "6ac10e1ecb4624cfe322a12f7aa0f51bd33527fb108546f9a5645fa69c2746e3"
+    },
+    {
+      "path": "/output/project/experiments/stp-format-study/execution-v1/smoke/pairing/format_sm8_q8k4_topp_p095/pairing_manifest.json",
+      "sha256": "6b02e4e5544a29a52c3c9cae8af186cd6a59a687814e849bf87a91769477f13b"
+    }
+  ],
+  "artifacts": {
+    "summarize_smoke_selection.py": "ce5c6bd88062d93877ed506b755775970ab6e2fcf4cf7b1354d87436001c9670",
+    "smoke_selection_own_source.csv": "99a3e210c10e317f136dfaa3b5ec0e09d4733c1e10d9ba59d258b39bd80de62f",
+    "smoke_selection_cross_tc.csv": "6e4e4e73dee3c181f03c3ba8318420bdf39989dd069e2e74957e86e30c8bba18",
+    "SMOKE_SELECTION_BUDGET.md": "5e7eeb1d49184dd21784a35d233bb47a897871bacaad8bf95d12bc9dfd59aa46"
+  },
+  "checks": [
+    "12 complete passed manifests",
+    "paired_sets SHA256 matches source manifest",
+    "192 unique own-source identities/cell",
+    "192 cross-TC records/cell",
+    "6 passed candidate replay captures/cell",
+    "saved selection count equals saved replay selection count for every own-source row"
+  ],
+  "related_layer0_equality_manifest": {
+    "path": "layer0_input_equality_manifest.json",
+    "sha256": "7190208281de5b9b7995d42395e79840937fb0121bce5438bd154d32eb6739d5"
+  }
+}

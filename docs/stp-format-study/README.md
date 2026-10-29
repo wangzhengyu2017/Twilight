@@ -1,5 +1,8 @@
 # Format study: delivered results
 
+The [reviewed scientific synthesis and readable figures](scientific-synthesis-v1/REPORT.md) and [four separately accepted dense benchmarks](../stp-dense-formats/README.md) are now published here. [Publication status](scientific-synthesis-v1/PUBLICATION_STATUS.md) separates this completed scope from the six full-format TopP and ten RS jobs still pending acceptance. The original delivery and its historical status summary below are preserved.
+
+
 Execution is terminal complete. Conditional FP4 activated: true. Independent terminal audit verified 18 format full cells. RS-INT8 remains blocked; proposed other-cause supplements remain unapproved and unexecuted.
 
 Execution source commit: `124b78ae3e542bba3dc66bb35e58048373892ced`. The later delivery commit records documentation and reproducibility tools; it is not the source used by these runs.

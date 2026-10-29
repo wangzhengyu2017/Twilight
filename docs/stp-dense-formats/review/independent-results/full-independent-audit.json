@@ -1,0 +1,49 @@
+{
+  "code_sha256": "1d895ebc01bda7ac04ac9d698a3b9504df8465afc3a4241f14346b7366b2e029",
+  "full_cell_count": 4,
+  "gate_sha256": "95a6ea86f47879e523cbcd97df7e2cf338da4732975522218e508ea44b155357",
+  "passed": true,
+  "status": "complete",
+  "verified_cells": [
+    {
+      "metrics_sha256": "2d0c6f31c211e62f6e9d0a300ca65592de26c310216ee35422a56bc2fc37bcbf",
+      "ppl": 6.486693431357931,
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_sm8_q8k8-windows-full",
+      "source_code_sha256": "1d895ebc01bda7ac04ac9d698a3b9504df8465afc3a4241f14346b7366b2e029",
+      "sum_nll": 540498.8236694336,
+      "targets": 289075,
+      "variant_id": "dense_sm8_q8k8",
+      "windows": 282
+    },
+    {
+      "metrics_sha256": "70ef95d02ce8449a2076d49386d6fa79903eea29d0a11a4e765cbb679db226eb",
+      "ppl": 6.490220331853793,
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8_q8k8-windows-full",
+      "source_code_sha256": "1d895ebc01bda7ac04ac9d698a3b9504df8465afc3a4241f14346b7366b2e029",
+      "sum_nll": 540655.9548339844,
+      "targets": 289075,
+      "variant_id": "dense_mxint8_q8k8",
+      "windows": 282
+    },
+    {
+      "metrics_sha256": "00201e523119e8c345ebd01b0fa66450cc5549a8d8bc8028c7428c2b67c6a73f",
+      "ppl": 7.062489489104702,
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8q_mxfp4k_q8k4-windows-full",
+      "source_code_sha256": "1d895ebc01bda7ac04ac9d698a3b9504df8465afc3a4241f14346b7366b2e029",
+      "sum_nll": 565083.1185913086,
+      "targets": 289075,
+      "variant_id": "dense_mxint8q_mxfp4k_q8k4",
+      "windows": 282
+    },
+    {
+      "metrics_sha256": "2d4674f721dce9f411f2e0b6e8b68da7b1659716450e0f66bd9e853c4e899b5d",
+      "ppl": 8.659092745342019,
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxfp4_q4k4-windows-full",
+      "source_code_sha256": "1d895ebc01bda7ac04ac9d698a3b9504df8465afc3a4241f14346b7366b2e029",
+      "sum_nll": 624000.1722412109,
+      "targets": 289075,
+      "variant_id": "dense_mxfp4_q4k4",
+      "windows": 282
+    }
+  ]
+}

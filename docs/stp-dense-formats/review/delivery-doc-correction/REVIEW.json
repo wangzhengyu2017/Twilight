@@ -1,0 +1,102 @@
+{
+  "schema": "delivery-doc-correction-review-v1",
+  "status": "pass",
+  "reviewed_at_utc": "2026-10-29T14:07:18.836851+00:00",
+  "scope": "Narrow independent documentation correction review. No model/GPU/test execution or code edits; no repeat of 881-file hashing or primary gates. Only review artifacts written.",
+  "prior_reviews": [
+    {
+      "path": "/output/project/experiments/stp-format-study/review/scientific-synthesis-v1-independent-review.json",
+      "sha256": "1f9e2ba06b6bbe56c0ac1df5d346734e90329debe6aec1c1da6137b12a629e3b",
+      "status": "pass",
+      "document_status": "study_pass; dense_report_requires_single_filename_fix"
+    },
+    {
+      "path": "/output/project/experiments/stp-dense-formats/review/delivery-dense-v1-independent-review.json",
+      "sha256": "1f9e2ba06b6bbe56c0ac1df5d346734e90329debe6aec1c1da6137b12a629e3b",
+      "status": "pass",
+      "document_status": "study_pass; dense_report_requires_single_filename_fix"
+    }
+  ],
+  "prior_review_provenance": "The two prior review files are byte-identical combined scientific/dense reports, not two distinct independent executions. Prior reviewed coverage: 881 dense bindings, 574 gate evidence files, zero hash mismatches, exact metrics, scientific claims and visual inspection. This correction review relies on that prior coverage.",
+  "checks": {
+    "index_entries": 881,
+    "changed_index_sha256_entries": [
+      "/output/project/experiments/stp-dense-formats/delivery-dense-v1/REPORT.md",
+      "/output/project/experiments/stp-dense-formats/delivery-tools/write_dense_report.py"
+    ],
+    "other_879_index_sha256_bindings_match_prior_review": true,
+    "corrected_files": [
+      {
+        "path": "/output/project/experiments/stp-dense-formats/delivery-dense-v1/REPORT.md",
+        "sha256": "5b727f1f1698d00955dc8aaa7f6db4536f1529e8ab2aed109b596ddba2594be5",
+        "bytes": 4916,
+        "reverse_filename_replacement_matches_prior_sha256": true
+      },
+      {
+        "path": "/output/project/experiments/stp-dense-formats/delivery-tools/write_dense_report.py",
+        "sha256": "e88d22404ad05d3408fc0120b2393611bd7b1f7db9a4bad3cd75b9d3a2822935",
+        "bytes": 8327,
+        "reverse_filename_replacement_matches_prior_sha256": true
+      }
+    ],
+    "diagnostic_files": [
+      {
+        "path": "/output/project/experiments/stp-dense-formats/execution-v1/smoke/dense_mxfp4_q4k4-decode-on/diagnostic_sets.jsonl",
+        "rows": 576,
+        "sha256": "142571842620509576981001e7dfdd7b97c7604314bc4a6279733370786134b1",
+        "bytes": 555892
+      },
+      {
+        "path": "/output/project/experiments/stp-dense-formats/execution-v1/smoke/dense_mxint8_q8k8-decode-on/diagnostic_sets.jsonl",
+        "rows": 576,
+        "sha256": "ba17fa25780b3c22420a272c5e72b479075895e3c08d03c11324fde05563a4cb",
+        "bytes": 555358
+      },
+      {
+        "path": "/output/project/experiments/stp-dense-formats/execution-v1/smoke/dense_mxint8q_mxfp4k_q8k4-decode-on/diagnostic_sets.jsonl",
+        "rows": 576,
+        "sha256": "1d1f1da961f4a90877a5cab6b6e73e6867c48b5e205ba7ce389fc8b578b150d7",
+        "bytes": 565931
+      },
+      {
+        "path": "/output/project/experiments/stp-dense-formats/execution-v1/smoke/dense_sm8_q8k8-decode-on/diagnostic_sets.jsonl",
+        "rows": 576,
+        "sha256": "efd16a40638e037e00951a7b0c137b054588692b0f53a56490cb0c4950279ae1",
+        "bytes": 551776
+      }
+    ],
+    "scientific_core_and_render_artifacts_unchanged": true,
+    "mechanism_historical_wording_resolved": true,
+    "mechanism_note": "Header and preface explicitly mark preparation-stage pending/source-blocked language historical and link current REPORT. No prior MECHANISM hash was recorded by the previous reviews; full-body change identity is not independently claimed.",
+    "prior_gate_evidence_files": 574
+  },
+  "current_sha256": {
+    "/output/project/experiments/stp-dense-formats/delivery-dense-v1/REPORT.md": "5b727f1f1698d00955dc8aaa7f6db4536f1529e8ab2aed109b596ddba2594be5",
+    "/output/project/experiments/stp-dense-formats/delivery-tools/write_dense_report.py": "e88d22404ad05d3408fc0120b2393611bd7b1f7db9a4bad3cd75b9d3a2822935",
+    "/output/project/experiments/stp-dense-formats/delivery-dense-v1/ARTIFACT_INDEX.json": "e38cea98b753e25b63d73d8b79697812ac89998127401f1041a12c1eddd1f79a",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MECHANISM.md": "bec727786447162749ef8032e1f643cd869bc1de8975732c78b165d2fc4443e3",
+    "/output/project/experiments/stp-format-study/analysis-final-readable/RENDER.manifest.json": "820ab7f993e4e9dca2624c875f17a3e4c7d09a38e1a72f0385dcb17f8a404f98",
+    "/output/project/experiments/stp-dense-formats/delivery-dense-v1/RESULTS.csv": "5db5bd9ee9f93b38a32528b88e26f2706f7c1cddb5e4a87e1ee1a0af5d3303c7",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv": "1107b11bde72d43179c6a606e63e00aac8eab5726734335d35a877b0ba0890bc",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/REPORT.md": "c04543d4844b41ed27a9d49ffe89606355c852886687f67c2e57834aa4cd88d7",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/STATUS.md": "f50f94cdaffdc385d1693a1ec677a51389e537118dfe3d0e9cf3efc44cf82fba",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/SYNTHESIS.manifest.json": "47a6947e62b80837e9589c7f0ee3f883e4e6733b82629efea2093583da54b28b",
+    "/output/project/experiments/stp-format-study/scientific-synthesis-v1/synthesize.py": "5b5944ac5bc7b0f46bc63e7d4cfdac9773dd18f678767a691773cc173eef4523",
+    "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_top_p.pdf": "6aba5c5ad0376522e7495b7e585183cd17316a9170c1d18c32e546d6821a23cf",
+    "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_selected_fraction.pdf": "a5d313cb80902bfb6abd55814bd045e21866d98b2f081fdcb5a2285c7c127dda",
+    "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_selected_fraction.png": "04d81fab79df17470f852414b615ea94300764965f3b0933521f2245f96ad9c2",
+    "/output/project/experiments/stp-format-study/analysis-final-readable/ppl_vs_top_p.png": "0b1e9f788868ccc882ddae08e99790622cec655fba8efe1a177c8243476e4521"
+  },
+  "findings": [
+    "PASS: dense report and generator differ from prior reviewed versions only by selection_sets.jsonl to diagnostic_sets.jsonl replacement, verified by reconstructing prior SHA256.",
+    "PASS: corrected index bindings match current byte sizes and hashes; index cardinality remains 881 and remaining 879 SHA256 bindings match prior reviewed record.",
+    "PASS: all four referenced diagnostic listing files exist, contain 576 JSONL rows each and match their unchanged prior/index hashes.",
+    "PASS: scientific REPORT, CSV, STATUS, manifest, synthesis source, dense RESULTS, render manifest and four published plot files match their reviewed or reviewed-manifest hashes.",
+    "PASS: auxiliary MECHANISM historical status ambiguity is resolved by explicit historical header/preface and link to current REPORT."
+  ],
+  "remaining_documentation_findings": [],
+  "limitations": [
+    "This review does not rerun or change acceptance gates, tests, replay, metrics, models or GPU workloads.",
+    "No whole-project integrity claim beyond the cited prior review plus narrow checks recorded here."
+  ]
+}

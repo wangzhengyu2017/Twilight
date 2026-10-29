@@ -1,0 +1,632 @@
+{
+  "scope": "Existing saved actual logits/probabilities and derived original-INT references only; exact-byte checks plus descriptive arithmetic, no logits/probabilities regenerated, no new selection or fitting",
+  "population": "6 predictors x 2 layer0 query captures x 32 heads =384 head-query rows. Thresholds .90/.85 omitted after verifying identical saved inputs/predictor logits/probabilities to .95 for the four format predictors.",
+  "rank_definition": "1-based descending stable ordinal rank; ties ascending key-array position, which equals key position in these captures",
+  "entropy_definition": "-sum(p*ln(p)) for saved positive probabilities only; no renormalization or softmax",
+  "std_definition": "population standard deviation (correction=0) of legal saved logits in FP64; reported mean std_ratio is mean per-head ratio",
+  "input_and_reference_byte_checks": [
+    {
+      "variant": "TC_Q4K4",
+      "record": "layer00_query127_prefill",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "TC_Q8K4",
+      "record": "layer00_query127_prefill",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "SM8_Q4K4",
+      "record": "layer00_query127_prefill",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "SM8_Q8K4",
+      "record": "layer00_query127_prefill",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q4K4",
+      "record": "layer00_query127_prefill",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q8K4",
+      "record": "layer00_query127_prefill",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "TC_Q4K4",
+      "record": "layer00_query128_decode",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "TC_Q8K4",
+      "record": "layer00_query128_decode",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "SM8_Q4K4",
+      "record": "layer00_query128_decode",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "SM8_Q8K4",
+      "record": "layer00_query128_decode",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q4K4",
+      "record": "layer00_query128_decode",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q8K4",
+      "record": "layer00_query128_decode",
+      "inputs_byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true
+      },
+      "original_reference_byte_equal": {
+        "reference_int_logits_same_input": true,
+        "reference_int_probs_same_input": true
+      }
+    }
+  ],
+  "threshold_duplicate_byte_checks": [
+    {
+      "variant": "SM8_Q4K4",
+      "other_threshold": "090",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q4K4",
+      "other_threshold": "085",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q8K4",
+      "other_threshold": "090",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q8K4",
+      "other_threshold": "085",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q4K4",
+      "other_threshold": "090",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q4K4",
+      "other_threshold": "085",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q8K4",
+      "other_threshold": "090",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q8K4",
+      "other_threshold": "085",
+      "record": "layer00_query127_prefill",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q4K4",
+      "other_threshold": "090",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q4K4",
+      "other_threshold": "085",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q8K4",
+      "other_threshold": "090",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "SM8_Q8K4",
+      "other_threshold": "085",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q4K4",
+      "other_threshold": "090",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q4K4",
+      "other_threshold": "085",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q8K4",
+      "other_threshold": "090",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    },
+    {
+      "variant": "MXINT8_TC4_Q8K4",
+      "other_threshold": "085",
+      "record": "layer00_query128_decode",
+      "byte_equal": {
+        "q_codes": true,
+        "k_codes": true,
+        "q_scales": true,
+        "k_scales": true,
+        "q_post_rope": true,
+        "k_visible": true,
+        "q_dq": true,
+        "k_dq": true,
+        "v_visible": true,
+        "allowed_mask": true,
+        "key_positions": true,
+        "estimator_logits": true,
+        "estimator_probs": true
+      }
+    }
+  ],
+  "source_files": {
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q4k4_topp_p095-decode-on/trace/layer00_query127_prefill/actual.pt": "1617944faf06dd52d3af2bb891356d23bcd1d211973de11825771b1ea3ce0fa8",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q4k4_topp_p095-decode-on/trace/layer00_query127_prefill/derived.pt": "cc81426c0b0fe17e0f9660cfc490d1b2aea01f88c7e6aee0f505d25d5bcb8d8a",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q8k4_topp_p095-decode-on/trace/layer00_query127_prefill/actual.pt": "5684df6af4b91834dca3f29c133316238ab8fbe5ac55f6ea4011cc92d0a38214",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q8k4_topp_p095-decode-on/trace/layer00_query127_prefill/derived.pt": "cc81426c0b0fe17e0f9660cfc490d1b2aea01f88c7e6aee0f505d25d5bcb8d8a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p095-decode-on/trace/layer00_query127_prefill/actual.pt": "960ec5b4213440a9611a53faf29916df27f0ea7a40e065a580d63552835c51d9",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p095-decode-on/trace/layer00_query127_prefill/derived.pt": "cc81426c0b0fe17e0f9660cfc490d1b2aea01f88c7e6aee0f505d25d5bcb8d8a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p090-decode-on/trace/layer00_query127_prefill/actual.pt": "4aea9157ec9a28299523d57867813dbad7d55ab085ac471e5b8c70e17324250a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p085-decode-on/trace/layer00_query127_prefill/actual.pt": "cf43c64b1e9fca87147f3640c868840cd1add0c0705e3796e09b907840315342",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p095-decode-on/trace/layer00_query127_prefill/actual.pt": "40040f90c313f743d36b1bbc54177f62aef0a639fe5334b86912d42deac68943",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p095-decode-on/trace/layer00_query127_prefill/derived.pt": "cc81426c0b0fe17e0f9660cfc490d1b2aea01f88c7e6aee0f505d25d5bcb8d8a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p090-decode-on/trace/layer00_query127_prefill/actual.pt": "15285d4ae874f5a353c3a4caf372caaf3f47653ff345e0624211aa88b41e84ce",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p085-decode-on/trace/layer00_query127_prefill/actual.pt": "3dcd4cd250d789e0ef77cc3873c40161f8e4fb71acc6e902705e53f27b855d47",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p095-decode-on/trace/layer00_query127_prefill/actual.pt": "0eadf21fe4c1b978b296b9ecf26b074475caaea12ec00c1615990f82f9eaa3f0",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p095-decode-on/trace/layer00_query127_prefill/derived.pt": "874867663b36dffa9ad71d50ddd2a12021930b1aeab576cccf24271ed990a49a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p090-decode-on/trace/layer00_query127_prefill/actual.pt": "cd14697d68c471e24c0c70a39c0e28f23651f743f3fa614768da8d8cf38734c0",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p085-decode-on/trace/layer00_query127_prefill/actual.pt": "5ded5cf352749874fc4f69cbcb91b0b60133ef696c75768b8fa6be1e30f11978",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p095-decode-on/trace/layer00_query127_prefill/actual.pt": "88f6ea325cefd823e1522706fcacf0ecd858fb728ad7b4121fa2aac5f3a6642c",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p095-decode-on/trace/layer00_query127_prefill/derived.pt": "874867663b36dffa9ad71d50ddd2a12021930b1aeab576cccf24271ed990a49a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p090-decode-on/trace/layer00_query127_prefill/actual.pt": "f22486cbf3536c13a043f308a80261eca0cef3a92845f2c49547c358ed5ff60c",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p085-decode-on/trace/layer00_query127_prefill/actual.pt": "1b4803fbbb638f6290fcc836ea8c73065ff25367dd4a073c505a9bcd87036137",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q4k4_topp_p095-decode-on/trace/layer00_query128_decode/actual.pt": "31584825778a53b980aa8b08dce8f3e10102ca634033860377af44780b8c5653",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q4k4_topp_p095-decode-on/trace/layer00_query128_decode/derived.pt": "0682c612677d050bc67617f59291b71094ac1e8353a003bab7491fbcf4ac280a",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q8k4_topp_p095-decode-on/trace/layer00_query128_decode/actual.pt": "27eaecdf95ae1e58db3bde4458e10257cf9d9d656aeab6082dba5b923e052839",
+    "/output/project/experiments/stp-slice/20261028-v2-smoke/msb_q8k4_topp_p095-decode-on/trace/layer00_query128_decode/derived.pt": "0682c612677d050bc67617f59291b71094ac1e8353a003bab7491fbcf4ac280a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p095-decode-on/trace/layer00_query128_decode/actual.pt": "ec8071ccfa972ee69efb09cb75c25011a0ec17533a090b784e7317722866953d",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p095-decode-on/trace/layer00_query128_decode/derived.pt": "0682c612677d050bc67617f59291b71094ac1e8353a003bab7491fbcf4ac280a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p090-decode-on/trace/layer00_query128_decode/actual.pt": "681077fb9ef6ef23dc285fe011d325011081d539a187e19a7187e62d40b3c8f6",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q4k4_topp_p085-decode-on/trace/layer00_query128_decode/actual.pt": "f9a44eb5713394b5f94673b59d81b66731a235cec72557682f82dd1ad751e65d",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p095-decode-on/trace/layer00_query128_decode/actual.pt": "8e533d780f38842f8eb48292fd05ed55cfea411f0c12c410c1f552a842c5772a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p095-decode-on/trace/layer00_query128_decode/derived.pt": "0682c612677d050bc67617f59291b71094ac1e8353a003bab7491fbcf4ac280a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p090-decode-on/trace/layer00_query128_decode/actual.pt": "944094514ac2712780b40a4713012d1f582e851afe0a5f5b216088e0b6dc4616",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_sm8_q8k4_topp_p085-decode-on/trace/layer00_query128_decode/actual.pt": "1cde8e7d926a74cebf8d13e8f20cf2c1dce8010f57cf5eb088adeca2822ef3ac",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p095-decode-on/trace/layer00_query128_decode/actual.pt": "704cb568165175b9f17e04d8561bf966c8e7b3f23458ca782de98382b5b12064",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p095-decode-on/trace/layer00_query128_decode/derived.pt": "3a8980b0ccf9fae06708f37927cd4057b97e704ea162a0c7e92a248145dd5abe",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p090-decode-on/trace/layer00_query128_decode/actual.pt": "1143f1191912c4634106aae63850393dbb2448e6a5806dd665b9f6e565fb4141",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q4k4_topp_p085-decode-on/trace/layer00_query128_decode/actual.pt": "95ddba69639d2d6c16df27d197a44da824a987e5031cec7a32572ae8f2db0358",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p095-decode-on/trace/layer00_query128_decode/actual.pt": "0794bd0b9c3e190ffce93d8a84cfc85c048ceb8442468cda955606e2243f5d02",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p095-decode-on/trace/layer00_query128_decode/derived.pt": "3a8980b0ccf9fae06708f37927cd4057b97e704ea162a0c7e92a248145dd5abe",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p090-decode-on/trace/layer00_query128_decode/actual.pt": "63fccf1947ae46a71d6517c0b72980ddbaeb78166b2c9ae0f1e3fb8feb9cba6a",
+    "/output/project/experiments/stp-format-study/execution-v1/smoke/format_mxint8_tc4_q8k4_topp_p085-decode-on/trace/layer00_query128_decode/actual.pt": "60745f0bee6354adc59157b021b30138baee2378b87719cb64ec9a592f9517e6"
+  },
+  "artifacts": {
+    "observe_saved_logit_calibration.py": "2316ca504d23231da2e2547ab161ebfb47434fd7fd91ba545710a5a759a9c463",
+    "layer0_logit_calibration_heads.csv": "5f748178295962545b902ebfe515cfe77277e5bec5360e318eddff12ad268629",
+    "layer0_logit_calibration_summary.csv": "6928b97d97415da4d5232a63a6e679c69068fb66a76a5f22466e3407606a46ad",
+    "layer0_worst_head_key_probabilities.csv": "ca7fb32a13190c377cffe699619bafb99193e72d1bae65db5de480258025e5d7",
+    "LOGIT_CALIBRATION_OBSERVATIONS.md": "f4f4f83ee0fe5c153a979c8d3ebe85800d86e0d708e3af26f4886a51fda006bc"
+  }
+}
