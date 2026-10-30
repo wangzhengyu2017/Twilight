@@ -1,0 +1,43 @@
+variant_id,group_zh,name_zh,method,p,ppl,sum_nll,num_targets,acceptance
+fp_common,历史稠密（2）,浮点稠密基线,fp_common,,6.484759140305276,540412.6104736328,289075,historical_measured_unverified
+intflash_qk8,历史稠密（2）,INT8 稠密基线（历史）,intflash_qk8,,6.486693431357931,540498.8236694336,289075,historical_measured_unverified
+dense_mxfp4_q4k4,新增稠密（4）,MXFP4 Q4K4 稠密,dense_mxfp4_q4k4,,8.659092745342019,624000.1722412109,289075,independently_accepted
+dense_mxint8_q8k8,新增稠密（4）,MXINT8 Q8K8 稠密,dense_mxint8_q8k8,,6.490220331853793,540655.9548339844,289075,independently_accepted
+dense_mxint8q_mxfp4k_q8k4,新增稠密（4）,MXINT8-Q / MXFP4-K Q8K4 稠密,dense_mxint8q_mxfp4k_q8k4,,7.062489489104702,565083.1185913086,289075,independently_accepted
+dense_sm8_q8k8,新增稠密（4）,SM8 Q8K8 稠密,dense_sm8_q8k8,,6.486693431357931,540498.8236694336,289075,independently_accepted
+fp_topp_p085,历史 TopP（30）,浮点 TopP,fp,0.85,6.613164945109833,546080.6990966797,289075,historical_gate_verified
+fp_topp_p090,历史 TopP（30）,浮点 TopP,fp,0.90,6.530139845057859,542428.5278320312,289075,historical_gate_verified
+fp_topp_p095,历史 TopP（30）,浮点 TopP,fp,0.95,6.482529432621796,540313.1983642578,289075,historical_gate_verified
+int_topp_p085,历史 TopP（30）,INT8 TopP（历史）,int,0.85,6.614928623951711,546157.7828369141,289075,historical_gate_verified
+int_topp_p090,历史 TopP（30）,INT8 TopP（历史）,int,0.90,6.532782194945276,542545.4752197266,289075,historical_gate_verified
+int_topp_p095,历史 TopP（30）,INT8 TopP（历史）,int,0.95,6.485038852465563,540425.0791015625,289075,historical_gate_verified
+msb_q4k4_topp_p085,历史 TopP（30）,MSB Q4K4 TopP,msb_q4k4,0.85,7.921542008230447,598265.5396728516,289075,historical_gate_verified
+msb_q4k4_topp_p090,历史 TopP（30）,MSB Q4K4 TopP,msb_q4k4,0.90,7.317662664363692,575343.3618164062,289075,historical_gate_verified
+msb_q4k4_topp_p095,历史 TopP（30）,MSB Q4K4 TopP,msb_q4k4,0.95,6.836825225317617,555695.6586914062,289075,historical_gate_verified
+msb_q8k4_topp_p085,历史 TopP（30）,MSB Q8K4 TopP,msb_q8k4,0.85,6.667326948693377,548438.5888671875,289075,historical_gate_verified
+msb_q8k4_topp_p090,历史 TopP（30）,MSB Q8K4 TopP,msb_q8k4,0.90,6.563771997808608,543913.5288085938,289075,historical_gate_verified
+msb_q8k4_topp_p095,历史 TopP（30）,MSB Q8K4 TopP,msb_q8k4,0.95,6.500289850707189,541104.1045532227,289075,historical_gate_verified
+format_mxfp4_q4k4_topp_p085,历史 TopP（30）,MXFP4 Q4K4 TopP,mxfp4_q4k4,0.85,6.638277733253167,547176.3515625,289075,independently_accepted
+format_mxfp4_q4k4_topp_p090,历史 TopP（30）,MXFP4 Q4K4 TopP,mxfp4_q4k4,0.90,6.544644553270194,543069.9074707031,289075,independently_accepted
+format_mxfp4_q4k4_topp_p095,历史 TopP（30）,MXFP4 Q4K4 TopP,mxfp4_q4k4,0.95,6.4921937104986975,540743.8359375,289075,independently_accepted
+format_mxint8_tc4_q4k4_topp_p085,历史 TopP（30）,MXINT8 TC4 Q4K4 TopP,mxint8_tc4_q4k4,0.85,7.238384229123409,572194.4793701172,289075,independently_accepted
+format_mxint8_tc4_q4k4_topp_p090,历史 TopP（30）,MXINT8 TC4 Q4K4 TopP,mxint8_tc4_q4k4,0.90,6.921717984644132,559262.9965209961,289075,independently_accepted
+format_mxint8_tc4_q4k4_topp_p095,历史 TopP（30）,MXINT8 TC4 Q4K4 TopP,mxint8_tc4_q4k4,0.95,6.673346712029949,548699.4697265625,289075,independently_accepted
+format_mxint8_tc4_q8k4_topp_p085,历史 TopP（30）,MXINT8 TC4 Q8K4 TopP,mxint8_tc4_q8k4,0.85,6.675617582400599,548797.8222045898,289075,independently_accepted
+format_mxint8_tc4_q8k4_topp_p090,历史 TopP（30）,MXINT8 TC4 Q8K4 TopP,mxint8_tc4_q8k4,0.90,6.571010663254627,544232.1511230469,289075,independently_accepted
+format_mxint8_tc4_q8k4_topp_p095,历史 TopP（30）,MXINT8 TC4 Q8K4 TopP,mxint8_tc4_q8k4,0.95,6.503502716561412,541246.9489135742,289075,independently_accepted
+format_mxint8q_mxfp4k_q8k4_topp_p085,历史 TopP（30）,MXINT8-Q / MXFP4-K Q8K4 TopP,mxint8q_mxfp4k_q8k4,0.85,6.603272693952198,545647.9647827148,289075,independently_accepted
+format_mxint8q_mxfp4k_q8k4_topp_p090,历史 TopP（30）,MXINT8-Q / MXFP4-K Q8K4 TopP,mxint8q_mxfp4k_q8k4,0.90,6.530161489034313,542429.4859619141,289075,independently_accepted
+format_mxint8q_mxfp4k_q8k4_topp_p095,历史 TopP（30）,MXINT8-Q / MXFP4-K Q8K4 TopP,mxint8q_mxfp4k_q8k4,0.95,6.484024913239672,540379.8785400391,289075,independently_accepted
+format_sm8_q4k4_topp_p085,历史 TopP（30）,SM8 Q4K4 TopP,sm8_q4k4,0.85,6.675108025900951,548775.7559814453,289075,independently_accepted
+format_sm8_q4k4_topp_p090,历史 TopP（30）,SM8 Q4K4 TopP,sm8_q4k4,0.90,6.557246574078004,543625.9997558594,289075,independently_accepted
+format_sm8_q4k4_topp_p095,历史 TopP（30）,SM8 Q4K4 TopP,sm8_q4k4,0.95,6.497612037852986,540984.9947509766,289075,independently_accepted
+format_sm8_q8k4_topp_p085,历史 TopP（30）,SM8 Q8K4 TopP,sm8_q8k4,0.85,6.69749192227387,549743.5006103516,289075,independently_accepted
+format_sm8_q8k4_topp_p090,历史 TopP（30）,SM8 Q8K4 TopP,sm8_q8k4,0.90,6.574305366696284,544377.0569458008,289075,independently_accepted
+format_sm8_q8k4_topp_p095,历史 TopP（30）,SM8 Q8K4 TopP,sm8_q8k4,0.95,6.498412688422396,541020.6130371094,289075,independently_accepted
+mxint8_q8k8_topp_p085,新增完整 Q8K8 TopP（6）,完整 MXINT8 Q8K8 TopP,mxint8_q8k8,0.85,6.618002627190208,546292.0867919922,289075,independently_accepted
+mxint8_q8k8_topp_p090,新增完整 Q8K8 TopP（6）,完整 MXINT8 Q8K8 TopP,mxint8_q8k8,0.90,6.536305635248961,542701.3450927734,289075,independently_accepted
+mxint8_q8k8_topp_p095,新增完整 Q8K8 TopP（6）,完整 MXINT8 Q8K8 TopP,mxint8_q8k8,0.95,6.489148863570674,540608.2276000977,289075,independently_accepted
+sm8_q8k8_topp_p085,新增完整 Q8K8 TopP（6）,完整 SM8 Q8K8 TopP,sm8_q8k8,0.85,6.614928623951711,546157.7828369141,289075,independently_accepted
+sm8_q8k8_topp_p090,新增完整 Q8K8 TopP（6）,完整 SM8 Q8K8 TopP,sm8_q8k8,0.90,6.532782194945276,542545.4752197266,289075,independently_accepted
+sm8_q8k8_topp_p095,新增完整 Q8K8 TopP（6）,完整 SM8 Q8K8 TopP,sm8_q8k8,0.95,6.485038852465563,540425.0791015625,289075,independently_accepted

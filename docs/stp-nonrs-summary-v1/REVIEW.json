@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "cpu_only": true,
+  "gpu_or_model_executed": false,
+  "project_scan_performed": false,
+  "ppl_groups": 42,
+  "ppl_raw_metrics_status_source_rows_checked": 42,
+  "effective_targets_each": 289075,
+  "rs_groups": 0,
+  "mini_tables": 42,
+  "layer_rows": 126,
+  "layers": [
+    0,
+    16,
+    31
+  ],
+  "denominator_per_layer": 8224,
+  "saved_set_check_rows_schema_and_aggregates_checked": 9984,
+  "independently_reconstructed_head_sets": 5376,
+  "sampled_groups": [
+    "dense_mxfp4_q4k4",
+    "dense_mxint8_q8k8",
+    "dense_mxint8q_mxfp4k_q8k4",
+    "dense_sm8_q8k8",
+    "fp_topp_p085",
+    "int_topp_p095",
+    "msb_q4k4_topp_p090",
+    "msb_q8k4_topp_p085",
+    "format_mxfp4_q4k4_topp_p095",
+    "format_mxint8_tc4_q4k4_topp_p085",
+    "format_mxint8_tc4_q8k4_topp_p090",
+    "format_mxint8q_mxfp4k_q8k4_topp_p085",
+    "format_sm8_q4k4_topp_p090",
+    "format_sm8_q8k4_topp_p095",
+    "mxint8_q8k8_topp_p085",
+    "sm8_q8k8_topp_p095"
+  ],
+  "verified_file_hashes": 902,
+  "acceptance_counts": {
+    "historical_measured_unverified": 2,
+    "independently_accepted": 28,
+    "historical_gate_verified": 12
+  },
+  "dense_semantics": "Four new dense groups execute all legal keys; p095/p090/p085 are saved offline diagnostics unused in forward. Historical FP/INT dense important sets are N/A.",
+  "scope_limit": "K ratios cover only six saved smoke capture slots (three layers, two query slots, 32 heads), not all layers/full corpus. Independent tensor membership reconstruction is sampled; all hash/index/schema/aggregate checks are exhaustive.",
+  "findings": [],
+  "reviewed_output_sha256": {
+    "TABLE_PPL.md": "f8baf101edfcdb878ca30f42740461f40f0f4fa6c29884d45177705792c1d52b",
+    "TABLE_PPL.csv": "c049c0b876a3ac97a7fece7cf38d617318ad5730e8f7555f4d6de6212f9884dd",
+    "MANIFEST.json": "b1c5c60bdc31e78bdd48efea754b715f34255f477920720a8b5f8c54c5fffa78",
+    "TABLE_K_RATIOS.md": "937d7f679671fc6dedff78bad1a47ebc7271208e915cfb7b0524206ea3c74406",
+    "TABLE_K_RATIOS.csv": "10e5d4caf5fe7eb7fa75e9784e93f538b15c8a7218dc114973c7e5a25aa000cf",
+    "K_MANIFEST.json": "16bbf440da13c33743f9858a7abcf49aa4454a77e64d25c631f783482b021956",
+    "K_SET_CHECKS.jsonl": "4c4ff4478d7de32f5e0785b903bfe5e7ef064b846a340fd8e7e9be002546c60c",
+    "build_k_ratios.py": "387486af008c114f4e4f0270fe47b57f820b3894ef9052c177cd1a86bac3b635"
+  },
+  "trace_indexes_independently_checked": 41
+}

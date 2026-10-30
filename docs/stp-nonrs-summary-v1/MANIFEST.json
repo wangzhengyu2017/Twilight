@@ -1,0 +1,748 @@
+{
+  "schema_version": "nonrs-cancelled-summary-v1",
+  "operation": "Read existing measurements only; no model/GPU/RS code executed or changed",
+  "source_files": [
+    {
+      "path": "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+      "sha256": "1107b11bde72d43179c6a606e63e00aac8eab5726734335d35a877b0ba0890bc",
+      "rows": 32
+    },
+    {
+      "path": "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv",
+      "sha256": "28c070575b4748ab71bb9762f0dd8ab16b5745fea9c65c134272f6c047184d01",
+      "rows": 40
+    }
+  ],
+  "count": 42,
+  "group_counts": {
+    "历史稠密（2）": 2,
+    "新增稠密（4）": 4,
+    "历史 TopP（30）": 30,
+    "新增完整 Q8K8 TopP（6）": 6
+  },
+  "acceptance_counts": {
+    "historical_measured_unverified": 2,
+    "independently_accepted": 28,
+    "historical_gate_verified": 12
+  },
+  "effective_targets_each": 289075,
+  "duplicate_variant_ids_exactly_matched": [
+    "format_mxfp4_q4k4_topp_p085",
+    "format_mxfp4_q4k4_topp_p090",
+    "format_mxfp4_q4k4_topp_p095",
+    "format_mxint8_tc4_q4k4_topp_p085",
+    "format_mxint8_tc4_q4k4_topp_p090",
+    "format_mxint8_tc4_q4k4_topp_p095",
+    "format_mxint8_tc4_q8k4_topp_p085",
+    "format_mxint8_tc4_q8k4_topp_p090",
+    "format_mxint8_tc4_q8k4_topp_p095",
+    "format_mxint8q_mxfp4k_q8k4_topp_p085",
+    "format_mxint8q_mxfp4k_q8k4_topp_p090",
+    "format_mxint8q_mxfp4k_q8k4_topp_p095",
+    "format_sm8_q4k4_topp_p085",
+    "format_sm8_q4k4_topp_p090",
+    "format_sm8_q4k4_topp_p095",
+    "format_sm8_q8k4_topp_p085",
+    "format_sm8_q8k4_topp_p090",
+    "format_sm8_q8k4_topp_p095",
+    "fp_common",
+    "intflash_qk8"
+  ],
+  "excluded_rows": [
+    {
+      "variant_id": "rs_dense_q8k8",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_full_q8k8_topp_p095",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_full_q8k8_topp_p090",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_full_q8k8_topp_p085",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_msb_q8k4_topp_p095",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_msb_q8k4_topp_p090",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_msb_q8k4_topp_p085",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_msb_q4k4_topp_p095",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_msb_q4k4_topp_p090",
+      "reason": "RS cancelled; pending placeholder excluded"
+    },
+    {
+      "variant_id": "rs_msb_q4k4_topp_p085",
+      "reason": "RS cancelled; pending placeholder excluded"
+    }
+  ],
+  "validation": "All 42 raw metrics/status verified; exact source PPL/NLL/target match; exp(sum_nll/targets) checked; 28 independent audit hashes and cells verified; 30 historical passed gates verified; 2 historical dense unverified labels preserved. No project scan.",
+  "outputs": [
+    {
+      "path": "/output/project/experiments/stp-nonrs-cancelled-summary-v1/TABLE_PPL.csv",
+      "sha256": "c049c0b876a3ac97a7fece7cf38d617318ad5730e8f7555f4d6de6212f9884dd"
+    },
+    {
+      "path": "/output/project/experiments/stp-nonrs-cancelled-summary-v1/TABLE_PPL.md",
+      "sha256": "f8baf101edfcdb878ca30f42740461f40f0f4fa6c29884d45177705792c1d52b"
+    }
+  ],
+  "rows": [
+    {
+      "variant_id": "format_mxfp4_q4k4_topp_p085",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "4a7b7032eca273129ab74c87c5649f805d2241cd9dc2aac227dbf5898b80df4d",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-smoke/gate.json",
+      "gate_sha256": "bfaec3d158eebe2fae7d35c4f92488d2ca7bd81513a0e953db762a3fec4c7860"
+    },
+    {
+      "variant_id": "format_mxfp4_q4k4_topp_p090",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "f3a662123be318dd8638168cb036e03fe69272da57b1c2865679023af70ab50e",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-smoke/gate.json",
+      "gate_sha256": "bfaec3d158eebe2fae7d35c4f92488d2ca7bd81513a0e953db762a3fec4c7860"
+    },
+    {
+      "variant_id": "format_mxfp4_q4k4_topp_p095",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "d384e9eb9e6d4d52e67c1db9187e9e5cab10280604cff32a5e5339a9b89c7c90",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxfp4_q4k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-smoke/gate.json",
+      "gate_sha256": "bfaec3d158eebe2fae7d35c4f92488d2ca7bd81513a0e953db762a3fec4c7860"
+    },
+    {
+      "variant_id": "format_mxint8_tc4_q4k4_topp_p085",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "9eed5869b0ab85d73945207e1b4965f4f5d50d4e233acd14acde3ec92a0e89bc",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_mxint8_tc4_q4k4_topp_p090",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "184c2c0d40c02da573f7e85b331ae9a6e011dbdd994bb44b92947ffba91ca05f",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_mxint8_tc4_q4k4_topp_p095",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "abece37be8c83d5d57eed2bef1c643c3a28ac895969141530f3da57d4aeda621",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q4k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_mxint8_tc4_q8k4_topp_p085",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "8945b944e92b7bca0f7eb45446fffda57cfa751ec59c14c4a14838abfa8a9734",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_mxint8_tc4_q8k4_topp_p090",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "9ece2563240ba1c0f65084aaec768d387155dc86cb044956bf3f20809a7801cb",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_mxint8_tc4_q8k4_topp_p095",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "8eab08ecab0e89a60be2f4f2917630b6869499807671fc42175a9d40124e99d4",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_mxint8_tc4_q8k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_mxint8q_mxfp4k_q8k4_topp_p085",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "d2971093154bb32ed45039f13a0a82bd7b38f8fe95b9bc505a3ddbf3da6dd770",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-smoke/gate.json",
+      "gate_sha256": "bfaec3d158eebe2fae7d35c4f92488d2ca7bd81513a0e953db762a3fec4c7860"
+    },
+    {
+      "variant_id": "format_mxint8q_mxfp4k_q8k4_topp_p090",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "b33abb47cc44b05897ea7b23244beeeb1c52afba614456bffda0e71a19adf9c9",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-smoke/gate.json",
+      "gate_sha256": "bfaec3d158eebe2fae7d35c4f92488d2ca7bd81513a0e953db762a3fec4c7860"
+    },
+    {
+      "variant_id": "format_mxint8q_mxfp4k_q8k4_topp_p095",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "35a0113cd04b15868d8f74dac2e2a1fad475b6bbc95f0463104e633ce1ef7cba",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-full/format_mxint8q_mxfp4k_q8k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/conditional-smoke/gate.json",
+      "gate_sha256": "bfaec3d158eebe2fae7d35c4f92488d2ca7bd81513a0e953db762a3fec4c7860"
+    },
+    {
+      "variant_id": "format_sm8_q4k4_topp_p085",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "5d3cb3da35869c1be3bc1c2457d635ea4470dee8dda1a403bf86d7cb08fc5269",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_sm8_q4k4_topp_p090",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "c6b689d16e3adf2f11cb06bc7c65388ff35b4c5720b97e689cf8cf2921fb8a96",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_sm8_q4k4_topp_p095",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "ad7dc99d7cfe6811828a8ef47c70304d9a62e1879ef2b7b3a154a90017cef9b9",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q4k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_sm8_q8k4_topp_p085",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "de126b00a9762331e2983dccf5901872de6ab649b2b1056cc2f5c8b04d32a386",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_sm8_q8k4_topp_p090",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "0d18549e31fe307113cad65e79189b52f3f004abc4a330902107312ac0589f0b",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "format_sm8_q8k4_topp_p095",
+      "run": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "830e8574e4316a2ccedfa462eff7ed291775521bb114e48ab6ee43b7d3836f53",
+      "status_path": "/output/project/experiments/stp-format-study/execution-v1/full/format_sm8_q8k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-format-study/review/execution-v1-full-independent-audit.json",
+      "independent_audit_sha256": "b0ae42519ead199b216e3729cc534121112962c9849a5a95c3cc6a11240ebebb",
+      "gate_path": "/output/project/experiments/stp-format-study/execution-v1/smoke/gate.json",
+      "gate_sha256": "9cb1878aa9207a4cdbcfabe1f32f7c0be508df4aaf824e91133fb3f1ea1d2734"
+    },
+    {
+      "variant_id": "fp_common",
+      "run": "/output/project/experiments/stp-baselines/20261027-v5-full/fp_common-windows-full",
+      "metrics_path": "/output/project/experiments/stp-baselines/20261027-v5-full/fp_common-windows-full/metrics.json",
+      "metrics_sha256": "bd901712f7f32632eea2e22bfa19bc3c15469617452100410324440141d21d78",
+      "status_path": "/output/project/experiments/stp-baselines/20261027-v5-full/fp_common-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_measured_unverified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "verification_note": "No matching archived full release gate"
+    },
+    {
+      "variant_id": "fp_topp_p085",
+      "run": "/output/project/experiments/stp-slice-thresholds/p085-full/fp_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p085-full/fp_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "df18b860d60fd6ff0d8b78f59ffdebcabe04aba71d5bf3ef1a07c315cbb456ac",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p085-full/fp_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p085-smoke/gate.json",
+      "gate_sha256": "4d7dfb59202d7a15b3a513ac449cb037b32bb96d61d829958fefb1cec3674d5a"
+    },
+    {
+      "variant_id": "fp_topp_p090",
+      "run": "/output/project/experiments/stp-slice-thresholds/p090-full/fp_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p090-full/fp_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "c7d2141c5dc68a90e2db7b38e5ab2285be138a95da4e7efbc590b292f0b4f0d6",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p090-full/fp_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p090-smoke/gate.json",
+      "gate_sha256": "6d145ea308e807ff1f91f517c89bad85fe745df5efd3e4c8fb1abe1cdd03d8c4"
+    },
+    {
+      "variant_id": "fp_topp_p095",
+      "run": "/output/project/experiments/stp-slice/20261028-v2-full/fp_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice/20261028-v2-full/fp_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "12eb9f9ecba34ebb32aaf490978201e7575d1fbd0727d3e057946b947ee39349",
+      "status_path": "/output/project/experiments/stp-slice/20261028-v2-full/fp_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice/20261028-v2-smoke/gate.json",
+      "gate_sha256": "0890086d022cc9d575a6691cbe957f7d33dcc84440bee3fed47f026025ce520b"
+    },
+    {
+      "variant_id": "int_topp_p085",
+      "run": "/output/project/experiments/stp-slice-thresholds/p085-full/int_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p085-full/int_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "99ae4526241d47571c3268fb9b397360fdd90b931cee868ada14c5503cb3585a",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p085-full/int_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p085-smoke/gate.json",
+      "gate_sha256": "4d7dfb59202d7a15b3a513ac449cb037b32bb96d61d829958fefb1cec3674d5a"
+    },
+    {
+      "variant_id": "int_topp_p090",
+      "run": "/output/project/experiments/stp-slice-thresholds/p090-full/int_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p090-full/int_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "c4e8269384d07807299c003cac7b7d9b907a5bc5091c5d855a8c2f89702e0ef9",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p090-full/int_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p090-smoke/gate.json",
+      "gate_sha256": "6d145ea308e807ff1f91f517c89bad85fe745df5efd3e4c8fb1abe1cdd03d8c4"
+    },
+    {
+      "variant_id": "int_topp_p095",
+      "run": "/output/project/experiments/stp-slice/20261028-v2-full/int_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice/20261028-v2-full/int_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "c36b2d5adb68f517fe56f02d172ef459ba6c4cbedce08d4a7e886bf2bfd2f879",
+      "status_path": "/output/project/experiments/stp-slice/20261028-v2-full/int_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice/20261028-v2-smoke/gate.json",
+      "gate_sha256": "0890086d022cc9d575a6691cbe957f7d33dcc84440bee3fed47f026025ce520b"
+    },
+    {
+      "variant_id": "intflash_qk8",
+      "run": "/output/project/experiments/stp-baselines/20261027-v5-full/intflash_qk8-windows-full",
+      "metrics_path": "/output/project/experiments/stp-baselines/20261027-v5-full/intflash_qk8-windows-full/metrics.json",
+      "metrics_sha256": "547e82bd1f38d286dfe57c4655dbcf0d5e84a88a6da92fb65957f3ea017a98da",
+      "status_path": "/output/project/experiments/stp-baselines/20261027-v5-full/intflash_qk8-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_measured_unverified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv",
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "verification_note": "No matching archived full release gate"
+    },
+    {
+      "variant_id": "msb_q4k4_topp_p085",
+      "run": "/output/project/experiments/stp-slice-thresholds/p085-full/msb_q4k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p085-full/msb_q4k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "988c553d8b4433a25e0ec4dfaac23b4dec10bd57c6667213adaa52eb779cf4dc",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p085-full/msb_q4k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p085-smoke/gate.json",
+      "gate_sha256": "4d7dfb59202d7a15b3a513ac449cb037b32bb96d61d829958fefb1cec3674d5a"
+    },
+    {
+      "variant_id": "msb_q4k4_topp_p090",
+      "run": "/output/project/experiments/stp-slice-thresholds/p090-full/msb_q4k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p090-full/msb_q4k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "315a90dab39586f486627180d63e623b846872e44f8c2ba0cbfa58e32e853b5d",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p090-full/msb_q4k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p090-smoke/gate.json",
+      "gate_sha256": "6d145ea308e807ff1f91f517c89bad85fe745df5efd3e4c8fb1abe1cdd03d8c4"
+    },
+    {
+      "variant_id": "msb_q4k4_topp_p095",
+      "run": "/output/project/experiments/stp-slice/20261028-v2-full/msb_q4k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice/20261028-v2-full/msb_q4k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "2a25672ad05bf2b4494baf49f8332e24bab7fb8d3c771532ed572e52337e9635",
+      "status_path": "/output/project/experiments/stp-slice/20261028-v2-full/msb_q4k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice/20261028-v2-smoke/gate.json",
+      "gate_sha256": "0890086d022cc9d575a6691cbe957f7d33dcc84440bee3fed47f026025ce520b"
+    },
+    {
+      "variant_id": "msb_q8k4_topp_p085",
+      "run": "/output/project/experiments/stp-slice-thresholds/p085-full/msb_q8k4_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p085-full/msb_q8k4_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "632c4fbc38d223e853d9cc0f197fbd04e4d1c1b1b0c773b4bb0e3054ef6dccf4",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p085-full/msb_q8k4_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p085-smoke/gate.json",
+      "gate_sha256": "4d7dfb59202d7a15b3a513ac449cb037b32bb96d61d829958fefb1cec3674d5a"
+    },
+    {
+      "variant_id": "msb_q8k4_topp_p090",
+      "run": "/output/project/experiments/stp-slice-thresholds/p090-full/msb_q8k4_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice-thresholds/p090-full/msb_q8k4_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "e9e3b839730c88759df4da50f5717c4c16392fb3e5ab9f2b61fc8571bc97557b",
+      "status_path": "/output/project/experiments/stp-slice-thresholds/p090-full/msb_q8k4_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice-thresholds/p090-smoke/gate.json",
+      "gate_sha256": "6d145ea308e807ff1f91f517c89bad85fe745df5efd3e4c8fb1abe1cdd03d8c4"
+    },
+    {
+      "variant_id": "msb_q8k4_topp_p095",
+      "run": "/output/project/experiments/stp-slice/20261028-v2-full/msb_q8k4_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-slice/20261028-v2-full/msb_q8k4_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "6d47aadb226b6daadaec49b9febcaf41cfa5e804d1b8ed9d9aabedbaaee7d607",
+      "status_path": "/output/project/experiments/stp-slice/20261028-v2-full/msb_q8k4_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "historical_gate_verified",
+      "sources": [
+        "/output/project/experiments/stp-format-study/scientific-synthesis-v1/MEASURED_RESULTS.csv"
+      ],
+      "gate_path": "/output/project/experiments/stp-slice/20261028-v2-smoke/gate.json",
+      "gate_sha256": "0890086d022cc9d575a6691cbe957f7d33dcc84440bee3fed47f026025ce520b"
+    },
+    {
+      "variant_id": "dense_sm8_q8k8",
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_sm8_q8k8-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_sm8_q8k8-windows-full/metrics.json",
+      "metrics_sha256": "2d0c6f31c211e62f6e9d0a300ca65592de26c310216ee35422a56bc2fc37bcbf",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_sm8_q8k8-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "3fafeeb73271ecf081c1eba3d378f7e4d99a8f7407bcec64be24266592598644"
+    },
+    {
+      "variant_id": "dense_mxint8_q8k8",
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8_q8k8-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8_q8k8-windows-full/metrics.json",
+      "metrics_sha256": "70ef95d02ce8449a2076d49386d6fa79903eea29d0a11a4e765cbb679db226eb",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8_q8k8-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "3fafeeb73271ecf081c1eba3d378f7e4d99a8f7407bcec64be24266592598644"
+    },
+    {
+      "variant_id": "dense_mxint8q_mxfp4k_q8k4",
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8q_mxfp4k_q8k4-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8q_mxfp4k_q8k4-windows-full/metrics.json",
+      "metrics_sha256": "00201e523119e8c345ebd01b0fa66450cc5549a8d8bc8028c7428c2b67c6a73f",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxint8q_mxfp4k_q8k4-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "3fafeeb73271ecf081c1eba3d378f7e4d99a8f7407bcec64be24266592598644"
+    },
+    {
+      "variant_id": "dense_mxfp4_q4k4",
+      "run": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxfp4_q4k4-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxfp4_q4k4-windows-full/metrics.json",
+      "metrics_sha256": "2d4674f721dce9f411f2e0b6e8b68da7b1659716450e0f66bd9e853c4e899b5d",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-v1/full/dense_mxfp4_q4k4-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "3fafeeb73271ecf081c1eba3d378f7e4d99a8f7407bcec64be24266592598644"
+    },
+    {
+      "variant_id": "sm8_q8k8_topp_p095",
+      "run": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "e5f2e1a813ee7f3d23bc2bd2eaca82a641c63c6e20aee658698c0ccce7c96750",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/full-topp-replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "83099f98cd0f30cf00c2eca6e9494fbefee6eab17a984b3cafbe4dda1820deae"
+    },
+    {
+      "variant_id": "sm8_q8k8_topp_p090",
+      "run": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "16bfa12afbbf8f7d405360d5f7a1dfdd04caff95eee896b9c6e011448ddbd33b",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/full-topp-replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "83099f98cd0f30cf00c2eca6e9494fbefee6eab17a984b3cafbe4dda1820deae"
+    },
+    {
+      "variant_id": "sm8_q8k8_topp_p085",
+      "run": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "a4ed48e1683b1eaa05ba33e882f6329dbbf6c479d377d227f6d3555e65e5b780",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/sm8_q8k8_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/full-topp-replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "83099f98cd0f30cf00c2eca6e9494fbefee6eab17a984b3cafbe4dda1820deae"
+    },
+    {
+      "variant_id": "mxint8_q8k8_topp_p095",
+      "run": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p095-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p095-windows-full/metrics.json",
+      "metrics_sha256": "34077eb398f381bd7dadeae4ce060c395ea46a1e9b459134946dec0fd7115750",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p095-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/full-topp-replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "83099f98cd0f30cf00c2eca6e9494fbefee6eab17a984b3cafbe4dda1820deae"
+    },
+    {
+      "variant_id": "mxint8_q8k8_topp_p090",
+      "run": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p090-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p090-windows-full/metrics.json",
+      "metrics_sha256": "b8df7365f20c4c70a47b8985b5d85fa5976a7d53a4163d4aa6c2d4e2bbe23a31",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p090-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/full-topp-replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "83099f98cd0f30cf00c2eca6e9494fbefee6eab17a984b3cafbe4dda1820deae"
+    },
+    {
+      "variant_id": "mxint8_q8k8_topp_p085",
+      "run": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p085-windows-full",
+      "metrics_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p085-windows-full/metrics.json",
+      "metrics_sha256": "b9ca319738c56b58b4132e19dcfe43e91c14475d0cb43edfff7419603180e2d4",
+      "status_path": "/output/project/experiments/stp-dense-formats/execution-topp-v1/full/mxint8_q8k8_topp_p085-windows-full/status.json",
+      "status_sha256": "db487907bd3d4f23206c9b11a3cf18f407d9a0d54d6a2951634f131fb9f15b59",
+      "acceptance": "independently_accepted",
+      "sources": [
+        "/output/project/experiments/stp-dense-formats/delivery-full-topp-rs-v1/COMBINED_BASELINE.csv"
+      ],
+      "independent_audit": "/output/project/experiments/stp-dense-formats/review/full-topp-replay-amendment-v1/independent-results/full-independent-audit.json",
+      "independent_audit_sha256": "83099f98cd0f30cf00c2eca6e9494fbefee6eab17a984b3cafbe4dda1820deae"
+    }
+  ]
+}
